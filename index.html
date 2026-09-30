@@ -1,504 +1,557 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth antialiased dark">
+<html lang="en" class="scroll-smooth antialiased">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PhillipCapital India — Equity Advisory Architecture & Fiduciary Suite</title>
+  <title>PhillipCapital India — Equity Advisory Architecture & Investor Ecosystem</title>
+  
+  <!-- Premium Font Stack: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           colors: {
-            phillip: {
-              navy: '#00204a',
-              blue: '#0052cc',
-              sky: '#0099ff',
-              gold: '#c59b27',
-              dark: '#05070d',
-              card: '#0a0d17',
-              cardHover: '#101424',
-              border: 'rgba(255, 255, 255, 0.08)',
-              borderActive: 'rgba(0, 153, 255, 0.4)'
+            midnight: {
+              950: '#040711',
+              900: '#060c18',
+              850: '#081222',
+              800: '#0c1a2e',
+              border: 'rgba(56, 189, 248, 0.15)'
             },
-            apple: {
-              black: '#000000',
-              space: '#08080a',
-              card: '#0c0e14',
-              cardHover: '#131622',
-              subtle: '#181b28',
-              border: 'rgba(255, 255, 255, 0.08)',
-              text: '#f5f5f7',
-              muted: '#86868b',
-              secondary: '#a1a1a6',
-              blue: '#2997ff',
-              emerald: '#30d158',
-              purple: '#bf5af2',
-              amber: '#ff9f0a',
-              red: '#ff453a'
+            ice: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              150: '#d4edfc',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9'
+            },
+            maritime: {
+              primary: '#082347',
+              secondary: '#133e68',
+              muted: '#335c87',
+              accent: '#0284c7'
             }
           },
           fontFamily: {
-            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', 'Inter', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'Menlo', 'monospace']
+          },
+          letterSpacing: {
+            tightest: '-0.04em',
+            tighter: '-0.025em',
+            tight: '-0.015em'
           }
         }
       }
     }
   </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <style>
-    body {
-      background-color: #05070d;
-      color: #f5f5f7;
-      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    /* Dark Obsidian & Sapphire Midnight Canvas */
+    html, body {
+      background-color: #050a14;
+      color: #e0f2fe;
       overflow-x: hidden;
-    }
-    
-    /* Apple Ambient Glows with PhillipCapital Navy/Blue Tint */
-    .hero-glow {
-      background: radial-gradient(circle 900px at 50% -120px, rgba(0, 82, 204, 0.18), transparent 70%),
-                  radial-gradient(circle 600px at 85% 180px, rgba(197, 155, 39, 0.06), transparent 60%);
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .glass-nav {
-      background: rgba(5, 7, 13, 0.78);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    /* Fixed Dark Velvet Ambient Layer with Cyan / Sapphire Nebulas */
+    .sapphire-canvas {
+      background-color: #050a14;
+      background-image: 
+        radial-gradient(circle 900px at 50% -120px, rgba(14, 116, 144, 0.22), transparent 70%),
+        radial-gradient(circle 750px at 85% 350px, rgba(2, 132, 199, 0.16), transparent 65%),
+        radial-gradient(circle 800px at 15% 850px, rgba(56, 189, 248, 0.12), transparent 70%);
+      background-attachment: fixed;
     }
 
-    .glass-card {
-      background: rgba(12, 14, 22, 0.72);
+    /* Hardware-Accelerated 120fps Cursor Follower */
+    #cursor-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(14, 165, 233, 0.08) 45%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(55px);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      will-change: transform;
+      transform: translate3d(-1000px, -1000px, 0);
+    }
+
+    /* Ice Blue / Sky Blue Frosted Glass Surfaces */
+    .ice-glass-card {
+      background: linear-gradient(135deg, rgba(224, 242, 254, 0.94) 0%, rgba(203, 232, 252, 0.90) 100%);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(125, 211, 252, 0.65);
+      box-shadow: 
+        0 18px 40px -10px rgba(3, 10, 25, 0.75),
+        0 0 25px rgba(56, 189, 248, 0.18),
+        inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.85);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    }
+
+    .ice-glass-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 
+        0 24px 50px -8px rgba(3, 10, 25, 0.85),
+        0 0 35px rgba(56, 189, 248, 0.32),
+        inset 0 1px 2px 0 rgba(255, 255, 255, 0.95);
+      border-color: rgba(56, 189, 248, 0.9);
+    }
+
+    /* Subdued Sky Blue Surface */
+    .ice-glass-subtle {
+      background: linear-gradient(140deg, rgba(214, 238, 252, 0.85) 0%, rgba(186, 230, 253, 0.80) 100%);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(125, 211, 252, 0.5);
     }
 
-    .glass-card:hover {
-      border-color: rgba(0, 153, 255, 0.3);
-      transform: translateY(-2px);
+    /* Glass Navigation Bar */
+    .midnight-nav {
+      background: rgba(6, 12, 24, 0.82);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.18);
+      box-shadow: 0 10px 30px rgba(2, 6, 15, 0.8);
     }
 
-    .glass-pill {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .nav-tab-active {
-      background: rgba(0, 153, 255, 0.12) !important;
-      color: #2997ff !important;
-      border: 1px solid rgba(41, 151, 255, 0.3) !important;
+    .nav-btn-active {
+      background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%) !important;
+      color: #082347 !important;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4) !important;
+      border: 1px solid #7dd3fc !important;
     }
 
     /* Flowchart Node Hover Glows */
     .flow-node {
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     .flow-node:hover rect {
-      filter: drop-shadow(0 0 16px rgba(0, 153, 255, 0.4));
-      stroke: #2997ff !important;
-      stroke-width: 1.8 !important;
+      filter: drop-shadow(0 8px 22px rgba(56, 189, 248, 0.65));
+      stroke: #0284c7 !important;
+      stroke-width: 2 !important;
     }
-    .flow-node:hover text.title-text {
-      fill: #ffffff !important;
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050a14;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #172d4a;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0284c7;
     }
 
     /* Print Stylesheet */
     @media print {
       body {
         background: #ffffff !important;
-        color: #000000 !important;
+        color: #082347 !important;
       }
-      .no-print, header, footer, #toast {
+      .no-print, header, footer, #toast, #inspector-modal, #cursor-glow {
         display: none !important;
       }
       .page-view {
         display: block !important;
       }
-      .glass-card {
-        background: #ffffff !important;
-        border: 1px solid #d1d5db !important;
+      .ice-glass-card {
+        background: #f0f9ff !important;
         box-shadow: none !important;
-      }
-      svg {
-        filter: invert(1) hue-rotate(180deg);
+        border: 1px solid #7dd3fc !important;
       }
     }
   </style>
 </head>
-<body class="selection:bg-apple-blue selection:text-white min-h-screen flex flex-col justify-between">
+<body class="sapphire-canvas selection:bg-ice-300 selection:text-maritime-primary flex flex-col justify-between min-h-screen">
 
-  <!-- Top Glass Navigation Bar -->
-  <header class="sticky top-0 z-50 glass-nav transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <!-- Hardware-Accelerated 120fps Cursor Follower -->
+  <div id="cursor-glow"></div>
+
+  <header class="sticky top-0 z-50 midnight-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
-      <!-- Brand Logo -->
-      <a href="#flowchart" onclick="switchPage('flowchart')" class="flex items-center gap-3 group">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-700 via-phillip-blue to-cyan-500 flex items-center justify-center text-white shadow-[0_0_20px_rgba(0,82,204,0.45)] transition-transform duration-300 group-hover:scale-105">
-          <span class="font-black text-sm tracking-tighter">P</span>
+      <!-- Brand Entity Identity -->
+      <a href="#flowchart" onclick="switchPage('flowchart')" class="flex items-center gap-3.5 group z-10">
+        <div class="relative flex items-center justify-center">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-600 via-sky-500 to-ice-200 p-[1px] shadow-[0_0_20px_rgba(56,189,248,0.4)] group-hover:shadow-[0_0_30px_rgba(56,189,248,0.7)] transition-all duration-300">
+            <div class="w-full h-full bg-[#070e1c] rounded-2xl flex items-center justify-center">
+              <span class="font-extrabold text-lg tracking-tighter bg-gradient-to-br from-ice-100 via-ice-200 to-sky-400 bg-clip-text text-transparent">P</span>
+            </div>
+          </div>
+          <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-[#070e1c] flex items-center justify-center text-[8px] font-bold text-slate-950 shadow-sm" title="SEBI Registered">✓</span>
         </div>
         <div class="flex flex-col">
-          <div class="flex items-center gap-1.5">
-            <span class="text-sm font-bold tracking-tight text-white group-hover:text-apple-blue transition">PhillipCapital</span>
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-blue-400 font-medium tracking-wide">INDIA</span>
+          <div class="flex items-center gap-2">
+            <span class="text-base font-extrabold tracking-tight text-white group-hover:text-ice-300 transition-colors">PhillipCapital</span>
+            <span class="text-[9px] px-2 py-0.5 rounded-md bg-ice-300/15 border border-ice-300/30 text-ice-200 font-bold tracking-wider">INDIA</span>
           </div>
-          <span class="text-[10px] text-apple-muted tracking-tight">Equity Advisory & Wealth Solutions</span>
+          <span class="text-[11px] text-sky-200/70 tracking-tight font-medium">Equity Advisory & Wealth Management</span>
         </div>
       </a>
 
-      <!-- Multi-Page Navigation Tabs -->
-      <nav class="hidden lg:flex items-center space-x-1 text-xs font-medium text-apple-secondary">
-        <button id="nav-btn-flowchart" onclick="switchPage('flowchart')" class="nav-tab px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition flex items-center gap-2">
+      <!-- Navigation Pill Bar -->
+      <nav class="hidden lg:flex items-center space-x-1.5 p-1.5 rounded-full bg-midnight-900/80 border border-sky-500/20 backdrop-blur-2xl z-10">
+        <button id="nav-btn-flowchart" onclick="switchPage('flowchart')" class="px-4 py-2 rounded-full text-xs font-semibold text-sky-100 hover:text-white transition-all flex items-center gap-2">
           <i class="fa-solid fa-diagram-project text-[11px]"></i>
-          <span>Advisory Flowchart</span>
+          <span>Architecture Flow</span>
         </button>
-        <button id="nav-btn-standard" onclick="switchPage('standard')" class="nav-tab px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition flex items-center gap-2">
+        <button id="nav-btn-standard" onclick="switchPage('standard')" class="px-4 py-2 rounded-full text-xs font-semibold text-sky-100 hover:text-white transition-all flex items-center gap-2">
           <i class="fa-solid fa-shield-halved text-[11px]"></i>
-          <span>What is Advisory?</span>
+          <span>The Standard</span>
         </button>
-        <button id="nav-btn-onboarding" onclick="switchPage('onboarding')" class="nav-tab px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition flex items-center gap-2">
+        <button id="nav-btn-onboarding" onclick="switchPage('onboarding')" class="px-4 py-2 rounded-full text-xs font-semibold text-sky-100 hover:text-white transition-all flex items-center gap-2">
           <i class="fa-solid fa-user-check text-[11px]"></i>
-          <span>Account Setup & Demat</span>
+          <span>Account & Demat</span>
         </button>
-        <button id="nav-btn-portfolios" onclick="switchPage('portfolios')" class="nav-tab px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition flex items-center gap-2">
+        <button id="nav-btn-portfolios" onclick="switchPage('portfolios')" class="px-4 py-2 rounded-full text-xs font-semibold text-sky-100 hover:text-white transition-all flex items-center gap-2">
           <i class="fa-solid fa-chart-pie text-[11px]"></i>
           <span>Allocation Engine</span>
         </button>
-        <button id="nav-btn-compliance" onclick="switchPage('compliance')" class="nav-tab px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition flex items-center gap-2">
+        <button id="nav-btn-compliance" onclick="switchPage('compliance')" class="px-4 py-2 rounded-full text-xs font-semibold text-sky-100 hover:text-white transition-all flex items-center gap-2">
           <i class="fa-solid fa-scale-balanced text-[11px]"></i>
-          <span>SEBI Disclosures</span>
+          <span>Governance & SEBI</span>
         </button>
       </nav>
 
-      <!-- Quick Actions -->
-      <div class="flex items-center space-x-2 no-print">
-        <button onclick="exportFlowchartSVG()" title="Export Vector SVG" class="text-xs px-3 py-1.5 rounded-full glass-pill text-apple-text hover:bg-white/10 transition hidden sm:flex items-center gap-1.5">
-          <i class="fa-solid fa-file-code text-[11px] text-apple-blue"></i>
-          <span>SVG</span>
-        </button>
-        <button onclick="exportFlowchartPNG()" title="Export High-Res Image" class="text-xs px-3 py-1.5 rounded-full glass-pill text-apple-text hover:bg-white/10 transition hidden sm:flex items-center gap-1.5">
-          <i class="fa-solid fa-file-image text-[11px] text-apple-purple"></i>
-          <span>PNG 2x</span>
-        </button>
-        <button onclick="window.print()" class="text-xs px-3.5 py-1.5 rounded-full bg-phillip-blue hover:bg-blue-600 text-white font-medium shadow-[0_0_15px_rgba(0,82,204,0.4)] transition flex items-center gap-1.5">
-          <i class="fa-solid fa-download text-[11px]"></i>
-          <span>Export / PDF</span>
+      <!-- Action Controls -->
+      <div class="flex items-center space-x-2.5 no-print z-10">
+        <div class="hidden sm:flex items-center gap-1.5 bg-midnight-900/80 border border-sky-500/20 p-1 rounded-full">
+          <button onclick="exportFlowchartSVG()" title="Export Vector SVG" class="text-[11px] px-3 py-1.5 rounded-full text-sky-100 hover:text-white hover:bg-sky-500/20 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-code text-[10px] text-ice-300"></i>
+            <span>SVG</span>
+          </button>
+          <button onclick="exportFlowchartPNG()" title="Export Retina 2x PNG" class="text-[11px] px-3 py-1.5 rounded-full text-sky-100 hover:text-white hover:bg-sky-500/20 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-image text-[10px] text-ice-300"></i>
+            <span>PNG 2x</span>
+          </button>
+        </div>
+        <button onclick="window.print()" class="text-xs px-4 py-2 rounded-full bg-gradient-to-r from-ice-100 to-ice-200 hover:from-white hover:to-ice-100 text-maritime-primary font-bold shadow-[0_4px_20px_rgba(56,189,248,0.3)] border border-ice-300 transition flex items-center gap-2">
+          <i class="fa-solid fa-arrow-down-to-bracket text-[11px] text-maritime-accent"></i>
+          <span>Export Summary</span>
         </button>
       </div>
 
     </div>
 
-    <!-- Mobile Sub-Navigation Strip -->
-    <div class="lg:hidden flex items-center justify-around py-2 border-t border-white/[0.06] text-[11px] bg-black/40 overflow-x-auto px-2">
-      <button onclick="switchPage('flowchart')" class="px-2 py-1 text-apple-secondary hover:text-white whitespace-nowrap">Flowchart</button>
-      <button onclick="switchPage('standard')" class="px-2 py-1 text-apple-secondary hover:text-white whitespace-nowrap">About Advisory</button>
-      <button onclick="switchPage('onboarding')" class="px-2 py-1 text-apple-secondary hover:text-white whitespace-nowrap">Account Opening</button>
-      <button onclick="switchPage('portfolios')" class="px-2 py-1 text-apple-secondary hover:text-white whitespace-nowrap">Allocations (INR)</button>
-      <button onclick="switchPage('compliance')" class="px-2 py-1 text-apple-secondary hover:text-white whitespace-nowrap">Compliance</button>
+    <!-- Responsive Subnav Strip -->
+    <div class="lg:hidden flex items-center justify-between px-3 py-2 border-t border-sky-500/15 text-xs bg-midnight-950 overflow-x-auto gap-2">
+      <button onclick="switchPage('flowchart')" class="px-2.5 py-1 rounded-lg text-sky-100 hover:text-white whitespace-nowrap">Flowchart</button>
+      <button onclick="switchPage('standard')" class="px-2.5 py-1 rounded-lg text-sky-100 hover:text-white whitespace-nowrap">The Standard</button>
+      <button onclick="switchPage('onboarding')" class="px-2.5 py-1 rounded-lg text-sky-100 hover:text-white whitespace-nowrap">Account Setup</button>
+      <button onclick="switchPage('portfolios')" class="px-2.5 py-1 rounded-lg text-sky-100 hover:text-white whitespace-nowrap">Allocation (INR)</button>
+      <button onclick="switchPage('compliance')" class="px-2.5 py-1 rounded-lg text-sky-100 hover:text-white whitespace-nowrap">SEBI Charter</button>
     </div>
   </header>
 
-  <!-- PAGE 1: ARCHITECTURE FLOWCHART -->
   <main id="page-flowchart" class="page-view flex-grow">
     
-    <!-- Hero Banner -->
-    <div class="relative hero-glow pt-14 pb-12 sm:pt-20 sm:pb-16 border-b border-white/[0.06]">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
+    <div class="relative pt-16 pb-12 sm:pt-20 sm:pb-16 border-b border-sky-500/15">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
         
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-medium text-apple-secondary">
-          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-          PhillipCapital (India) Pvt. Ltd. • SEBI Regd. Investment Adviser (INA000004518)
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/25 text-xs font-semibold text-ice-200 backdrop-blur-xl">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          SEBI Registered Investment Adviser • INA000004518 • BASL No. 1319
         </div>
 
-        <h1 class="text-4xl sm:text-6xl font-bold tracking-tighter text-white max-w-4xl mx-auto leading-[1.08]">
-          Precision Equity Advisory. <br>
-          <span class="bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300 bg-clip-text text-transparent">
-            Institutional research direct to your Demat.
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tightest text-white max-w-4xl mx-auto leading-[1.06]">
+          Institutional Equity Advisory. <br>
+          <span class="bg-gradient-to-r from-ice-100 via-sky-300 to-cyan-400 bg-clip-text text-transparent">
+            Precision research direct to your Demat.
           </span>
         </h1>
 
-        <p class="text-sm sm:text-base text-apple-muted max-w-2xl mx-auto font-normal leading-relaxed">
-          An institutional, non-discretionary equity framework designed for High Net Worth Individuals, Family Offices, and discerning retail investors. Zero custody risk; complete transparency.
+        <p class="text-base sm:text-lg text-sky-200/80 max-w-2xl mx-auto font-normal leading-relaxed tracking-tight">
+          A completely transparent, non-discretionary advisory framework. Benefit from PhillipCapital's global institutional research with zero custody risk, zero commissions, and complete portfolio autonomy.
         </p>
 
-        <!-- Quick Switch Bar -->
-        <div class="flex flex-wrap items-center justify-center gap-3 pt-3">
-          <button onclick="switchPage('onboarding')" class="px-5 py-2.5 rounded-full bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center gap-2">
-            <span>Start Account Setup (INR)</span>
-            <i class="fa-solid fa-arrow-right text-xs"></i>
+        <div class="flex flex-wrap items-center justify-center gap-3.5 pt-3">
+          <button onclick="switchPage('onboarding')" class="px-6 py-3 rounded-full bg-gradient-to-r from-ice-100 to-ice-200 text-maritime-primary font-extrabold text-xs hover:from-white hover:to-ice-100 transition shadow-[0_0_30px_rgba(56,189,248,0.35)] border border-ice-300 flex items-center gap-2">
+            <span>Initiate Digital Demat Onboarding</span>
+            <i class="fa-solid fa-arrow-right text-xs text-maritime-accent"></i>
           </button>
-          <button onclick="switchPage('standard')" class="px-5 py-2.5 rounded-full glass-pill text-white text-xs font-medium hover:bg-white/[0.08] transition flex items-center gap-2">
-            <span>Advisory vs PMS vs Broker</span>
-            <i class="fa-solid fa-chevron-right text-xs text-apple-muted"></i>
+          <button onclick="switchPage('standard')" class="px-6 py-3 rounded-full bg-sky-500/10 border border-sky-400/30 text-ice-100 text-xs font-semibold hover:bg-sky-500/20 transition flex items-center gap-2">
+            <span>RIA vs PMS vs Stock Broker</span>
+            <i class="fa-solid fa-chevron-right text-xs text-sky-300"></i>
           </button>
         </div>
 
       </div>
     </div>
 
-    <!-- Interactive Visual Flow Section -->
     <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
       
-      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-2 border-b border-white/[0.06]">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-2 border-b border-sky-500/15">
         <div>
-          <div class="text-xs font-bold text-apple-blue tracking-wider uppercase mb-1 flex items-center gap-2">
+          <div class="text-xs font-bold text-ice-300 tracking-wider uppercase mb-1 flex items-center gap-2">
             <i class="fa-solid fa-network-wired"></i> End-to-End Operational Lifecycle
           </div>
-          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">PhillipCapital Advisory Execution Blueprint</h2>
-          <p class="text-apple-muted text-xs sm:text-sm mt-1 max-w-xl">
-            Click on any operational node to inspect SEBI IA regulatory mandates, research committee mechanics, and Demat trade settlement workflows.
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">PhillipCapital Advisory Lifecycle Blueprint</h2>
+          <p class="text-sky-200/70 text-xs sm:text-sm mt-1 max-w-xl">
+            Click any ice-blue node below to inspect statutory SEBI IA mandates, research committee protocols, and automated Demat clearing workflows.
           </p>
         </div>
 
-        <!-- Export Toolbar -->
-        <div class="flex flex-wrap items-center gap-2.5">
-          <span class="text-xs text-apple-secondary mr-1">Export Diagram:</span>
-          <button onclick="exportFlowchartSVG()" class="px-3 py-1.5 rounded-lg text-xs font-medium glass-pill text-apple-text hover:bg-white/10 transition flex items-center gap-1.5">
-            <i class="fa-solid fa-file-code text-apple-blue"></i> SVG Vector
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs text-sky-200/70 mr-1">Export Diagram:</span>
+          <button onclick="exportFlowchartSVG()" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-sky-500/15 hover:bg-sky-500/25 text-ice-100 border border-sky-400/30 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-file-code text-ice-300"></i> Vector SVG
           </button>
-          <button onclick="exportFlowchartPNG()" class="px-3 py-1.5 rounded-lg text-xs font-medium glass-pill text-apple-text hover:bg-white/10 transition flex items-center gap-1.5">
-            <i class="fa-solid fa-file-image text-apple-purple"></i> High-Res PNG (2x)
+          <button onclick="exportFlowchartPNG()" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-sky-500/15 hover:bg-sky-500/25 text-ice-100 border border-sky-400/30 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-file-image text-ice-300"></i> Retina PNG (2x)
           </button>
-          <button onclick="window.print()" class="px-3 py-1.5 rounded-lg text-xs font-medium glass-pill text-apple-text hover:bg-white/10 transition flex items-center gap-1.5">
-            <i class="fa-solid fa-print text-apple-emerald"></i> Print Sheet
+          <button onclick="window.print()" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-sky-500/15 hover:bg-sky-500/25 text-ice-100 border border-sky-400/30 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-print text-emerald-400"></i> Print Worksheet
           </button>
         </div>
       </div>
 
-      <!-- Flowchart SVG Canvas Container -->
-      <div class="p-3 sm:p-5 rounded-3xl glass-card overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.85)] border border-white/[0.08]">
+      <div class="p-4 sm:p-6 rounded-3xl bg-midnight-900/90 border border-sky-500/25 overflow-hidden relative shadow-[0_25px_60px_rgba(3,10,25,0.9)]">
         
-        <!-- Stage Headers -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4 text-xs font-semibold text-center">
-          <div class="py-2 px-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-blue-500"></span> 1. ONBOARDING & SUITABILITY
+        <!-- Stage Category Bar -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-5 text-xs font-bold text-center">
+          <div class="py-2.5 px-3 rounded-2xl bg-sky-500/15 border border-sky-400/30 text-ice-200 flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-ice-300"></span> 1. INGESTION & SUITABILITY
           </div>
-          <div class="py-2 px-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-amber-500"></span> 2. PHILLIP RESEARCH & MODELS
+          <div class="py-2.5 px-3 rounded-2xl bg-cyan-500/15 border border-cyan-400/30 text-cyan-200 flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-cyan-300"></span> 2. PHILLIP QUANT RESEARCH
           </div>
-          <div class="py-2 px-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 3. CLIENT CONSENT & ROUTING
+          <div class="py-2.5 px-3 rounded-2xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-200 flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-300"></span> 3. GATED ORDER EXECUTION
           </div>
-          <div class="py-2 px-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-purple-500"></span> 4. SURVEILLANCE & REBALANCE
+          <div class="py-2.5 px-3 rounded-2xl bg-indigo-500/15 border border-indigo-400/30 text-indigo-200 flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-indigo-300"></span> 4. SURVEILLANCE & REBALANCE
           </div>
         </div>
 
-        <!-- SVG Visual Diagram -->
         <div class="overflow-x-auto pb-4 pt-1">
           <svg id="equity-flow-svg" viewBox="0 0 1120 700" class="w-full min-w-[980px] h-auto select-none" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <marker id="arr-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1 L 9 5 L 0 9 z" fill="#2997ff"/>
+              <linearGradient id="sky-node-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#e0f2fe"/>
+                <stop offset="100%" stop-color="#c5e7fc"/>
+              </linearGradient>
+
+              <marker id="arr-sky" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="#38bdf8"/>
               </marker>
-              <marker id="arr-amber" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1 L 9 5 L 0 9 z" fill="#ff9f0a"/>
+              <marker id="arr-cyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="#22d3ee"/>
               </marker>
               <marker id="arr-emerald" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1 L 9 5 L 0 9 z" fill="#30d158"/>
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="#34d399"/>
               </marker>
-              <marker id="arr-purple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1 L 9 5 L 0 9 z" fill="#bf5af2"/>
+              <marker id="arr-indigo" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="#818cf8"/>
               </marker>
-              <radialGradient id="card-grad" cx="50%" cy="30%" r="80%">
-                <stop offset="0%" stop-color="#141724"/>
-                <stop offset="100%" stop-color="#0a0c14"/>
-              </radialGradient>
+
+              <filter id="ice-shadow" x="-10%" y="-10%" width="120%" height="130%">
+                <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#02142d" flood-opacity="0.6"/>
+              </filter>
             </defs>
 
-            <!-- Column Frames -->
-            <rect x="20" y="20" width="250" height="660" rx="16" fill="#060810" stroke="rgba(41, 151, 255, 0.2)" stroke-width="1.2"/>
-            <text x="145" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#2997ff" letter-spacing="1">1. REGULATORY SUITABILITY</text>
+            <!-- 4 Column Bounding Boxes -->
+            <rect x="20" y="20" width="250" height="660" rx="18" fill="#071120" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.2"/>
+            <text x="145" y="55" text-anchor="middle" font-size="11" font-weight="800" fill="#7dd3fc" letter-spacing="1">1. ONBOARDING & SUITABILITY</text>
 
-            <rect x="295" y="20" width="250" height="660" rx="16" fill="#060810" stroke="rgba(255, 159, 10, 0.2)" stroke-width="1.2"/>
-            <text x="420" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#ff9f0a" letter-spacing="1">2. INSTITUTIONAL RESEARCH</text>
+            <rect x="295" y="20" width="250" height="660" rx="18" fill="#071120" stroke="rgba(34, 211, 238, 0.25)" stroke-width="1.2"/>
+            <text x="420" y="55" text-anchor="middle" font-size="11" font-weight="800" fill="#67e8f9" letter-spacing="1">2. INSTITUTIONAL RESEARCH</text>
 
-            <rect x="570" y="20" width="250" height="660" rx="16" fill="#060810" stroke="rgba(48, 209, 88, 0.2)" stroke-width="1.2"/>
-            <text x="695" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#30d158" letter-spacing="1">3. GATED DEMAT EXECUTION</text>
+            <rect x="570" y="20" width="250" height="660" rx="18" fill="#071120" stroke="rgba(52, 211, 153, 0.25)" stroke-width="1.2"/>
+            <text x="695" y="55" text-anchor="middle" font-size="11" font-weight="800" fill="#6ee7b7" letter-spacing="1">3. GATED DEMAT EXECUTION</text>
 
-            <rect x="845" y="20" width="255" height="660" rx="16" fill="#060810" stroke="rgba(191, 90, 242, 0.2)" stroke-width="1.2"/>
-            <text x="972" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#bf5af2" letter-spacing="1">4. CONTINUOUS SURVEILLANCE</text>
+            <rect x="845" y="20" width="255" height="660" rx="18" fill="#071120" stroke="rgba(129, 140, 248, 0.25)" stroke-width="1.2"/>
+            <text x="972" y="55" text-anchor="middle" font-size="11" font-weight="800" fill="#a5b4fc" letter-spacing="1">4. CONTINUOUS SURVEILLANCE</text>
 
-            <!-- Connector Beziers -->
-            <!-- 1.1 -> 1.2 -->
-            <path d="M 145 165 L 145 210" stroke="#2997ff" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-blue)"/>
-            <!-- 1.2 -> 1.3 -->
-            <path d="M 145 305 L 145 350" stroke="#2997ff" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-blue)"/>
-            <!-- Stage 1 -> Stage 2 -->
-            <path d="M 245 395 C 275 395, 270 120, 315 120" stroke="#4b5563" stroke-width="1.8" fill="none" marker-end="url(#arr-amber)"/>
+            <!-- Inter-node Paths -->
+            <path d="M 145 165 L 145 210" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-sky)"/>
+            <path d="M 145 305 L 145 350" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-sky)"/>
+            <path d="M 245 395 C 275 395, 270 120, 315 120" stroke="#38bdf8" stroke-width="2" fill="none" marker-end="url(#arr-cyan)"/>
 
-            <!-- 2.1 -> 2.2 -->
-            <path d="M 420 165 L 420 210" stroke="#ff9f0a" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-amber)"/>
-            <!-- 2.2 -> 2.3 -->
-            <path d="M 420 305 L 420 350" stroke="#ff9f0a" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-amber)"/>
-            <!-- Stage 2 -> Stage 3 -->
-            <path d="M 520 395 C 550 395, 545 120, 590 120" stroke="#4b5563" stroke-width="1.8" fill="none" marker-end="url(#arr-emerald)"/>
+            <path d="M 420 165 L 420 210" stroke="#22d3ee" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-cyan)"/>
+            <path d="M 420 305 L 420 350" stroke="#22d3ee" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-cyan)"/>
+            <path d="M 520 395 C 550 395, 545 120, 590 120" stroke="#22d3ee" stroke-width="2" fill="none" marker-end="url(#arr-emerald)"/>
 
-            <!-- 3.1 -> 3.2 -->
-            <path d="M 695 165 L 695 210" stroke="#30d158" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-emerald)"/>
-            <!-- 3.2 -> 3.3 -->
-            <path d="M 695 305 L 695 350" stroke="#30d158" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-emerald)"/>
-            <!-- Stage 3 -> Stage 4 -->
-            <path d="M 795 395 C 825 395, 820 120, 865 120" stroke="#4b5563" stroke-width="1.8" fill="none" marker-end="url(#arr-purple)"/>
+            <path d="M 695 165 L 695 210" stroke="#34d399" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-emerald)"/>
+            <path d="M 695 305 L 695 350" stroke="#34d399" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-emerald)"/>
+            <path d="M 795 395 C 825 395, 820 120, 865 120" stroke="#34d399" stroke-width="2" fill="none" marker-end="url(#arr-indigo)"/>
 
-            <!-- 4.1 -> 4.2 -->
-            <path d="M 972 165 L 972 210" stroke="#bf5af2" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-purple)"/>
-            <!-- 4.2 -> 4.3 -->
-            <path d="M 972 305 L 972 350" stroke="#bf5af2" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-purple)"/>
+            <path d="M 972 165 L 972 210" stroke="#818cf8" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-indigo)"/>
+            <path d="M 972 305 L 972 350" stroke="#818cf8" stroke-width="2" stroke-dasharray="3,3" marker-end="url(#arr-indigo)"/>
 
-            <!-- Rebalance Feedback Loop -->
-            <path d="M 972 445 C 972 580, 590 580, 695 455" stroke="#bf5af2" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-emerald)"/>
+            <!-- Rebalance Loop -->
+            <path d="M 972 445 C 972 580, 590 580, 695 455" stroke="#818cf8" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-emerald)"/>
 
-            <!-- Node 1.1: CKYC & PAN Ingestion -->
+            <!-- Node 1.1 -->
             <g class="flow-node" onclick="openInspectorModal('node-1')" transform="translate(38, 80)">
-              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-              <circle cx="24" cy="28" r="10" fill="#2997ff" fill-opacity="0.15"/>
-              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#2997ff">01</text>
-              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">PAN & CKYC Onboarding</text>
-              <text x="24" y="55" font-size="10.5" fill="#86868b">KRA Registration & KYC</text>
-              <text x="24" y="70" font-size="9.5" fill="#52525b">SEBI AML & FATCA Check</text>
-              <circle cx="195" cy="28" r="4" fill="#2997ff"/>
+              <rect width="214" height="85" rx="14" fill="url(#sky-node-grad)" stroke="#7dd3fc" stroke-width="1.3" filter="url(#ice-shadow)"/>
+              <circle cx="24" cy="28" r="10" fill="#0284c7" fill-opacity="0.16"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">01</text>
+              <text x="44" y="32" font-size="12.5" font-weight="800" fill="#082347">PAN & CKYCR Ingestion</text>
+              <text x="24" y="55" font-size="10.5" font-weight="600" fill="#133e68">KRA Registration & FATCA</text>
+              <text x="24" y="70" font-size="9.5" fill="#335c87">PMLA Anti-Fraud Validation</text>
+              <circle cx="195" cy="28" r="4" fill="#0284c7"/>
             </g>
 
-            <!-- Node 1.2: SEBI Psychometric Profiler -->
+            <!-- Node 1.2 -->
             <g class="flow-node" onclick="openInspectorModal('node-2')" transform="translate(38, 220)">
-              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-              <circle cx="24" cy="28" r="10" fill="#2997ff" fill-opacity="0.15"/>
-              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#2997ff">02</text>
-              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">SEBI Risk Suitability</text>
-              <text x="24" y="55" font-size="10.5" fill="#86868b">Drawdown tolerance audit</text>
-              <text x="24" y="70" font-size="9.5" fill="#52525b">Conservative / Growth / Alpha</text>
-              <circle cx="195" cy="28" r="4" fill="#2997ff"/>
+              <rect width="214" height="85" rx="14" fill="url(#sky-node-grad)" stroke="#7dd3fc" stroke-width="1.3" filter="url(#ice-shadow)"/>
+              <circle cx="24" cy="28" r="10" fill="#0284c7" fill-opacity="0.16"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">02</text>
+              <text x="44" y="32" font-size="12.5" font-weight="800" fill="#082347">SEBI Suitability Matrix</text>
+              <text x="24" y="55" font-size="10.5" font-weight="600" fill="#133e68">Psychometric draw-down test</text>
+              <text x="24" y="70" font-size="9.5" fill="#335c87">Horizon: Growth vs Defensive</text>
+              <circle cx="195" cy="28" r="4" fill="#0284c7"/>
             </g>
 
-            <!-- Node 1.3: Digital Fiduciary Mandate -->
+            <!-- Node 1.3 -->
             <g class="flow-node" onclick="openInspectorModal('node-3')" transform="translate(38, 360)">
-              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-              <circle cx="24" cy="28" r="10" fill="#2997ff" fill-opacity="0.15"/>
-              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#2997ff">03</text>
-              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Advisory Agreement</text>
-              <text x="24" y="55" font-size="10.5" fill="#86868b">SEBI IA fee cap disclosures</text>
-              <text x="24" y="70" font-size="9.5" fill="#52525b">Aadhaar e-Sign execution</text>
-              <circle cx="195" cy="28" r="4" fill="#2997ff"/>
+              <rect width="214" height="85" rx="14" fill="url(#sky-node-grad)" stroke="#7dd3fc" stroke-width="1.3" filter="url(#ice-shadow)"/>
+              <circle cx="24" cy="28" r="10" fill="#0284c7" fill-opacity="0.16"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">03</text>
+              <text x="44" y="32" font-size="12.5" font-weight="800" fill="#082347">Fiduciary IA Agreement</text>
+              <text x="24" y="55" font-size="10.5" font-weight="600" fill="#133e68">SEBI fee ceiling declaration</text>
+              <text x="24" y="70" font-size="9.5" fill="#335c87">Aadhaar OTP digital e-Sign</text>
+              <circle cx="195" cy="28" r="4" fill="#0284c7"/>
             </g>
 
-            <!-- Node 2.1: Phillip Research Universe -->
+            <!-- Node 2.1 -->
             <g class="flow-node" onclick="openInspectorModal('node-4')" transform="translate(313, 80)">
-              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-              <circle cx="24" cy="28" r="10" fill="#ff9f0a" fill-opacity="0.15"/>
-              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#ff9f0a">04</text>
-              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Phillip Quant Screener</text>
-              <text x="24" y="55" font-size="10.5" fill="#86868b">ROCE > 20%, FCF conversion</text>
-              <text x="24" y="70" font-size="9.5" fill="#52525b">Corporate governance filter</text>
-              <circle cx="195" cy="28" r="4" fill="#ff9f0a"/>
+              <rect width="214" height="85" rx="14" fill="url(#sky-node-grad)" stroke="#7dd3fc" stroke-width="1.3" filter="url(#ice-shadow)"/>
+              <circle cx="24" cy="28" r="10" fill="#0284c7" fill-opacity="0.16"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">04</text>
+              <text x="44" y="32" font-size="12.5" font-weight="800" fill="#082347">Phillip Quant Screener</text>
+              <text x="24" y="55" font-size="10.5" font-weight="600" fill="#133e68">ROCE > 20%, Low Debt/EBITDA</text>
+              <text x="24" y="70" font-size="9.5" fill="#335c87">Corporate governance filters</text>
+              <circle cx="195" cy="28" r="4" fill="#0284c7"/>
             </g>
 
-            <!-- Node 2.2: Model Basket Construction -->
+            <!-- Node 2.2 -->
             <g class="flow-node" onclick="openInspectorModal('node-5')" transform="translate(313, 220)">
-              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-              <circle cx="24" cy="28" r="10" fill="#ff9f0a" fill-opacity="0.15"/>
-              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#ff9f0a">05</text>
-              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Model Basket Design</text>
-              <text x="24" y="55" font-size="10.5" fill="#86868b">Sector limits (max 25%)</text>
-              <text x="24" y="70" font-size="9.5" fill="#52525b">Single equity cap (max 10%)</text>
-              <circle cx="195" cy="28" r="4" fill="#ff9f0a"/>
+              <rect width="214" height="85" rx="14" fill="url(#sky-node-grad)" stroke="#7dd3fc" stroke-width="1.3" filter="url(#ice-shadow)"/>
+              <circle cx="24" cy="28" r="10" fill="#0284c7" fill-opacity="0.16"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">05</text>
+              <text x="44" y="32" font-size="12.5" font-weight="800" fill="#082347">Model Basket Design</text>
+              <text x="24" y="55" font-size="10.5" font-weight="600" fill="#133e68">Sector limits (max 25%)</text>
+              <text x="24" y="70" font-size="9.5" fill="#335c87">Single stock cap (max 10%)</text>
+              <circle cx="195" cy="28" r="4" fill="#0284c7"/>
             </g>
 
-            <!-- Node 2.3: Research Thesis Memos -->
+            <!-- Node 2.3 -->
             <g class="flow-node" onclick="openInspectorModal('node-6')" transform="translate(313, 360)">
-              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-              <circle cx="24" cy="28" r="10" fill="#ff9f0a" fill-opacity="0.15"/>
-              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#ff9f0a">06</text>
-              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Advisory Note & Rationale</text>
-              <text x="24" y="55" font-size="10.5" fill="#86868b">Target price, stop & horizon</text>
-              <text x="24" y="70" font-size="9.5" fill="#52525b">SEBI RA disclosure attached</text>
-              <circle cx="195" cy="28" r="4" fill="#ff9f0a"/>
+              <rect width="214" height="85" rx="14" fill="url(#sky-node-grad)" stroke="#7dd3fc" stroke-width="1.3" filter="url(#ice-shadow)"/>
+              <circle cx="24" cy="28" r="10" fill="#0284c7" fill-opacity="0.16"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">06</text>
+              <text x="44" y="32" font-size="12.5" font-weight="800" fill="#082347">Advisory Research Note</text>
+              <text x="24" y="55" font-size="10.5" font-weight="600" fill="#133e68">Target price, entry band, stop</text>
+              <text x="24" y="70" font-size="9.5" fill="#335c87">SEBI RA disclosure attached</text>
+              <circle cx="195" cy="28" r="4" fill="#0284c7"/>
             </g>
 
-            <!-- Node 3.1: Recommendation Signal Dispatch -->
+            <!-- Node 3.1 -->
             <g class="flow-node" onclick="openInspectorModal('node-7')" transform="translate(588, 80)">
-              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-              <circle cx="24" cy="28" r="10" fill="#30d158" fill-opacity="0.15"/>
-              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#30d158">07</text>
-              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Client Signal Dispatch</text>
-              <text x="24" y="55" font-size="10.5" fill="#86868b">Encrypted portal & app alert</text>
-              <text x="24" y="70" font-size="9.5" fill="#52525b">Non-discretionary trigger</text>
-              <circle cx="195" cy="28" r="4" fill="#30d158"/>
+              <rect width="214" height="85" rx="14" fill="url(#sky-node-grad)" stroke="#7dd3fc" stroke-width="1.3" filter="url(#ice-shadow)"/>
+              <circle cx="24" cy="28" r="10" fill="#0284c7" fill-opacity="0.16"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">07</text>
+              <text x="44" y="32" font-size="12.5" font-weight="800" fill="#082347">Client Signal Dispatch</text>
+              <text x="24" y="55" font-size="10.5" font-weight="600" fill="#133e68">Encrypted portal & app alert</text>
+              <text x="24" y="70" font-size="9.5" fill="#335c87">Non-discretionary review</text>
+              <circle cx="195" cy="28" r="4" fill="#0284c7"/>
             </g>
 
-            <!-- Node 3.2: 1-Click Consent / Broker API -->
+            <!-- Node 3.2 -->
             <g class="flow-node" onclick="openInspectorModal('node-8')" transform="translate(588, 220)">
-              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-              <circle cx="24" cy="28" r="10" fill="#30d158" fill-opacity="0.15"/>
-              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#30d158">08</text>
-              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Client 1-Click Consent</text>
-              <text x="24" y="55" font-size="10.5" fill="#86868b">PhillipCapital / Broker API</text>
-              <text x="24" y="70" font-size="9.5" fill="#52525b">Zero POA requirement</text>
-              <circle cx="195" cy="28" r="4" fill="#30d158"/>
+              <rect width="214" height="85" rx="14" fill="url(#sky-node-grad)" stroke="#7dd3fc" stroke-width="1.3" filter="url(#ice-shadow)"/>
+              <circle cx="24" cy="28" r="10" fill="#0284c7" fill-opacity="0.16"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">08</text>
+              <text x="44" y="32" font-size="12.5" font-weight="800" fill="#082347">1-Click Consent / API</text>
+              <text x="24" y="55" font-size="10.5" font-weight="600" fill="#133e68">PhillipCapital / Broker API</text>
+              <text x="24" y="70" font-size="9.5" fill="#335c87">Zero POA requirement</text>
+              <circle cx="195" cy="28" r="4" fill="#0284c7"/>
             </g>
 
-            <!-- Node 3.3: T+1 Direct Demat Custody -->
+            <!-- Node 3.3 -->
             <g class="flow-node" onclick="openInspectorModal('node-9')" transform="translate(588, 360)">
-              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-              <circle cx="24" cy="28" r="10" fill="#30d158" fill-opacity="0.15"/>
-              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#30d158">09</text>
-              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">T+1 Demat Clearing</text>
-              <text x="24" y="55" font-size="10.5" fill="#86868b">NSE / BSE exchange routing</text>
-              <text x="24" y="70" font-size="9.5" fill="#52525b">Direct NSDL / CDSL holding</text>
-              <circle cx="195" cy="28" r="4" fill="#30d158"/>
+              <rect width="214" height="85" rx="14" fill="url(#sky-node-grad)" stroke="#7dd3fc" stroke-width="1.3" filter="url(#ice-shadow)"/>
+              <circle cx="24" cy="28" r="10" fill="#0284c7" fill-opacity="0.16"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">09</text>
+              <text x="44" y="32" font-size="12.5" font-weight="800" fill="#082347">T+1 Demat Custody</text>
+              <text x="24" y="55" font-size="10.5" font-weight="600" fill="#133e68">NSE / BSE exchange routing</text>
+              <text x="24" y="70" font-size="9.5" fill="#335c87">Direct NSDL / CDSL holding</text>
+              <circle cx="195" cy="28" r="4" fill="#0284c7"/>
             </g>
 
-            <!-- Node 4.1: Quarterly Earnings Surveillance -->
+            <!-- Node 4.1 -->
             <g class="flow-node" onclick="openInspectorModal('node-10')" transform="translate(865, 80)">
-              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-              <circle cx="24" cy="28" r="10" fill="#bf5af2" fill-opacity="0.15"/>
-              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#bf5af2">10</text>
-              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Earnings Surveillance</text>
-              <text x="24" y="55" font-size="10.5" fill="#86868b">QoQ / YoY forensic reviews</text>
-              <text x="24" y="70" font-size="9.5" fill="#52525b">Management con-call audits</text>
-              <circle cx="195" cy="28" r="4" fill="#bf5af2"/>
+              <rect width="214" height="85" rx="14" fill="url(#sky-node-grad)" stroke="#7dd3fc" stroke-width="1.3" filter="url(#ice-shadow)"/>
+              <circle cx="24" cy="28" r="10" fill="#0284c7" fill-opacity="0.16"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">10</text>
+              <text x="44" y="32" font-size="12.5" font-weight="800" fill="#082347">Earnings Surveillance</text>
+              <text x="24" y="55" font-size="10.5" font-weight="600" fill="#133e68">QoQ / YoY forensic reviews</text>
+              <text x="24" y="70" font-size="9.5" fill="#335c87">Con-call thesis tracking</text>
+              <circle cx="195" cy="28" r="4" fill="#0284c7"/>
             </g>
 
-            <!-- Node 4.2: Drift & Thesis Rebalance -->
+            <!-- Node 4.2 -->
             <g class="flow-node" onclick="openInspectorModal('node-11')" transform="translate(865, 220)">
-              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-              <circle cx="24" cy="28" r="10" fill="#bf5af2" fill-opacity="0.15"/>
-              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#bf5af2">11</text>
-              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Dynamic Rebalance</text>
-              <text x="24" y="55" font-size="10.5" fill="#86868b">Weight drift > 5% trigger</text>
-              <text x="24" y="70" font-size="9.5" fill="#52525b">Profit-booking / Stop reallocation</text>
-              <circle cx="195" cy="28" r="4" fill="#bf5af2"/>
+              <rect width="214" height="85" rx="14" fill="url(#sky-node-grad)" stroke="#7dd3fc" stroke-width="1.3" filter="url(#ice-shadow)"/>
+              <circle cx="24" cy="28" r="10" fill="#0284c7" fill-opacity="0.16"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">11</text>
+              <text x="44" y="32" font-size="12.5" font-weight="800" fill="#082347">Dynamic Rebalance</text>
+              <text x="24" y="55" font-size="10.5" font-weight="600" fill="#133e68">Weight drift > 5% trigger</text>
+              <text x="24" y="70" font-size="9.5" fill="#335c87">Profit-booking / Stop reallocation</text>
+              <circle cx="195" cy="28" r="4" fill="#0284c7"/>
             </g>
 
-            <!-- Node 4.3: Tax-Loss Harvesting & XIRR -->
+            <!-- Node 4.3 -->
             <g class="flow-node" onclick="openInspectorModal('node-12')" transform="translate(865, 360)">
-              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-              <circle cx="24" cy="28" r="10" fill="#bf5af2" fill-opacity="0.15"/>
-              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#bf5af2">12</text>
-              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Tax-Loss Harvesting</text>
-              <text x="24" y="55" font-size="10.5" fill="#86868b">LTCG / STCG fiscal offset</text>
-              <text x="24" y="70" font-size="9.5" fill="#52525b">XIRR vs Nifty 50 alpha audit</text>
-              <circle cx="195" cy="28" r="4" fill="#bf5af2"/>
+              <rect width="214" height="85" rx="14" fill="url(#sky-node-grad)" stroke="#7dd3fc" stroke-width="1.3" filter="url(#ice-shadow)"/>
+              <circle cx="24" cy="28" r="10" fill="#0284c7" fill-opacity="0.16"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1">12</text>
+              <text x="44" y="32" font-size="12.5" font-weight="800" fill="#082347">Tax-Loss Harvesting</text>
+              <text x="24" y="55" font-size="10.5" font-weight="600" fill="#133e68">LTCG / STCG fiscal offset</text>
+              <text x="24" y="70" font-size="9.5" fill="#335c87">XIRR vs Nifty 500 alpha</text>
+              <circle cx="195" cy="28" r="4" fill="#0284c7"/>
             </g>
 
-            <!-- Closed Loop Badge -->
-            <rect x="710" y="555" width="240" height="34" rx="17" fill="#151025" stroke="#bf5af2" stroke-width="1.2"/>
-            <text x="830" y="576" text-anchor="middle" font-size="11" font-weight="600" fill="#d8b4fe">↺ Dynamic Rebalance Feedback Loop</text>
+            <rect x="710" y="555" width="240" height="34" rx="17" fill="#081830" stroke="#38bdf8" stroke-width="1.3"/>
+            <text x="830" y="576" text-anchor="middle" font-size="11" font-weight="700" fill="#bae6fd">↺ Dynamic Rebalance Feedback Loop</text>
           </svg>
         </div>
 
-        <div class="pt-3 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between text-xs text-apple-muted gap-2">
+        <div class="pt-3.5 border-t border-sky-500/15 flex flex-col sm:flex-row items-center justify-between text-xs text-sky-200/70 gap-2">
           <span class="flex items-center gap-2">
-            <i class="fa-regular fa-hand-pointer text-apple-blue"></i>
-            <span>Click any node to view SEBI IA compliance & research committee execution rules.</span>
+            <i class="fa-regular fa-hand-pointer text-ice-300"></i>
+            <span>Interactive: Click any ice-blue node above to view SEBI statutory regulations and clearing mechanics.</span>
           </span>
-          <span class="text-[11px] text-apple-secondary">PhillipCapital IA Architecture Standard v2.4</span>
+          <span class="text-[11px] text-sky-300/80 font-mono">PhillipCapital Architecture Standard v5.3</span>
         </div>
       </div>
 
@@ -506,140 +559,139 @@
 
   </main>
 
-  <!-- PAGE 2: WHAT IS EQUITY ADVISORY -->
   <main id="page-standard" class="page-view flex-grow hidden">
     
     <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       
       <div class="text-center max-w-3xl mx-auto space-y-3">
-        <div class="text-xs font-bold text-apple-blue tracking-wider uppercase">Fiduciary Standard</div>
-        <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white">What is an Equity Advisory?</h2>
-        <p class="text-apple-muted text-sm sm:text-base leading-relaxed">
-          An independent, SEBI-registered advisory service that equips you with institutional research and tailored portfolio strategies without taking custody of your funds or executing trades without your explicit approval.
+        <div class="text-xs font-bold text-ice-300 tracking-wider uppercase">Fiduciary Architecture</div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">The Advisory Standard</h2>
+        <p class="text-sky-200/70 text-sm sm:text-base leading-relaxed">
+          How fee-only, non-discretionary equity advisory ensures true fiduciary alignment, complete custody safety, and uncompromised investor autonomy.
         </p>
       </div>
 
-      <!-- 3 Core Pillars -->
+      <!-- 3 Institutional Ice-Blue Pillars -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <div class="glass-card rounded-3xl p-7 space-y-4">
-          <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-apple-blue text-xl">
+        <div class="ice-glass-card rounded-3xl p-7 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-sky-200/70 border border-sky-400/50 flex items-center justify-center text-maritime-primary text-xl shadow-sm">
             <i class="fa-solid fa-vault"></i>
           </div>
-          <h3 class="text-xl font-bold text-white tracking-tight">100% Client Demat Custody</h3>
-          <p class="text-apple-muted text-xs leading-relaxed">
-            Your securities are held directly in your personal Demat account with NSDL or CDSL. PhillipCapital Advisory never pools client funds, eliminating counterparty custody risk.
+          <h3 class="text-xl font-extrabold text-maritime-primary tracking-tight">100% Client Demat Custody</h3>
+          <p class="text-maritime-secondary text-xs leading-relaxed">
+            Your shares are held strictly in your personal Demat account with NSDL or CDSL. PhillipCapital Advisory holds zero custody and zero power of attorney over your securities.
           </p>
-          <div class="pt-2 text-xs font-semibold text-apple-blue flex items-center gap-1">
-            Zero Custody Exposure <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          <div class="pt-2 text-xs font-bold text-maritime-accent flex items-center gap-1.5">
+            Zero Counterparty Exposure <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </div>
         </div>
 
-        <div class="glass-card rounded-3xl p-7 space-y-4">
-          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-apple-amber text-xl">
+        <div class="ice-glass-card rounded-3xl p-7 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-sky-200/70 border border-sky-400/50 flex items-center justify-center text-maritime-primary text-xl shadow-sm">
             <i class="fa-solid fa-hand-holding-dollar"></i>
           </div>
-          <h3 class="text-xl font-bold text-white tracking-tight">Fee-Only Fiduciary Model</h3>
-          <p class="text-apple-muted text-xs leading-relaxed">
-            Regulated under SEBI (Investment Advisers) Regulations, 2013. We do not accept commissions, kickbacks, or distribution incentives from listed entities or exchanges.
+          <h3 class="text-xl font-extrabold text-maritime-primary tracking-tight">Fee-Only Fiduciary Model</h3>
+          <p class="text-maritime-secondary text-xs leading-relaxed">
+            Regulated under SEBI IA Regulations, 2013. We accept no commissions, trailing rebates, or transaction churn incentives from stockbrokers or asset management companies.
           </p>
-          <div class="pt-2 text-xs font-semibold text-apple-amber flex items-center gap-1">
-            Zero Trade Churn Conflict <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          <div class="pt-2 text-xs font-bold text-maritime-accent flex items-center gap-1.5">
+            Eliminates Churn Conflicts <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </div>
         </div>
 
-        <div class="glass-card rounded-3xl p-7 space-y-4">
-          <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-apple-emerald text-xl">
+        <div class="ice-glass-card rounded-3xl p-7 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-sky-200/70 border border-sky-400/50 flex items-center justify-center text-maritime-primary text-xl shadow-sm">
             <i class="fa-solid fa-building-columns"></i>
           </div>
-          <h3 class="text-xl font-bold text-white tracking-tight">Phillip Institutional Pedigree</h3>
-          <p class="text-apple-muted text-xs leading-relaxed">
-            Founded in Singapore in 1975, PhillipCapital operates across 15 countries with over USD 35 Billion in assets under custody and management, bringing global research rigor to Indian equities.
+          <h3 class="text-xl font-extrabold text-maritime-primary tracking-tight">49+ Years Global Pedigree</h3>
+          <p class="text-maritime-secondary text-xs leading-relaxed">
+            Founded in Singapore in 1975, PhillipCapital operates across 15 financial hubs globally with over USD 35 Billion in AUM/AUA, delivering institutional-caliber research to Indian equities.
           </p>
-          <div class="pt-2 text-xs font-semibold text-apple-emerald flex items-center gap-1">
-            49+ Years of Institutional Trust <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          <div class="pt-2 text-xs font-bold text-maritime-accent flex items-center gap-1.5">
+            Institutional Trust <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </div>
         </div>
 
       </div>
 
-      <!-- Regulatory Comparison Matrix -->
-      <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/[0.06] pb-4">
+      <!-- Comparison Matrix in Light Sky Blue Framing -->
+      <div class="ice-glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-sky-300/60 pb-4">
           <div>
-            <h3 class="text-lg font-bold text-white">Institutional Comparison: Advisory vs PMS vs Stock Broker</h3>
-            <p class="text-xs text-apple-muted">A direct legal and operational comparison under Indian regulatory frameworks.</p>
+            <h3 class="text-lg font-extrabold text-maritime-primary">Comparative Regulatory Analysis</h3>
+            <p class="text-xs text-maritime-muted">A clear, objective breakdown under Indian Securities and Exchange Board of India (SEBI) guidelines.</p>
           </div>
-          <span class="text-xs px-3 py-1 rounded-full bg-apple-blue/10 text-apple-blue border border-apple-blue/20 self-start">
-            SEBI Regulatory Matrix
+          <span class="text-xs px-3 py-1 rounded-full bg-sky-200/80 text-maritime-primary font-bold border border-sky-400/50 self-start">
+            SEBI Regulatory Benchmark
           </span>
         </div>
 
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs border-collapse">
             <thead>
-              <tr class="text-apple-secondary border-b border-white/[0.08]">
-                <th class="py-3 px-4 font-semibold">Parameter</th>
-                <th class="py-3 px-4 font-semibold text-apple-blue bg-blue-500/[0.05] rounded-t-xl">Phillip Equity Advisory (RIA)</th>
-                <th class="py-3 px-4 font-semibold">Portfolio Management (PMS)</th>
-                <th class="py-3 px-4 font-semibold">Discount / Traditional Broker</th>
-                <th class="py-3 px-4 font-semibold">Direct Mutual Fund</th>
+              <tr class="text-maritime-muted border-b border-sky-300/60">
+                <th class="py-3 px-4 font-bold">Regulatory Dimension</th>
+                <th class="py-3 px-4 font-extrabold text-maritime-primary bg-sky-200/80 rounded-t-xl">Phillip Advisory (SEBI RIA)</th>
+                <th class="py-3 px-4 font-bold">Portfolio Management (PMS)</th>
+                <th class="py-3 px-4 font-bold">Stock Broker (Broking)</th>
+                <th class="py-3 px-4 font-bold">Mutual Fund (Direct)</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-white/[0.04] text-apple-muted">
-              <tr class="hover:bg-white/[0.02]">
-                <td class="py-3.5 px-4 font-medium text-white">Asset Custody</td>
-                <td class="py-3.5 px-4 text-emerald-400 font-semibold bg-blue-500/[0.05]">
-                  <i class="fa-solid fa-check mr-1.5"></i> Client's Personal Demat
+            <tbody class="divide-y divide-sky-200/60 text-maritime-secondary">
+              <tr class="hover:bg-white/40">
+                <td class="py-3.5 px-4 font-bold text-maritime-primary">Demat Custody</td>
+                <td class="py-3.5 px-4 text-emerald-800 font-bold bg-sky-200/80">
+                  <i class="fa-solid fa-circle-check mr-1 text-[11px] text-emerald-600"></i> 100% In Client Demat
                 </td>
                 <td class="py-3.5 px-4">Managed via Power of Attorney (POA)</td>
                 <td class="py-3.5 px-4">Client Demat / Broker Pool Account</td>
-                <td class="py-3.5 px-4">AMC Custodian Pooled Units</td>
+                <td class="py-3.5 px-4">Pooled with AMC Custodian</td>
               </tr>
-              <tr class="hover:bg-white/[0.02]">
-                <td class="py-3.5 px-4 font-medium text-white">Trade Discretion</td>
-                <td class="py-3.5 px-4 text-apple-blue font-semibold bg-blue-500/[0.05]">
-                  Non-Discretionary (Client Consent Required)
+              <tr class="hover:bg-white/40">
+                <td class="py-3.5 px-4 font-bold text-maritime-primary">Trade Discretion</td>
+                <td class="py-3.5 px-4 text-maritime-primary font-bold bg-sky-200/80">
+                  Non-Discretionary (Client Approves)
                 </td>
-                <td class="py-3.5 px-4">Full Discretion with Fund Manager</td>
-                <td class="py-3.5 px-4">Client Self-Directed Only</td>
-                <td class="py-3.5 px-4">Full AMC Discretion</td>
+                <td class="py-3.5 px-4">Discretionary (Manager Decides)</td>
+                <td class="py-3.5 px-4">Self-Directed Trading</td>
+                <td class="py-3.5 px-4">Full Scheme Manager Discretion</td>
               </tr>
-              <tr class="hover:bg-white/[0.02]">
-                <td class="py-3.5 px-4 font-medium text-white">Legal Standard</td>
-                <td class="py-3.5 px-4 text-white font-medium bg-blue-500/[0.05]">
-                  Fiduciary Standard (SEBI IA Regs 2013)
+              <tr class="hover:bg-white/40">
+                <td class="py-3.5 px-4 font-bold text-maritime-primary">Legal Standard</td>
+                <td class="py-3.5 px-4 text-maritime-primary font-extrabold bg-sky-200/80">
+                  Fiduciary Standard (SEBI IA Regs)
                 </td>
-                <td class="py-3.5 px-4">Contractual PMS Mandate</td>
+                <td class="py-3.5 px-4">PMS Contractual Mandate</td>
                 <td class="py-3.5 px-4">Suitability / Execution Only</td>
                 <td class="py-3.5 px-4">Scheme SID / KIM Mandate</td>
               </tr>
-              <tr class="hover:bg-white/[0.02]">
-                <td class="py-3.5 px-4 font-medium text-white">Fee Architecture</td>
-                <td class="py-3.5 px-4 text-apple-text font-semibold bg-blue-500/[0.05]">
-                  Flat Fee or Max 2.5% AUA (SEBI Cap)
+              <tr class="hover:bg-white/40">
+                <td class="py-3.5 px-4 font-bold text-maritime-primary">Fee Caps</td>
+                <td class="py-3.5 px-4 text-maritime-primary font-bold bg-sky-200/80">
+                  Max 2.5% AUA or ₹1.25L Flat Fee
                 </td>
                 <td class="py-3.5 px-4">1.5 - 2.5% Fixed + 15-20% Profit Share</td>
-                <td class="py-3.5 px-4">₹20/order or % Brokerage Churn</td>
-                <td class="py-3.5 px-4">0.8 - 2.0% TER (Deducted daily from NAV)</td>
+                <td class="py-3.5 px-4">Per-Order or % Turnover Brokerage</td>
+                <td class="py-3.5 px-4">0.8 - 2.0% Total Expense Ratio (TER)</td>
               </tr>
-              <tr class="hover:bg-white/[0.02]">
-                <td class="py-3.5 px-4 font-medium text-white">Minimum Capital</td>
-                <td class="py-3.5 px-4 text-emerald-400 font-semibold bg-blue-500/[0.05]">
-                  Accessible (₹10 Lakhs recommended)
+              <tr class="hover:bg-white/40">
+                <td class="py-3.5 px-4 font-bold text-maritime-primary">Minimum Capital</td>
+                <td class="py-3.5 px-4 text-emerald-800 font-bold bg-sky-200/80">
+                  Flexible (₹10 Lakhs recommended)
                 </td>
                 <td class="py-3.5 px-4">₹50 Lakhs (SEBI Mandatory Floor)</td>
-                <td class="py-3.5 px-4">₹0 Minimum</td>
+                <td class="py-3.5 px-4">₹0</td>
                 <td class="py-3.5 px-4">₹500 (SIP)</td>
               </tr>
-              <tr class="hover:bg-white/[0.02]">
-                <td class="py-3.5 px-4 font-medium text-white">Tax Transparency</td>
-                <td class="py-3.5 px-4 text-white bg-blue-500/[0.05]">
-                  Direct Capital Gain Statements (T+1)
+              <tr class="hover:bg-white/40">
+                <td class="py-3.5 px-4 font-bold text-maritime-primary">Tax Transparency</td>
+                <td class="py-3.5 px-4 text-maritime-primary font-bold bg-sky-200/80">
+                  Direct Capital Gains Statements (T+1)
                 </td>
                 <td class="py-3.5 px-4">Annual Audited Statement</td>
-                <td class="py-3.5 px-4">Contract Notes</td>
-                <td class="py-3.5 px-4">Taxable only on Unit Redemption</td>
+                <td class="py-3.5 px-4">Broker Contract Notes</td>
+                <td class="py-3.5 px-4">Taxed on Unit Redemption</td>
               </tr>
             </tbody>
           </table>
@@ -650,177 +702,226 @@
 
   </main>
 
-  <!-- PAGE 3: ONBOARDING & ACCOUNT SETUP -->
   <main id="page-onboarding" class="page-view flex-grow hidden">
     
     <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       
       <div class="text-center max-w-3xl mx-auto space-y-3">
-        <div class="text-xs font-bold text-apple-emerald tracking-wider uppercase">Digital Setup</div>
-        <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white">How to Open an Advisory Account</h2>
-        <p class="text-apple-muted text-sm sm:text-base leading-relaxed">
-          Open your account digitally in less than 15 minutes. Connect your existing Demat account or set up a new one with PhillipCapital India.
+        <div class="text-xs font-bold text-emerald-400 tracking-wider uppercase">Frictionless Onboarding</div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">How to Set Up an Advisory Account</h2>
+        <p class="text-sky-200/70 text-sm sm:text-base leading-relaxed">
+          Open your account digitally in less than 15 minutes. Connect your existing Demat account or open a direct institutional Demat with PhillipCapital India.
         </p>
       </div>
 
-      <!-- 4 Step Cards -->
+      <!-- 4 Step Interactive Timeline -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5">
+        <div class="ice-glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5">
           <div>
-            <div class="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/30 text-apple-blue font-bold flex items-center justify-center text-sm mb-4">
+            <div class="w-10 h-10 rounded-2xl bg-sky-200/80 border border-sky-400/50 text-maritime-primary font-extrabold flex items-center justify-center text-sm mb-4">
               01
             </div>
-            <h4 class="text-base font-bold text-white tracking-tight">KYC & Identity Ingestion</h4>
-            <p class="text-apple-muted text-xs leading-relaxed mt-1">
+            <h4 class="text-base font-extrabold text-maritime-primary tracking-tight">Identity & CKYCR Ingestion</h4>
+            <p class="text-maritime-secondary text-xs leading-relaxed mt-1">
               Verify your Permanent Account Number (PAN) and retrieve your registered CKYC records via KRA.
             </p>
-            <ul class="mt-3 space-y-1.5 text-xs text-apple-secondary">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-blue text-[10px]"></i> PAN Card Verification</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-blue text-[10px]"></i> CKYC Status Retrieval</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-blue text-[10px]"></i> Bank Proof / Cancelled Cheque</li>
+            <ul class="mt-3.5 space-y-2 text-xs text-maritime-secondary">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-maritime-accent text-[10px]"></i> PAN Card Verification</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-maritime-accent text-[10px]"></i> CKYC Status Retrieval</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-maritime-accent text-[10px]"></i> Bank Proof / Cancelled Cheque</li>
             </ul>
           </div>
-          <div class="pt-3 border-t border-white/[0.06] text-[11px] text-apple-muted flex justify-between">
+          <div class="pt-3.5 border-t border-sky-300/60 text-[11px] text-maritime-muted flex justify-between">
             <span>Validation</span>
-            <span class="text-apple-emerald font-semibold">Instant API Check</span>
+            <span class="text-emerald-800 font-bold">Instant API Check</span>
           </div>
         </div>
 
-        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5">
+        <div class="ice-glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5">
           <div>
-            <div class="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 text-apple-amber font-bold flex items-center justify-center text-sm mb-4">
+            <div class="w-10 h-10 rounded-2xl bg-sky-200/80 border border-sky-400/50 text-maritime-primary font-extrabold flex items-center justify-center text-sm mb-4">
               02
             </div>
-            <h4 class="text-base font-bold text-white tracking-tight">SEBI Risk Suitability</h4>
-            <p class="text-apple-muted text-xs leading-relaxed mt-1">
+            <h4 class="text-base font-extrabold text-maritime-primary tracking-tight">SEBI Risk Suitability</h4>
+            <p class="text-maritime-secondary text-xs leading-relaxed mt-1">
               Complete a psychometric assessment covering investment horizon, draw-down resilience, and income objectives.
             </p>
-            <ul class="mt-3 space-y-1.5 text-xs text-apple-secondary">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-amber text-[10px]"></i> Liquidity Timeline (3-5+ Yrs)</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-amber text-[10px]"></i> Volatility Appetite Audit</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-amber text-[10px]"></i> Model Profile Classification</li>
+            <ul class="mt-3.5 space-y-2 text-xs text-maritime-secondary">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-maritime-accent text-[10px]"></i> Liquidity Timeline (3-5+ Yrs)</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-maritime-accent text-[10px]"></i> Drawdown Volatility Resilience</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-maritime-accent text-[10px]"></i> Model Profile Allocation</li>
             </ul>
           </div>
-          <div class="pt-3 border-t border-white/[0.06] text-[11px] text-apple-muted flex justify-between">
+          <div class="pt-3.5 border-t border-sky-300/60 text-[11px] text-maritime-muted flex justify-between">
             <span>SEBI IA Mandate</span>
-            <span class="text-apple-amber font-semibold">Required by Law</span>
+            <span class="text-amber-800 font-bold">Required by Law</span>
           </div>
         </div>
 
-        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5">
+        <div class="ice-glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5">
           <div>
-            <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-apple-emerald font-bold flex items-center justify-center text-sm mb-4">
+            <div class="w-10 h-10 rounded-2xl bg-sky-200/80 border border-sky-400/50 text-maritime-primary font-extrabold flex items-center justify-center text-sm mb-4">
               03
             </div>
-            <h4 class="text-base font-bold text-white tracking-tight">Demat Connection</h4>
-            <p class="text-apple-muted text-xs leading-relaxed mt-1">
-              Link your existing broker Demat account (Zerodha, Groww, AngelOne, ICICI Direct) or open a direct PhillipCapital Demat.
+            <h4 class="text-base font-extrabold text-maritime-primary tracking-tight">Demat Connection</h4>
+            <p class="text-maritime-secondary text-xs leading-relaxed mt-1">
+              Link your existing broker Demat account or open a direct institutional PhillipCapital Demat.
             </p>
-            <ul class="mt-3 space-y-1.5 text-xs text-apple-secondary">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-emerald text-[10px]"></i> Client Master List (CML)</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-emerald text-[10px]"></i> Tokenized Broker OAuth2 API</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-emerald text-[10px]"></i> Zero POA or Withdrawal access</li>
+            <ul class="mt-3.5 space-y-2 text-xs text-maritime-secondary">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-maritime-accent text-[10px]"></i> Client Master Report (CMR)</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-maritime-accent text-[10px]"></i> Tokenized Broker OAuth2 API</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-maritime-accent text-[10px]"></i> Zero POA or Withdrawal access</li>
             </ul>
           </div>
-          <div class="pt-3 border-t border-white/[0.06] text-[11px] text-apple-muted flex justify-between">
+          <div class="pt-3.5 border-t border-sky-300/60 text-[11px] text-maritime-muted flex justify-between">
             <span>Custody Safety</span>
-            <span class="text-apple-emerald font-semibold">100% In Your Demat</span>
+            <span class="text-emerald-800 font-bold">100% In Your Demat</span>
           </div>
         </div>
 
-        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5">
+        <div class="ice-glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5">
           <div>
-            <div class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/30 text-apple-purple font-bold flex items-center justify-center text-sm mb-4">
+            <div class="w-10 h-10 rounded-2xl bg-sky-200/80 border border-sky-400/50 text-maritime-primary font-extrabold flex items-center justify-center text-sm mb-4">
               04
             </div>
-            <h4 class="text-base font-bold text-white tracking-tight">Sign Mandate & Go-Live</h4>
-            <p class="text-apple-muted text-xs leading-relaxed mt-1">
-              Execute the digital SEBI-compliant Advisory Agreement via Aadhaar OTP e-Sign and initiate your model portfolio.
+            <h4 class="text-base font-extrabold text-maritime-primary tracking-tight">Digital Mandate & Go-Live</h4>
+            <p class="text-maritime-secondary text-xs leading-relaxed mt-1">
+              Execute the digital SEBI-compliant Advisory Agreement via Aadhaar OTP e-Sign and initiate model deployment.
             </p>
-            <ul class="mt-3 space-y-1.5 text-xs text-apple-secondary">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-purple text-[10px]"></i> Aadhaar OTP Digital e-Sign</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-purple text-[10px]"></i> Transparent Fee Structure</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-purple text-[10px]"></i> Initial Portfolio Deployment</li>
+            <ul class="mt-3.5 space-y-2 text-xs text-maritime-secondary">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-maritime-accent text-[10px]"></i> Aadhaar OTP Digital e-Sign</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-maritime-accent text-[10px]"></i> Transparent Fee Schedule</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-maritime-accent text-[10px]"></i> Same-Day Go-Live Delivery</li>
             </ul>
           </div>
-          <div class="pt-3 border-t border-white/[0.06] text-[11px] text-apple-muted flex justify-between">
+          <div class="pt-3.5 border-t border-sky-300/60 text-[11px] text-maritime-muted flex justify-between">
             <span>Activation</span>
-            <span class="text-apple-purple font-semibold">Same-Day Active</span>
+            <span class="text-indigo-900 font-bold">Same-Day Active</span>
           </div>
         </div>
 
       </div>
 
-      <!-- Interactive Readiness Checklist -->
-      <div class="glass-card rounded-3xl p-6 sm:p-8 max-w-4xl mx-auto space-y-6 border border-white/[0.1]">
+      <!-- Supported Broker APIs Strip -->
+      <div class="ice-glass-card rounded-3xl p-6 sm:p-7 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-sky-300/60 pb-3">
+          <div>
+            <h4 class="text-sm font-extrabold text-maritime-primary flex items-center gap-2">
+              <i class="fa-solid fa-plug text-maritime-accent"></i> Supported 1-Click Execution Broker APIs
+            </h4>
+            <p class="text-xs text-maritime-muted">Execute trade recommendations seamlessly through your preferred broker.</p>
+          </div>
+          <span class="text-[11px] text-emerald-800 font-bold flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Tokenized Read & Order API Only
+          </span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 pt-2">
+          <div class="p-3 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 text-center transition">
+            <div class="text-xs font-bold text-maritime-primary">PhillipCapital</div>
+            <span class="text-[10px] text-maritime-accent font-bold">In-House</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 text-center transition">
+            <div class="text-xs font-bold text-maritime-primary">Zerodha</div>
+            <span class="text-[10px] text-maritime-muted font-semibold">Kite Connect</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 text-center transition">
+            <div class="text-xs font-bold text-maritime-primary">Groww</div>
+            <span class="text-[10px] text-maritime-muted font-semibold">Direct API</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 text-center transition">
+            <div class="text-xs font-bold text-maritime-primary">Upstox</div>
+            <span class="text-[10px] text-maritime-muted font-semibold">Upstox Pro</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 text-center transition">
+            <div class="text-xs font-bold text-maritime-primary">ICICI Direct</div>
+            <span class="text-[10px] text-maritime-muted font-semibold">Breeze API</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 text-center transition">
+            <div class="text-xs font-bold text-maritime-primary">HDFC Sky</div>
+            <span class="text-[10px] text-maritime-muted font-semibold">Sky API</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 text-center transition">
+            <div class="text-xs font-bold text-maritime-primary">Kotak Neo</div>
+            <span class="text-[10px] text-maritime-muted font-semibold">Trade API</span>
+          </div>
+          <div class="p-3 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 text-center transition">
+            <div class="text-xs font-bold text-maritime-primary">AngelOne</div>
+            <span class="text-[10px] text-maritime-muted font-semibold">SmartAPI</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Readiness Checklist in Light Sky Blue Card -->
+      <div class="ice-glass-card rounded-3xl p-6 sm:p-8 max-w-4xl mx-auto space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 class="text-lg font-bold text-white flex items-center gap-2">
-              <i class="fa-solid fa-list-check text-apple-blue"></i> Onboarding Document Checklist
+            <h3 class="text-lg font-extrabold text-maritime-primary flex items-center gap-2">
+              <i class="fa-solid fa-list-check text-maritime-accent"></i> Onboarding Document Checklist
             </h3>
-            <p class="text-xs text-apple-muted mt-0.5">Toggle the documents you have prepared to check your onboarding readiness.</p>
+            <p class="text-xs text-maritime-muted mt-0.5">Toggle the documents you have prepared to check your onboarding readiness.</p>
           </div>
           <div class="flex items-center gap-3">
             <div class="text-right">
-              <div id="checklist-percent" class="text-sm font-bold text-white">0% Complete</div>
-              <div class="text-[10px] text-apple-muted">Readiness Score</div>
+              <div id="checklist-percent" class="text-sm font-extrabold text-maritime-primary">0% Complete</div>
+              <div class="text-[10px] text-maritime-muted font-semibold">Readiness Score</div>
             </div>
-            <div class="w-12 h-12 rounded-full bg-apple-subtle border border-white/10 flex items-center justify-center">
-              <div id="readiness-ring" class="w-8 h-8 rounded-full bg-blue-500/20 border-2 border-apple-blue flex items-center justify-center text-[10px] font-bold text-apple-blue">
+            <div class="w-12 h-12 rounded-full bg-sky-200/80 border border-sky-300 flex items-center justify-center shadow-inner">
+              <div id="readiness-ring" class="w-9 h-9 rounded-full bg-white/80 border-2 border-maritime-accent flex items-center justify-center text-[10px] font-bold text-maritime-primary">
                 0/5
               </div>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none">
-            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
+          <label class="flex items-start gap-3 p-4 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-sky-400 bg-white text-maritime-accent focus:ring-0">
             <div>
-              <span class="text-white font-medium block">Permanent Account Number (PAN Card)</span>
-              <span class="text-apple-muted text-[11px]">Required for KRA identification and SEBI compliance.</span>
+              <span class="text-maritime-primary font-bold block">Permanent Account Number (PAN Card)</span>
+              <span class="text-maritime-muted text-[11px]">Required for KRA central database identification and tax records.</span>
             </div>
           </label>
 
-          <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none">
-            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
+          <label class="flex items-start gap-3 p-4 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-sky-400 bg-white text-maritime-accent focus:ring-0">
             <div>
-              <span class="text-white font-medium block">Active Demat Account (CDSL / NSDL)</span>
-              <span class="text-apple-muted text-[11px]">With PhillipCapital, Zerodha, Groww, AngelOne, or Bank DP.</span>
+              <span class="text-maritime-primary font-bold block">Active Demat Account (CDSL / NSDL)</span>
+              <span class="text-maritime-muted text-[11px]">With PhillipCapital, Zerodha, Groww, ICICI Direct, or other broker.</span>
             </div>
           </label>
 
-          <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none">
-            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
+          <label class="flex items-start gap-3 p-4 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-sky-400 bg-white text-maritime-accent focus:ring-0">
             <div>
-              <span class="text-white font-medium block">Verified Bank Account Proof</span>
-              <span class="text-apple-muted text-[11px]">Cancelled cheque with printed name or latest bank statement.</span>
+              <span class="text-maritime-primary font-bold block">Verified Bank Account Proof</span>
+              <span class="text-maritime-muted text-[11px]">Cancelled cheque with printed name or latest bank statement.</span>
             </div>
           </label>
 
-          <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none">
-            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
+          <label class="flex items-start gap-3 p-4 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-sky-400 bg-white text-maritime-accent focus:ring-0">
             <div>
-              <span class="text-white font-medium block">Aadhaar Linked with Active Mobile</span>
-              <span class="text-apple-muted text-[11px]">Required for instantaneous digital OTP e-Sign of the IA Agreement.</span>
+              <span class="text-maritime-primary font-bold block">Aadhaar Linked with Active Mobile</span>
+              <span class="text-maritime-muted text-[11px]">Required for instantaneous digital OTP e-Sign of the IA Agreement.</span>
             </div>
           </label>
 
-          <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none sm:col-span-2">
-            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
+          <label class="flex items-start gap-3 p-4 rounded-2xl bg-white/50 border border-sky-300/60 hover:border-sky-500 cursor-pointer transition select-none sm:col-span-2">
+            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-sky-400 bg-white text-maritime-accent focus:ring-0">
             <div>
-              <span class="text-white font-medium block">Client Master List (CML) Copy</span>
-              <span class="text-apple-muted text-[11px]">Digitally stamped PDF from your DP confirming 16-digit Demat BOID.</span>
+              <span class="text-maritime-primary font-bold block">Client Master Report (CMR) / CML Copy</span>
+              <span class="text-maritime-muted text-[11px]">Digitally stamped PDF from your DP confirming 16-digit Demat BOID.</span>
             </div>
           </label>
         </div>
 
-        <div class="space-y-1">
-          <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-            <div id="readiness-bar" class="h-full bg-gradient-to-r from-apple-blue to-apple-emerald transition-all duration-300 w-0"></div>
+        <div class="space-y-1.5">
+          <div class="w-full h-2 rounded-full bg-sky-200/80 overflow-hidden">
+            <div id="readiness-bar" class="h-full bg-gradient-to-r from-sky-500 to-emerald-500 transition-all duration-300 w-0"></div>
           </div>
-          <p id="readiness-msg" class="text-[11px] text-apple-secondary text-right">Select the documents you have ready.</p>
+          <p id="readiness-msg" class="text-[11px] text-maritime-muted text-right">Select the documents you have prepared.</p>
         </div>
       </div>
 
@@ -828,144 +929,147 @@
 
   </main>
 
-  <!-- PAGE 4: ALLOCATION ENGINE (INR) -->
   <main id="page-portfolios" class="page-view flex-grow hidden">
     
     <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
       
       <div class="text-center max-w-3xl mx-auto space-y-3">
-        <div class="text-xs font-bold text-apple-purple tracking-wider uppercase">Phillip Capital Advisory Engine</div>
-        <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white">Dynamic Asset Allocation (INR)</h2>
-        <p class="text-apple-muted text-sm sm:text-base leading-relaxed">
+        <div class="text-xs font-bold text-ice-300 tracking-wider uppercase">Phillip Capital Advisory Engine</div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">Dynamic Asset Allocation (INR)</h2>
+        <p class="text-sky-200/70 text-sm sm:text-base leading-relaxed">
           Simulate how your investment horizon and volatility tolerance calibrate model equity allocations across large-cap monopolies, mid-cap compounders, and tactical hedges.
         </p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
-        <!-- Controls (5 cols) -->
-        <div class="lg:col-span-5 glass-card rounded-3xl p-6 sm:p-8 space-y-6">
-          <h3 class="text-lg font-bold text-white flex items-center gap-2">
-            <i class="fa-solid fa-sliders text-apple-blue"></i> Investor Profile Parameters
+        <!-- Controls Panel in Light Sky Blue Surface -->
+        <div class="lg:col-span-5 ice-glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+          <h3 class="text-lg font-extrabold text-maritime-primary flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-maritime-accent"></i> Investor Profile Parameters
           </h3>
 
-          <!-- Capital Input in INR -->
+          <!-- Capital Deployment Input -->
           <div class="space-y-2">
             <div class="flex justify-between items-center text-xs">
-              <span class="text-apple-secondary font-medium">Deployment Capital:</span>
-              <span id="capital-display" class="text-white font-bold">₹25,00,000 (25 Lakhs)</span>
+              <span class="text-maritime-secondary font-bold">Deployment Capital:</span>
+              <span id="capital-display" class="text-maritime-primary font-extrabold font-mono text-sm">₹25,00,000 (25 Lakhs)</span>
             </div>
             <div class="relative">
-              <span class="absolute left-3.5 top-2.5 text-apple-muted text-xs font-semibold">₹</span>
-              <input type="number" id="capital-input" value="2500000" min="500000" step="500000" oninput="runAllocationSimulator()" class="w-full bg-white/[0.04] border border-white/10 rounded-xl py-2 pl-8 pr-3 text-sm text-white focus:outline-none focus:border-apple-blue transition">
+              <span class="absolute left-3.5 top-2.5 text-maritime-muted text-xs font-bold">₹</span>
+              <input type="number" id="capital-input" value="2500000" min="500000" step="500000" oninput="runAllocationSimulator()" class="w-full bg-white/60 border border-sky-300/80 rounded-2xl py-2.5 pl-8 pr-3 text-sm text-maritime-primary focus:outline-none focus:border-maritime-accent font-mono font-semibold transition">
             </div>
-            <div class="flex justify-between text-[10px] text-apple-muted">
+            <div class="flex justify-between text-[10px] text-maritime-muted font-semibold">
               <span>₹10 Lakhs (Min)</span>
               <span>₹1 Crore</span>
               <span>₹10 Crores+</span>
             </div>
           </div>
 
-          <!-- Horizon Slider -->
+          <!-- Investment Horizon Slider -->
           <div class="space-y-2">
             <div class="flex justify-between items-center text-xs">
-              <span class="text-apple-secondary font-medium">Investment Horizon:</span>
-              <span id="slider-horizon-val" class="text-apple-blue font-bold text-sm">5 Years</span>
+              <span class="text-maritime-secondary font-bold">Investment Horizon:</span>
+              <span id="slider-horizon-val" class="text-maritime-accent font-extrabold text-sm">5 Years</span>
             </div>
-            <input type="range" id="slider-horizon" min="1" max="15" value="5" step="1" oninput="runAllocationSimulator()" class="w-full accent-apple-blue bg-white/10 h-1.5 rounded-lg cursor-pointer">
-            <div class="flex justify-between text-[10px] text-apple-muted">
+            <input type="range" id="slider-horizon" min="1" max="15" value="5" step="1" oninput="runAllocationSimulator()" class="w-full accent-maritime-accent bg-sky-200/80 h-2 rounded-lg cursor-pointer">
+            <div class="flex justify-between text-[10px] text-maritime-muted font-semibold">
               <span>1 Year (Tactical)</span>
               <span>5 Years (Growth)</span>
               <span>15+ Years (Generational)</span>
             </div>
           </div>
 
-          <!-- Risk Profile Slider -->
+          <!-- Volatility / Drawdown Slider -->
           <div class="space-y-2">
             <div class="flex justify-between items-center text-xs">
-              <span class="text-apple-secondary font-medium">Drawdown Appetite:</span>
-              <span id="slider-risk-val" class="text-apple-purple font-bold text-sm">Moderate Growth</span>
+              <span class="text-maritime-secondary font-bold">Drawdown Appetite:</span>
+              <span id="slider-risk-val" class="text-indigo-900 font-extrabold text-sm">Moderate Growth</span>
             </div>
-            <input type="range" id="slider-risk" min="1" max="5" value="3" step="1" oninput="runAllocationSimulator()" class="w-full accent-apple-purple bg-white/10 h-1.5 rounded-lg cursor-pointer">
-            <div class="flex justify-between text-[10px] text-apple-muted">
+            <input type="range" id="slider-risk" min="1" max="5" value="3" step="1" oninput="runAllocationSimulator()" class="w-full accent-indigo-600 bg-sky-200/80 h-2 rounded-lg cursor-pointer">
+            <div class="flex justify-between text-[10px] text-maritime-muted font-semibold">
               <span>Conservative</span>
               <span>Balanced Growth</span>
               <span>Aggressive Alpha</span>
             </div>
           </div>
 
-          <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-[11px] text-apple-muted flex items-start gap-2">
-            <i class="fa-solid fa-circle-info text-apple-blue mt-0.5"></i>
-            <span>Complies with SEBI Investment Adviser Fee Ceiling (Maximum 2.5% p.a. of AUA or ₹1,25,000 flat fee per annum per family).</span>
+          <!-- SEBI Fee Ceiling Indicator -->
+          <div class="p-4 rounded-2xl bg-white/50 border border-sky-300/60 space-y-1.5 text-[11px] text-maritime-secondary">
+            <div class="flex items-center justify-between text-maritime-primary font-bold">
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-stamp text-maritime-accent"></i> SEBI Statutory Fee Cap:</span>
+              <span id="sebi-fee-calc" class="text-emerald-800 font-mono font-extrabold">Max 2.5% AUA / ₹1.25L Flat</span>
+            </div>
+            <p class="leading-relaxed text-[10px] text-maritime-muted">Strictly complies with SEBI IA (Amendment) Regulations 2020 fee ceilings. Zero performance sharing fees permitted.</p>
           </div>
         </div>
 
-        <!-- Output Visualizer (7 cols) -->
-        <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 space-y-6">
-          <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
-            <h4 class="text-base font-bold text-white">Recommended Model Basket</h4>
-            <span id="risk-category-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+        <!-- Output Visualizer in Light Sky Blue Card -->
+        <div class="lg:col-span-7 ice-glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+          <div class="flex items-center justify-between border-b border-sky-300/60 pb-3">
+            <h4 class="text-base font-extrabold text-maritime-primary">Recommended Model Basket</h4>
+            <span id="risk-category-badge" class="px-3.5 py-1 rounded-full text-xs font-bold bg-sky-200/80 text-maritime-primary border border-sky-400/50">
               Moderate Growth Strategy
             </span>
           </div>
 
-          <!-- Progress Allocations -->
+          <!-- Dynamic Allocation Bars -->
           <div class="space-y-4">
             
             <div class="space-y-1.5">
               <div class="flex justify-between text-xs">
-                <span class="text-white font-medium flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Phillip Large-Cap Moats (Nifty 50)
+                <span class="text-maritime-primary font-bold flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span> Phillip Large-Cap Moats (Nifty 50)
                 </span>
-                <span id="alloc-large-pct" class="font-bold text-apple-blue">50% (₹12,50,000)</span>
+                <span id="alloc-large-pct" class="font-extrabold text-maritime-primary font-mono">50% (₹12,50,000)</span>
               </div>
-              <div class="w-full h-3 rounded-full bg-white/5 overflow-hidden">
-                <div id="bar-large" class="h-full bg-apple-blue transition-all duration-300 w-1/2"></div>
+              <div class="w-full h-3 rounded-full bg-sky-200/80 overflow-hidden">
+                <div id="bar-large" class="h-full bg-sky-600 transition-all duration-300 w-1/2"></div>
               </div>
-              <span class="text-[10px] text-apple-muted">Bluechip leaders with high ROCE, debt-free balance sheets, and institutional stability.</span>
+              <span class="text-[10px] text-maritime-muted font-medium">Bluechip champions with high ROCE, debt-free balance sheets, and institutional moats.</span>
             </div>
 
             <div class="space-y-1.5">
               <div class="flex justify-between text-xs">
-                <span class="text-white font-medium flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span> Phillip Mid & Small-Cap Compounders
+                <span class="text-maritime-primary font-bold flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span> Phillip Mid & Small-Cap Compounders
                 </span>
-                <span id="alloc-mid-pct" class="font-bold text-apple-purple">35% (₹8,75,000)</span>
+                <span id="alloc-mid-pct" class="font-extrabold text-indigo-900 font-mono">35% (₹8,75,000)</span>
               </div>
-              <div class="w-full h-3 rounded-full bg-white/5 overflow-hidden">
-                <div id="bar-mid" class="h-full bg-apple-purple transition-all duration-300 w-[35%]"></div>
+              <div class="w-full h-3 rounded-full bg-sky-200/80 overflow-hidden">
+                <div id="bar-mid" class="h-full bg-indigo-600 transition-all duration-300 w-[35%]"></div>
               </div>
-              <span class="text-[10px] text-apple-muted">High-growth market share gainers across manufacturing, defense, and specialty chemicals.</span>
+              <span class="text-[10px] text-maritime-muted font-medium">Fast-growing sector leaders across domestic manufacturing, defense, and specialty chemicals.</span>
             </div>
 
             <div class="space-y-1.5">
               <div class="flex justify-between text-xs">
-                <span class="text-white font-medium flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Tactical Arbitrage / Cash / Sovereign Gold
+                <span class="text-maritime-primary font-bold flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Tactical Arbitrage / Sovereign Gold / Cash
                 </span>
-                <span id="alloc-cash-pct" class="font-bold text-apple-emerald">15% (₹3,75,000)</span>
+                <span id="alloc-cash-pct" class="font-extrabold text-emerald-800 font-mono">15% (₹3,75,000)</span>
               </div>
-              <div class="w-full h-3 rounded-full bg-white/5 overflow-hidden">
-                <div id="bar-cash" class="h-full bg-apple-emerald transition-all duration-300 w-[15%]"></div>
+              <div class="w-full h-3 rounded-full bg-sky-200/80 overflow-hidden">
+                <div id="bar-cash" class="h-full bg-emerald-600 transition-all duration-300 w-[15%]"></div>
               </div>
-              <span class="text-[10px] text-apple-muted">Liquid dry powder reserved for market corrections and tactical margin opportunities.</span>
+              <span class="text-[10px] text-maritime-muted font-medium">Liquid dry powder reserved for market dislocations and tactical rebalancing.</span>
             </div>
 
           </div>
 
-          <!-- Stats Grid -->
+          <!-- Metrics Grid -->
           <div class="grid grid-cols-3 gap-3 pt-2 text-center">
-            <div class="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-              <div class="text-[10px] text-apple-muted uppercase font-semibold">Expected Volatility</div>
-              <div id="stat-volatility" class="text-sm font-bold text-white mt-0.5">Moderate (13%)</div>
+            <div class="p-3.5 rounded-2xl bg-white/50 border border-sky-300/60">
+              <div class="text-[10px] text-maritime-muted uppercase font-bold">Expected Volatility</div>
+              <div id="stat-volatility" class="text-sm font-extrabold text-maritime-primary mt-0.5">Moderate (~13%)</div>
             </div>
-            <div class="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-              <div class="text-[10px] text-apple-muted uppercase font-semibold">Rebalance Cycle</div>
-              <div id="stat-cadence" class="text-sm font-bold text-apple-blue mt-0.5">Quarterly</div>
+            <div class="p-3.5 rounded-2xl bg-white/50 border border-sky-300/60">
+              <div class="text-[10px] text-maritime-muted uppercase font-bold">Rebalance Cadence</div>
+              <div id="stat-cadence" class="text-sm font-extrabold text-maritime-accent mt-0.5">Quarterly</div>
             </div>
-            <div class="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-              <div class="text-[10px] text-apple-muted uppercase font-semibold">Benchmark Target</div>
-              <div id="stat-benchmark" class="text-sm font-bold text-apple-emerald mt-0.5">Nifty 500 TRI</div>
+            <div class="p-3.5 rounded-2xl bg-white/50 border border-sky-300/60">
+              <div class="text-[10px] text-maritime-muted uppercase font-bold">Alpha Benchmark</div>
+              <div id="stat-benchmark" class="text-sm font-extrabold text-emerald-800 mt-0.5">Nifty 500 TRI</div>
             </div>
           </div>
 
@@ -977,78 +1081,85 @@
 
   </main>
 
-  <!-- PAGE 5: SEBI REGULATORY COMPLIANCE & INVESTOR CHARTER -->
   <main id="page-compliance" class="page-view flex-grow hidden">
     
     <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
       
       <div class="text-center max-w-3xl mx-auto space-y-3">
-        <div class="text-xs font-bold text-apple-blue tracking-wider uppercase">Statutory Disclosures</div>
-        <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white">SEBI Compliance & Investor Charter</h2>
-        <p class="text-apple-muted text-sm sm:text-base leading-relaxed">
-          Transparent, audited, and strictly compliant with Securities and Exchange Board of India (SEBI) standards.
+        <div class="text-xs font-bold text-ice-300 tracking-wider uppercase">Statutory Governance</div>
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">SEBI Compliance & Investor Charter</h2>
+        <p class="text-sky-200/70 text-sm sm:text-base leading-relaxed">
+          Transparent, audited, and strictly compliant with Securities and Exchange Board of India (SEBI) guidelines.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <!-- Registration Cards -->
-        <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
-          <h3 class="text-lg font-bold text-white flex items-center gap-2">
-            <i class="fa-solid fa-certificate text-apple-blue"></i> Entity & SEBI Registrations
+        <!-- Registration Credentials in Light Sky Blue -->
+        <div class="ice-glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+          <h3 class="text-lg font-extrabold text-maritime-primary flex items-center gap-2">
+            <i class="fa-solid fa-certificate text-maritime-accent"></i> Corporate Identity & SEBI Credentials
           </h3>
-          <div class="space-y-3 text-xs text-apple-secondary">
-            <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
-              <span class="text-apple-muted">Legal Entity Name:</span>
-              <span class="text-white font-medium">PhillipCapital (India) Private Limited</span>
+          <div class="space-y-3 text-xs text-maritime-secondary">
+            <div class="flex justify-between py-1.5 border-b border-sky-300/60">
+              <span class="text-maritime-muted font-semibold">Legal Entity Name:</span>
+              <span class="text-maritime-primary font-bold">PhillipCapital (India) Private Limited</span>
             </div>
-            <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
-              <span class="text-apple-muted">Corporate Identity No. (CIN):</span>
-              <span class="text-white font-mono">U92403MH1999PTC123359</span>
+            <div class="flex justify-between py-1.5 border-b border-sky-300/60">
+              <span class="text-maritime-muted font-semibold">Corporate Identity No. (CIN):</span>
+              <span class="text-maritime-primary font-mono font-bold">U92403MH1999PTC123359</span>
             </div>
-            <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
-              <span class="text-apple-muted">SEBI Investment Adviser (IA):</span>
-              <span class="text-apple-blue font-mono font-bold">INA000004518</span>
+            <div class="flex justify-between py-1.5 border-b border-sky-300/60">
+              <span class="text-maritime-muted font-semibold">SEBI Investment Adviser (IA):</span>
+              <span class="text-maritime-accent font-mono font-extrabold">INA000004518</span>
             </div>
-            <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
-              <span class="text-apple-muted">SEBI Research Analyst (RA):</span>
-              <span class="text-apple-blue font-mono font-bold">INH000001345</span>
+            <div class="flex justify-between py-1.5 border-b border-sky-300/60">
+              <span class="text-maritime-muted font-semibold">SEBI Research Analyst (RA):</span>
+              <span class="text-maritime-accent font-mono font-extrabold">INH000001345</span>
             </div>
-            <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
-              <span class="text-apple-muted">SEBI Stock Broker Regn:</span>
-              <span class="text-white font-mono">INZ000169632 (NSE / BSE / MCX)</span>
+            <div class="flex justify-between py-1.5 border-b border-sky-300/60">
+              <span class="text-maritime-muted font-semibold">SEBI Stock Broker Regn:</span>
+              <span class="text-maritime-primary font-mono font-bold">INZ000169632 (NSE / BSE / MCX)</span>
+            </div>
+            <div class="flex justify-between py-1.5 border-b border-sky-300/60">
+              <span class="text-maritime-muted font-semibold">Depository Participant (DP):</span>
+              <span class="text-maritime-primary font-mono font-bold">CDSL / NSDL (IN-DP-516-2020)</span>
             </div>
             <div class="flex justify-between py-1.5">
-              <span class="text-apple-muted">Depository Participant (DP):</span>
-              <span class="text-white font-mono">CDSL / NSDL (IN-DP-516-2020)</span>
+              <span class="text-maritime-muted font-semibold">BSE Administration (BASL):</span>
+              <span class="text-amber-900 font-mono font-bold">BASL Membership ID: 1319</span>
             </div>
           </div>
         </div>
 
-        <!-- Office & Grievance -->
-        <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
-          <h3 class="text-lg font-bold text-white flex items-center gap-2">
-            <i class="fa-solid fa-map-location-dot text-apple-emerald"></i> Registered Office & Grievance Redressal
+        <!-- Headquarters & Grievance Desk in Light Sky Blue -->
+        <div class="ice-glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+          <h3 class="text-lg font-extrabold text-maritime-primary flex items-center gap-2">
+            <i class="fa-solid fa-map-location-dot text-emerald-800"></i> Corporate Headquarters & Escalation
           </h3>
-          <div class="space-y-3 text-xs text-apple-secondary">
+          <div class="space-y-3 text-xs text-maritime-secondary">
             <div>
-              <span class="text-apple-muted block mb-1">Corporate & Registered Headquarters:</span>
-              <p class="text-white leading-relaxed">
+              <span class="text-maritime-muted block mb-1 font-semibold">Corporate & Registered Office:</span>
+              <p class="text-maritime-primary leading-relaxed font-bold">
                 PhillipCapital (India) Pvt. Ltd., No. 1, 18th Floor, Urmi Estate, 95, Ganpatrao Kadam Marg, Lower Parel (West), Mumbai – 400013, Maharashtra, India.
               </p>
             </div>
-            <div class="pt-2 border-t border-white/[0.04] space-y-1.5">
+            <div class="pt-2 border-t border-sky-300/60 space-y-2">
               <div class="flex justify-between">
-                <span class="text-apple-muted">Compliance Officer:</span>
-                <span class="text-white">Head of Regulatory Compliance</span>
+                <span class="text-maritime-muted font-semibold">Compliance Officer:</span>
+                <span class="text-maritime-primary font-bold">Head of Compliance & Legal</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-apple-muted">Direct Email:</span>
-                <span class="text-apple-blue font-mono">compliance@phillipcapital.in</span>
+                <span class="text-maritime-muted font-semibold">Compliance Email:</span>
+                <span class="text-maritime-accent font-mono font-bold">compliance@phillipcapital.in</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-apple-muted">Investor Grievance:</span>
-                <span class="text-apple-blue font-mono">customercare@phillipcapital.in</span>
+                <span class="text-maritime-muted font-semibold">Grievance Desk:</span>
+                <span class="text-maritime-accent font-mono font-bold">customercare@phillipcapital.in</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-maritime-muted font-semibold">Advisory Line:</span>
+                <span class="text-maritime-primary font-mono font-bold">+91 22 2483 1919</span>
               </div>
             </div>
           </div>
@@ -1056,27 +1167,29 @@
 
       </div>
 
-      <!-- SEBI Investor Charter Highlights -->
-      <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
-        <h3 class="text-lg font-bold text-white">Investor Charter in Respect of Investment Advisers (SEBI IA Circular)</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-apple-muted">
-          <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04] space-y-2">
-            <h4 class="text-white font-semibold flex items-center gap-1.5">
-              <i class="fa-solid fa-check text-apple-emerald text-[11px]"></i> Right to Fair Advice
+      <!-- SEBI Investor Charter Highlights in Light Sky Blue -->
+      <div class="ice-glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+        <h3 class="text-lg font-extrabold text-maritime-primary flex items-center gap-2">
+          <i class="fa-solid fa-shield-cat text-indigo-900"></i> Investor Charter for Investment Advisers (SEBI Mandated)
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-maritime-secondary">
+          <div class="p-4 rounded-2xl bg-white/50 border border-sky-300/60 space-y-2">
+            <h4 class="text-maritime-primary font-extrabold flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-check text-emerald-700 text-[11px]"></i> Right to Suitable Advice
             </h4>
-            <p>Every investor has the statutory right to receive investment advice consistent with their documented risk profile and suitability score.</p>
+            <p>Every investor has the statutory right to receive recommendations aligned strictly with their documented risk suitability and investment horizon.</p>
           </div>
-          <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04] space-y-2">
-            <h4 class="text-white font-semibold flex items-center gap-1.5">
-              <i class="fa-solid fa-check text-apple-emerald text-[11px]"></i> Complete Transparency
+          <div class="p-4 rounded-2xl bg-white/50 border border-sky-300/60 space-y-2">
+            <h4 class="text-maritime-primary font-extrabold flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-check text-emerald-700 text-[11px]"></i> Conflict-of-Interest Transparency
             </h4>
-            <p>Advisers must disclose all potential conflicts of interest, holding details, and all fee charges before the signing of the agreement.</p>
+            <p>Advisers must disclose all analyst holdings, institutional cross-affiliations, and fee schedules prior to client agreement signing.</p>
           </div>
-          <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04] space-y-2">
-            <h4 class="text-white font-semibold flex items-center gap-1.5">
-              <i class="fa-solid fa-check text-apple-emerald text-[11px]"></i> SEBI SCORES / SMART ODR
+          <div class="p-4 rounded-2xl bg-white/50 border border-sky-300/60 space-y-2">
+            <h4 class="text-maritime-primary font-extrabold flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-check text-emerald-700 text-[11px]"></i> SEBI SCORES & SMART ODR
             </h4>
-            <p>Unresolved grievances can be escalated directly to SEBI via the centralized SCORES portal (scores.gov.in) or SMART ODR dispute resolution.</p>
+            <p>Investors can escalate unresolved grievances directly via the SEBI SCORES portal (scores.gov.in) or SMART ODR dispute resolution (smartodr.in).</p>
           </div>
         </div>
       </div>
@@ -1085,55 +1198,56 @@
 
   </main>
 
-  <!-- Floating Inspector Modal Sheet -->
-  <div id="inspector-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl hidden transition-all duration-300 opacity-0 pointer-events-none">
-    <div class="relative w-full max-w-2xl glass-card bg-[#0a0d17]/95 border border-white/20 rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.95)] max-h-[90vh] overflow-y-auto transform scale-95 transition-all duration-300" id="modal-card">
+  <div id="inspector-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight-950/80 backdrop-blur-md hidden transition-all duration-300 opacity-0 pointer-events-none">
+    <div class="relative w-full max-w-2xl ice-glass-card rounded-3xl p-6 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto transform scale-95 transition-all duration-300" id="modal-card">
       
-      <button onclick="closeInspectorModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-apple-text flex items-center justify-center transition">
+      <!-- Close Button -->
+      <button onclick="closeInspectorModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/60 hover:bg-white text-maritime-primary flex items-center justify-center transition">
         <i class="fa-solid fa-xmark text-sm"></i>
       </button>
 
       <div class="space-y-6">
         <div class="flex items-center gap-3">
-          <div id="modal-step-badge" class="w-10 h-10 rounded-xl bg-blue-500/20 text-apple-blue font-bold flex items-center justify-center text-sm border border-blue-500/30">
+          <div id="modal-step-badge" class="w-10 h-10 rounded-2xl bg-sky-200/90 text-maritime-primary font-extrabold flex items-center justify-center text-sm border border-sky-400">
             01
           </div>
           <div>
-            <span id="modal-stage-pill" class="text-[10px] font-bold text-apple-blue uppercase tracking-widest block">STAGE 1: INGESTION</span>
-            <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-white tracking-tight">Step Title</h3>
+            <span id="modal-stage-pill" class="text-[10px] font-extrabold text-maritime-accent uppercase tracking-widest block">STAGE 1: INGESTION</span>
+            <h3 id="modal-title" class="text-xl sm:text-2xl font-extrabold text-maritime-primary tracking-tight">Step Title</h3>
           </div>
         </div>
 
-        <p id="modal-desc" class="text-sm text-apple-secondary leading-relaxed">
-          Description
+        <p id="modal-desc" class="text-sm text-maritime-secondary leading-relaxed">
+          Operational breakdown description of the selected operational step.
         </p>
 
-        <div class="space-y-4">
-          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1.5">
-            <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <i class="fa-solid fa-gears text-apple-blue"></i> PhillipCapital Operational Protocol
+        <!-- Technical Deep Dive Cards -->
+        <div class="space-y-3.5">
+          <div class="p-4 rounded-2xl bg-white/60 border border-sky-300/80 space-y-1.5">
+            <h4 class="text-xs font-extrabold text-maritime-primary uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-gears text-maritime-accent"></i> PhillipCapital Operational Protocol
             </h4>
-            <p id="modal-ops" class="text-xs text-apple-muted leading-relaxed">Protocols</p>
+            <p id="modal-ops" class="text-xs text-maritime-secondary leading-relaxed font-medium">Protocols</p>
           </div>
 
-          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1.5">
-            <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <i class="fa-solid fa-gavel text-apple-emerald"></i> SEBI IA Statutory Mandate
+          <div class="p-4 rounded-2xl bg-white/60 border border-sky-300/80 space-y-1.5">
+            <h4 class="text-xs font-extrabold text-maritime-primary uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-gavel text-emerald-800"></i> SEBI IA Statutory Mandate
             </h4>
-            <p id="modal-reg" class="text-xs text-apple-muted leading-relaxed">Compliance</p>
+            <p id="modal-reg" class="text-xs text-maritime-secondary leading-relaxed font-medium">Compliance</p>
           </div>
 
-          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1.5">
-            <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <i class="fa-solid fa-vault text-apple-purple"></i> Demat Custody & Security
+          <div class="p-4 rounded-2xl bg-white/60 border border-sky-300/80 space-y-1.5">
+            <h4 class="text-xs font-extrabold text-maritime-primary uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-vault text-indigo-900"></i> Demat Custody & Security Architecture
             </h4>
-            <p id="modal-sec" class="text-xs text-apple-muted leading-relaxed">Custody</p>
+            <p id="modal-sec" class="text-xs text-maritime-secondary leading-relaxed font-medium">Custody</p>
           </div>
         </div>
 
-        <div class="pt-4 border-t border-white/[0.08] flex justify-between items-center text-xs">
-          <span class="text-apple-muted">PhillipCapital (India) Pvt. Ltd. • SEBI IA Protocol</span>
-          <button onclick="closeInspectorModal()" class="px-5 py-2 rounded-full bg-white text-black font-semibold hover:bg-neutral-200 transition">
+        <div class="pt-4 border-t border-sky-300/60 flex justify-between items-center text-xs">
+          <span class="text-maritime-muted font-mono font-semibold">SEBI RIA Mandate INA000004518</span>
+          <button onclick="closeInspectorModal()" class="px-5 py-2 rounded-full bg-maritime-primary hover:bg-[#0c366e] text-white font-extrabold transition">
             Close Inspector
           </button>
         </div>
@@ -1141,40 +1255,39 @@
     </div>
   </div>
 
-  <!-- Toast Notification -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 rounded-2xl glass-card border border-white/20 text-xs text-white shadow-2xl transition-all duration-300 translate-y-16 opacity-0 pointer-events-none">
-    <i id="toast-icon" class="fa-solid fa-circle-check text-apple-emerald text-sm"></i>
-    <span id="toast-msg">Operation completed successfully</span>
+  <!-- Toast Notification Container -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 rounded-2xl ice-glass-card text-xs text-maritime-primary shadow-2xl transition-all duration-300 translate-y-16 opacity-0 pointer-events-none">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-700 text-sm"></i>
+    <span id="toast-msg" class="font-bold">Operation completed successfully</span>
   </div>
 
-  <!-- Footer -->
-  <footer class="border-t border-white/[0.08] py-10 text-apple-muted text-xs bg-black/60">
+  <footer class="border-t border-sky-500/15 py-10 text-sky-200/70 text-xs bg-midnight-950 z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
       
       <div class="flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
-          <div class="w-6 h-6 rounded-md bg-gradient-to-br from-blue-700 to-cyan-500 flex items-center justify-center text-white text-xs font-bold">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-cyan-600 to-sky-400 flex items-center justify-center text-maritime-primary text-xs font-extrabold">
             P
           </div>
-          <span class="font-bold text-white/90">PhillipCapital (India) Private Limited</span>
-          <span class="text-apple-muted">• Corporate Member of NSE, BSE, MCX | Depository Participant: CDSL / NSDL</span>
+          <span class="font-bold text-white">PhillipCapital (India) Private Limited</span>
+          <span class="text-sky-300/60">• Member of NSE, BSE, MCX | Depository Participant: CDSL / NSDL</span>
         </div>
 
-        <div class="flex flex-wrap gap-4 text-[11px] text-apple-secondary">
-          <button onclick="switchPage('flowchart')" class="hover:text-white transition">Flowchart</button>
-          <button onclick="switchPage('standard')" class="hover:text-white transition">Advisory Standard</button>
-          <button onclick="switchPage('onboarding')" class="hover:text-white transition">Account Setup</button>
+        <div class="flex flex-wrap gap-4 text-[11px] text-sky-200 font-semibold">
+          <button onclick="switchPage('flowchart')" class="hover:text-white transition">Lifecycle Architecture</button>
+          <button onclick="switchPage('standard')" class="hover:text-white transition">The Advisory Standard</button>
+          <button onclick="switchPage('onboarding')" class="hover:text-white transition">Account & Demat</button>
           <button onclick="switchPage('portfolios')" class="hover:text-white transition">Allocation Engine</button>
-          <button onclick="switchPage('compliance')" class="hover:text-white transition">SEBI Disclosures</button>
+          <button onclick="switchPage('compliance')" class="hover:text-white transition">SEBI Governance</button>
         </div>
       </div>
 
-      <div class="pt-4 border-t border-white/[0.05] text-[11px] leading-relaxed text-apple-muted flex flex-col md:flex-row justify-between gap-4">
+      <div class="pt-4 border-t border-sky-500/15 text-[11px] leading-relaxed text-sky-300/60 flex flex-col md:flex-row justify-between gap-4">
         <p class="max-w-4xl">
-          <strong>Regulatory Risk Disclosure:</strong> Investments in securities are subject to market risks. Read all scheme and offer documents carefully before investing. Registration granted by SEBI, membership of BASL, and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors. Securities quoted are for illustration purposes only.
+          <strong>SEBI Statutory Risk Warning:</strong> Investments in securities are subject to market risks. Read all scheme and offer documents carefully before investing. Registration granted by SEBI, membership of BASL, and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors. Securities quoted are for illustration purposes only.
         </p>
-        <p class="whitespace-nowrap text-right">
-          Urmi Estate, Lower Parel (W), Mumbai.
+        <p class="whitespace-nowrap text-right font-mono text-sky-300/80">
+          Urmi Estate, Lower Parel, Mumbai.
         </p>
       </div>
 
@@ -1182,7 +1295,37 @@
   </footer>
 
   <script>
-    // Multi-Page SPA Controller
+    // 120fps Hardware-Accelerated Lerp Cursor Glow (Natural movement, zero scroll hijacking)
+    const cursorGlow = document.getElementById('cursor-glow');
+    let targetX = -1000, targetY = -1000;
+    let currentX = -1000, currentY = -1000;
+    let isCursorActive = false;
+
+    window.addEventListener('pointermove', (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      if (!isCursorActive) {
+        cursorGlow.style.opacity = '1';
+        isCursorActive = true;
+      }
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => {
+      cursorGlow.style.opacity = '0';
+      isCursorActive = false;
+    });
+
+    function renderCursor() {
+      if (isCursorActive) {
+        currentX += (targetX - currentX) * 0.14;
+        currentY += (targetY - currentY) * 0.14;
+        cursorGlow.style.transform = `translate3d(${currentX - 200}px, ${currentY - 200}px, 0)`;
+      }
+      requestAnimationFrame(renderCursor);
+    }
+    requestAnimationFrame(renderCursor);
+
+    // Multi-Page SPA Hash Router
     function switchPage(pageId) {
       const pages = ['flowchart', 'standard', 'onboarding', 'portfolios', 'compliance'];
       
@@ -1192,19 +1335,17 @@
         
         if (p === pageId) {
           if (el) el.classList.remove('hidden');
-          if (navBtn) navBtn.classList.add('nav-tab-active');
+          if (navBtn) navBtn.classList.add('nav-btn-active');
         } else {
           if (el) el.classList.add('hidden');
-          if (navBtn) navBtn.classList.remove('nav-tab-active');
+          if (navBtn) navBtn.classList.remove('nav-btn-active');
         }
       });
 
-      // Update URL hash without jitter
       history.replaceState(null, null, `#${pageId}`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Initialize from URL Hash on page load
     window.addEventListener('DOMContentLoaded', () => {
       const initialHash = window.location.hash.replace('#', '') || 'flowchart';
       const validPages = ['flowchart', 'standard', 'onboarding', 'portfolios', 'compliance'];
@@ -1218,7 +1359,6 @@
       runAllocationSimulator();
     });
 
-    // Toast Utility
     function showToast(message, isSuccess = true) {
       const toast = document.getElementById('toast');
       const toastMsg = document.getElementById('toast-msg');
@@ -1226,23 +1366,23 @@
 
       toastMsg.textContent = message;
       toastIcon.className = isSuccess 
-        ? "fa-solid fa-circle-check text-apple-emerald text-sm" 
-        : "fa-solid fa-circle-info text-apple-blue text-sm";
+        ? "fa-solid fa-circle-check text-emerald-700 text-sm" 
+        : "fa-solid fa-circle-info text-maritime-accent text-sm";
 
       toast.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
       setTimeout(() => {
         toast.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
       }, 3500);
     }
+  </script>
 
-    // PhillipCapital Operational Node Data Dictionary
+  <script>
     const nodeDetails = {
       'node-1': {
         stage: 'STAGE 1: SUITABILITY & ONBOARDING',
         step: '01',
-        color: '#2997ff',
-        title: 'PAN & CKYC Digital Onboarding',
-        desc: 'Central KYC (CKYC) registry verification and PAN authentication required under SEBI (Investment Advisers) Regulations, 2013.',
+        title: 'PAN & CKYCR Ingestion',
+        desc: 'Central KYC (CKYC) registry verification and PAN authentication required under SEBI (Investment Advisers) Regulations, 2013 and PMLA norms.',
         ops: 'Real-time API lookup through CVL KRA, NDML, or CAMS KRA to extract verified demat details, address, and live bank records.',
         reg: 'Strict compliance with SEBI Circular on Central KYC Registry and Prevention of Money Laundering Act (PMLA), 2002.',
         sec: 'Direct institutional gateway verification. Zero local storage of raw biometric credentials.'
@@ -1250,9 +1390,8 @@
       'node-2': {
         stage: 'STAGE 1: SUITABILITY & ONBOARDING',
         step: '02',
-        color: '#2997ff',
         title: 'SEBI Psychometric Suitability Matrix',
-        desc: 'Comprehensive risk profiling required to calibrate advice to the client\'s financial capacity and drawdown resilience.',
+        desc: 'Comprehensive risk profiling required to calibrate advice to the client’s financial capacity and drawdown resilience.',
         ops: 'Multi-factor algorithm assessing investor age, current liability obligations, income streams, and maximum bear-market drop tolerance (-15% to -35%).',
         reg: 'SEBI IA Regulation 17: Advisers are legally prohibited from recommending high-beta mid/small caps to conservative investors.',
         sec: 'Timestamped risk audit certificates stored for 5 years for SEBI regulatory inspections.'
@@ -1260,8 +1399,7 @@
       'node-3': {
         stage: 'STAGE 1: SUITABILITY & ONBOARDING',
         step: '03',
-        color: '#2997ff',
-        title: 'Advisory Agreement & Fee Schedule',
+        title: 'Fiduciary Advisory Agreement',
         desc: 'The binding legal mandate governing the fiduciary engagement between PhillipCapital India and the investor.',
         ops: 'Executed via Aadhaar OTP e-Sign. Explicit disclosure of fee caps: Flat retainer or % of AUA (capped at SEBI IA statutory limits).',
         reg: 'Strict adherence to SEBI IA (Amendment) Regulations 2020: Absolute segregation of advisory activities from broking/distribution.',
@@ -1270,7 +1408,6 @@
       'node-4': {
         stage: 'STAGE 2: PHILLIP RESEARCH & MODELS',
         step: '04',
-        color: '#ff9f0a',
         title: 'Phillip Quant Screener & Universe Filter',
         desc: 'Quantitative and qualitative fundamental research screening over 1,500 listed NSE and BSE equities.',
         ops: 'Filters for Return on Capital Employed (ROCE) > 20%, low Debt-to-Equity (< 0.5x), consistent 5-year Free Cash Flow conversion, and high promoter integrity.',
@@ -1280,7 +1417,6 @@
       'node-5': {
         stage: 'STAGE 2: PHILLIP RESEARCH & MODELS',
         step: '05',
-        color: '#ff9f0a',
         title: 'Model Basket Construction',
         desc: 'Assembling balanced portfolios with strict single-stock limits (max 10%) and sector concentration barriers (max 25%).',
         ops: 'Blend of core large-cap compounding champions and high-conviction mid-cap sector leaders designed to generate sustainable alpha over Nifty 500 TRI.',
@@ -1290,7 +1426,6 @@
       'node-6': {
         stage: 'STAGE 2: PHILLIP RESEARCH & MODELS',
         step: '06',
-        color: '#ff9f0a',
         title: 'Advisory Note & Thesis Publication',
         desc: 'Detailed research memos published for each recommendation, specifying entry bands, target valuation, and stop-loss criteria.',
         ops: 'Comprehensive reports outlining industry catalysts, quarterly earnings previews, competitive moats, and risk metrics.',
@@ -1300,7 +1435,6 @@
       'node-7': {
         stage: 'STAGE 3: GATED DEMAT EXECUTION',
         step: '07',
-        color: '#30d158',
         title: 'Client Recommendation Signal Dispatch',
         desc: 'Instant transmission of trade recommendations to the investor. The client maintains complete non-discretionary authority.',
         ops: 'Automated notification dispatch across client portal, mobile app notifications, and registered WhatsApp/SMS channels.',
@@ -1310,7 +1444,6 @@
       'node-8': {
         stage: 'STAGE 3: GATED DEMAT EXECUTION',
         step: '08',
-        color: '#30d158',
         title: '1-Click Client Consent & Broker Routing',
         desc: 'Clients review the rationale and execute orders with a single tap through PhillipCapital or third-party broker APIs.',
         ops: 'Integration with major Indian brokers (PhillipCapital, Zerodha, Groww, AngelOne, ICICI Direct) via tokenized OAuth2.',
@@ -1320,7 +1453,6 @@
       'node-9': {
         stage: 'STAGE 3: GATED DEMAT EXECUTION',
         step: '09',
-        color: '#30d158',
         title: 'T+1 Direct Demat Custody Clearing',
         desc: 'Equities clear through NSCCL / ICCL directly into the investor\'s personal Demat account with NSDL or CDSL.',
         ops: 'Trade settlement executes on a rolling T+1 schedule. Purchased shares are deposited directly into the investor\'s 16-digit Demat BOID.',
@@ -1330,7 +1462,6 @@
       'node-10': {
         stage: 'STAGE 4: CONTINUOUS SURVEILLANCE',
         step: '10',
-        color: '#bf5af2',
         title: 'Quarterly Earnings & Management Audits',
         desc: 'Continuous surveillance of held equities, earnings concalls, corporate governance developments, and macro policy changes.',
         ops: 'Analysts review quarterly earnings releases and management guidance against initial investment theses.',
@@ -1340,7 +1471,6 @@
       'node-11': {
         stage: 'STAGE 4: CONTINUOUS SURVEILLANCE',
         step: '11',
-        color: '#bf5af2',
         title: 'Dynamic Trigger-Based Rebalancing',
         desc: 'Proactive portfolio adjustment when individual position weights deviate by > 5% due to price movements, or when target fair value is met.',
         ops: 'Generates rebalance signals to lock in profits from outperforming winners and reallocate into high-margin undervalued leaders.',
@@ -1350,7 +1480,6 @@
       'node-12': {
         stage: 'STAGE 4: CONTINUOUS SURVEILLANCE',
         step: '12',
-        color: '#bf5af2',
         title: 'Tax-Loss Harvesting & XIRR Benchmarking',
         desc: 'Strategic year-end capital gains optimization combined with rigorous XIRR alpha tracking against Nifty indices.',
         ops: 'Identifies opportunities to offset short-term/long-term capital gains (STCG/LTCG) against unrealized losses before March 31.',
@@ -1359,7 +1488,6 @@
       }
     };
 
-    // Modal Control Functions
     function openInspectorModal(nodeId) {
       const data = nodeDetails[nodeId];
       if (!data) return;
@@ -1368,12 +1496,7 @@
       const modalCard = document.getElementById('modal-card');
 
       document.getElementById('modal-step-badge').textContent = data.step;
-      document.getElementById('modal-step-badge').style.borderColor = data.color;
-      document.getElementById('modal-step-badge').style.color = data.color;
-
       document.getElementById('modal-stage-pill').textContent = data.stage;
-      document.getElementById('modal-stage-pill').style.color = data.color;
-
       document.getElementById('modal-title').textContent = data.title;
       document.getElementById('modal-desc').textContent = data.desc;
       document.getElementById('modal-ops').textContent = data.ops;
@@ -1398,7 +1521,7 @@
       
       setTimeout(() => {
         modal.classList.add('hidden', 'pointer-events-none');
-      }, 300);
+      }, 250);
     }
 
     window.addEventListener('click', (e) => {
@@ -1409,8 +1532,10 @@
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeInspectorModal();
     });
+  </script>
 
-    // Flowchart SVG Export
+  <script>
+    // Lossless SVG Vector Exporter
     function exportFlowchartSVG() {
       try {
         const svgElement = document.getElementById('equity-flow-svg');
@@ -1433,19 +1558,19 @@
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
 
-        showToast("PhillipCapital Vector SVG exported successfully.");
+        showToast("Vector SVG diagram exported successfully.");
       } catch (err) {
         showToast("Export error: " + err.message, false);
       }
     }
 
-    // High-Res Retina PNG Export (2x scale)
+    // High-Resolution Retina PNG Export (2x scale) with Dark Sapphire Canvas
     function exportFlowchartPNG() {
       try {
         const svg = document.getElementById('equity-flow-svg');
         if (!svg) return;
 
-        showToast("Generating Retina 2x PNG rendering...");
+        showToast("Rendering Retina 2x PNG via Canvas...");
 
         const serializer = new XMLSerializer();
         let source = serializer.serializeToString(svg);
@@ -1466,7 +1591,7 @@
           canvas.height = 700 * scale;
 
           const context = canvas.getContext('2d');
-          context.fillStyle = "#05070d";
+          context.fillStyle = "#050a14";
           context.fillRect(0, 0, canvas.width, canvas.height);
           context.drawImage(image, 0, 0, canvas.width, canvas.height);
 
@@ -1479,7 +1604,7 @@
           document.body.removeChild(downloadLink);
           URLObj.revokeObjectURL(blobURL);
 
-          showToast("High-resolution PNG downloaded successfully.");
+          showToast("Retina 2x PNG downloaded successfully.");
         };
 
         image.src = blobURL;
@@ -1488,7 +1613,7 @@
       }
     }
 
-    // Checklist Scoring
+    // Dynamic Readiness Checklist Scoring
     function updateReadinessChecklist() {
       const checkboxes = document.querySelectorAll('#page-onboarding input[type="checkbox"]');
       const total = checkboxes.length;
@@ -1506,17 +1631,17 @@
       const msg = document.getElementById('readiness-msg');
       if (percentage === 100) {
         msg.textContent = '🎉 All documents verified. You are ready for immediate digital onboarding!';
-        msg.className = 'text-[11px] text-apple-emerald font-semibold text-right';
+        msg.className = 'text-[11px] text-emerald-800 font-bold text-right';
       } else if (percentage >= 60) {
         msg.textContent = 'Well prepared. Only ' + (total - checkedCount) + ' items remaining.';
-        msg.className = 'text-[11px] text-apple-blue text-right';
+        msg.className = 'text-[11px] text-maritime-primary text-right font-bold';
       } else {
         msg.textContent = 'Toggle your documents to calculate readiness.';
-        msg.className = 'text-[11px] text-apple-secondary text-right';
+        msg.className = 'text-[11px] text-maritime-muted text-right';
       }
     }
 
-    // Allocation Simulator in INR
+    // Rupee Allocation Simulator Algorithm
     function runAllocationSimulator() {
       const horizon = parseInt(document.getElementById('slider-horizon').value);
       const risk = parseInt(document.getElementById('slider-risk').value);
@@ -1528,7 +1653,7 @@
       document.getElementById('slider-horizon-val').textContent = horizon + (horizon === 1 ? ' Year' : ' Years');
 
       const riskNames = [
-        'Capital Preservation (Ultra-Defensive)',
+        'Capital Preservation (Defensive)',
         'Conservative Hybrid Growth',
         'Moderate Growth Strategy',
         'Aggressive Alpha Strategy',
@@ -1536,7 +1661,6 @@
       ];
       document.getElementById('slider-risk-val').textContent = riskNames[risk - 1];
 
-      // Format Indian Rupee Label
       const formattedINR = formatINR(capital);
       document.getElementById('capital-display').textContent = formattedINR;
 
@@ -1574,6 +1698,10 @@
 
       document.getElementById('risk-category-badge').textContent = riskNames[risk - 1];
 
+      // SEBI Fee Ceiling Calculation
+      const auaCapFee = Math.round(capital * 0.025);
+      document.getElementById('sebi-fee-calc').textContent = `Max 2.5% p.a. (${formatINR(auaCapFee)}) or ₹1.25L Flat`;
+
       const volMap = ['Low (~8%)', 'Controlled (~10%)', 'Moderate (~13%)', 'Elevated (~17%)', 'High Beta (~23%)'];
       document.getElementById('stat-volatility').textContent = volMap[risk - 1];
 
@@ -1581,7 +1709,7 @@
       document.getElementById('stat-cadence').textContent = cadenceMap[risk - 1];
     }
 
-    // Indian Number Formatter Helper (Lakhs & Crores)
+    // Helper: Format Indian Rupee (Lakhs & Crores)
     function formatINR(number) {
       if (number >= 10000000) {
         return '₹' + (number / 10000000).toFixed(2) + ' Cr';
