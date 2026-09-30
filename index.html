@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Equity Advisory — Architecture & Lifecycle Guide</title>
+  <title>PhillipCapital India — Equity Advisory Architecture & Fiduciary Suite</title>
+  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -12,14 +13,24 @@
       theme: {
         extend: {
           colors: {
+            phillip: {
+              navy: '#00204a',
+              blue: '#0052cc',
+              sky: '#0099ff',
+              gold: '#c59b27',
+              dark: '#05070d',
+              card: '#0a0d17',
+              cardHover: '#101424',
+              border: 'rgba(255, 255, 255, 0.08)',
+              borderActive: 'rgba(0, 153, 255, 0.4)'
+            },
             apple: {
               black: '#000000',
               space: '#08080a',
-              card: '#0e0e12',
-              cardHover: '#14141a',
-              subtle: '#1b1b22',
-              border: 'rgba(255, 255, 255, 0.09)',
-              borderHover: 'rgba(255, 255, 255, 0.22)',
+              card: '#0c0e14',
+              cardHover: '#131622',
+              subtle: '#181b28',
+              border: 'rgba(255, 255, 255, 0.08)',
               text: '#f5f5f7',
               muted: '#86868b',
               secondary: '#a1a1a6',
@@ -32,10 +43,6 @@
           },
           fontFamily: {
             sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', 'Inter', 'sans-serif'],
-          },
-          letterSpacing: {
-            tighter: '-0.035em',
-            tight: '-0.02em',
           }
         }
       }
@@ -43,44 +50,49 @@
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    /* Custom Apple Pro Styling Tweaks */
     body {
-      background-color: #000000;
+      background-color: #05070d;
       color: #f5f5f7;
       font-feature-settings: "cv02", "cv03", "cv04", "cv11";
       overflow-x: hidden;
     }
     
-    /* Radial Background Glows */
+    /* Apple Ambient Glows with PhillipCapital Navy/Blue Tint */
     .hero-glow {
-      background: radial-gradient(circle 800px at 50% -100px, rgba(41, 151, 255, 0.16), transparent 70%),
-                  radial-gradient(circle 600px at 80% 200px, rgba(191, 90, 242, 0.08), transparent 60%);
+      background: radial-gradient(circle 900px at 50% -120px, rgba(0, 82, 204, 0.18), transparent 70%),
+                  radial-gradient(circle 600px at 85% 180px, rgba(197, 155, 39, 0.06), transparent 60%);
     }
 
     .glass-nav {
-      background: rgba(8, 8, 10, 0.72);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(5, 7, 13, 0.78);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     }
 
     .glass-card {
-      background: rgba(14, 14, 18, 0.75);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(12, 14, 22, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .glass-card:hover {
-      border-color: rgba(255, 255, 255, 0.18);
+      border-color: rgba(0, 153, 255, 0.3);
       transform: translateY(-2px);
     }
 
     .glass-pill {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-tab-active {
+      background: rgba(0, 153, 255, 0.12) !important;
+      color: #2997ff !important;
+      border: 1px solid rgba(41, 151, 255, 0.3) !important;
     }
 
     /* Flowchart Node Hover Glows */
@@ -89,7 +101,7 @@
       transition: all 0.25s ease;
     }
     .flow-node:hover rect {
-      filter: drop-shadow(0 0 14px rgba(41, 151, 255, 0.35));
+      filter: drop-shadow(0 0 16px rgba(0, 153, 255, 0.4));
       stroke: #2997ff !important;
       stroke-width: 1.8 !important;
     }
@@ -97,14 +109,17 @@
       fill: #ffffff !important;
     }
 
-    /* Print Styles */
+    /* Print Stylesheet */
     @media print {
       body {
         background: #ffffff !important;
         color: #000000 !important;
       }
-      .no-print, header, footer, #toast-container {
+      .no-print, header, footer, #toast {
         display: none !important;
+      }
+      .page-view {
+        display: block !important;
       }
       .glass-card {
         background: #ffffff !important;
@@ -115,860 +130,969 @@
         filter: invert(1) hue-rotate(180deg);
       }
     }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 7px;
-      height: 7px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #000000;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #2a2a32;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #3f3f4e;
-    }
   </style>
 </head>
-<body class="selection:bg-apple-blue selection:text-white">
+<body class="selection:bg-apple-blue selection:text-white min-h-screen flex flex-col justify-between">
 
+  <!-- Top Glass Navigation Bar -->
   <header class="sticky top-0 z-50 glass-nav transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <a href="#" class="flex items-center gap-2.5 group">
-          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-apple-blue to-purple-600 flex items-center justify-center text-white shadow-[0_0_15px_rgba(41,151,255,0.4)] transition-transform duration-300 group-hover:scale-105">
-            <i class="fa-solid fa-compass text-sm"></i>
+      
+      <!-- Brand Logo -->
+      <a href="#flowchart" onclick="switchPage('flowchart')" class="flex items-center gap-3 group">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-700 via-phillip-blue to-cyan-500 flex items-center justify-center text-white shadow-[0_0_20px_rgba(0,82,204,0.45)] transition-transform duration-300 group-hover:scale-105">
+          <span class="font-black text-sm tracking-tighter">P</span>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="text-sm font-bold tracking-tight text-white group-hover:text-apple-blue transition">PhillipCapital</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-blue-400 font-medium tracking-wide">INDIA</span>
           </div>
-          <span class="text-sm font-semibold tracking-tight text-white/90 group-hover:text-white transition">
-            Apex Equity <span class="text-apple-muted font-normal text-xs ml-1">Advisory Architecture</span>
-          </span>
-        </a>
-      </div>
+          <span class="text-[10px] text-apple-muted tracking-tight">Equity Advisory & Wealth Solutions</span>
+        </div>
+      </a>
 
-      <!-- Navigation Links -->
-      <nav class="hidden md:flex items-center space-x-1 text-xs font-medium text-apple-secondary">
-        <a href="#flowchart" class="px-3 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition">Visual Flow</a>
-        <a href="#what-is-advisory" class="px-3 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition">What is Advisory?</a>
-        <a href="#account-roadmap" class="px-3 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition">Account Setup</a>
-        <a href="#simulator" class="px-3 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition">Allocation Engine</a>
+      <!-- Multi-Page Navigation Tabs -->
+      <nav class="hidden lg:flex items-center space-x-1 text-xs font-medium text-apple-secondary">
+        <button id="nav-btn-flowchart" onclick="switchPage('flowchart')" class="nav-tab px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition flex items-center gap-2">
+          <i class="fa-solid fa-diagram-project text-[11px]"></i>
+          <span>Advisory Flowchart</span>
+        </button>
+        <button id="nav-btn-standard" onclick="switchPage('standard')" class="nav-tab px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-[11px]"></i>
+          <span>What is Advisory?</span>
+        </button>
+        <button id="nav-btn-onboarding" onclick="switchPage('onboarding')" class="nav-tab px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition flex items-center gap-2">
+          <i class="fa-solid fa-user-check text-[11px]"></i>
+          <span>Account Setup & Demat</span>
+        </button>
+        <button id="nav-btn-portfolios" onclick="switchPage('portfolios')" class="nav-tab px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition flex items-center gap-2">
+          <i class="fa-solid fa-chart-pie text-[11px]"></i>
+          <span>Allocation Engine</span>
+        </button>
+        <button id="nav-btn-compliance" onclick="switchPage('compliance')" class="nav-tab px-3.5 py-1.5 rounded-full hover:text-white hover:bg-white/[0.06] transition flex items-center gap-2">
+          <i class="fa-solid fa-scale-balanced text-[11px]"></i>
+          <span>SEBI Disclosures</span>
+        </button>
       </nav>
 
-      <!-- Quick Export Actions -->
+      <!-- Quick Actions -->
       <div class="flex items-center space-x-2 no-print">
-        <button onclick="exportFlowchartSVG()" class="text-xs px-3.5 py-1.5 rounded-full glass-pill text-apple-text hover:bg-white/10 hover:border-white/20 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-code text-[11px] text-apple-blue"></i>
+        <button onclick="exportFlowchartSVG()" title="Export Vector SVG" class="text-xs px-3 py-1.5 rounded-full glass-pill text-apple-text hover:bg-white/10 transition hidden sm:flex items-center gap-1.5">
+          <i class="fa-solid fa-file-code text-[11px] text-apple-blue"></i>
           <span>SVG</span>
         </button>
-        <button onclick="exportFlowchartPNG()" class="text-xs px-3.5 py-1.5 rounded-full glass-pill text-apple-text hover:bg-white/10 hover:border-white/20 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-image text-[11px] text-apple-purple"></i>
-          <span>PNG (2x)</span>
+        <button onclick="exportFlowchartPNG()" title="Export High-Res Image" class="text-xs px-3 py-1.5 rounded-full glass-pill text-apple-text hover:bg-white/10 transition hidden sm:flex items-center gap-1.5">
+          <i class="fa-solid fa-file-image text-[11px] text-apple-purple"></i>
+          <span>PNG 2x</span>
         </button>
-        <button onclick="window.print()" class="text-xs px-3.5 py-1.5 rounded-full bg-apple-blue hover:bg-blue-500 text-white font-medium shadow-[0_0_15px_rgba(41,151,255,0.35)] transition flex items-center gap-1.5">
-          <i class="fa-solid fa-arrow-down-to-bracket text-[11px]"></i>
-          <span>PDF / Print</span>
+        <button onclick="window.print()" class="text-xs px-3.5 py-1.5 rounded-full bg-phillip-blue hover:bg-blue-600 text-white font-medium shadow-[0_0_15px_rgba(0,82,204,0.4)] transition flex items-center gap-1.5">
+          <i class="fa-solid fa-download text-[11px]"></i>
+          <span>Export / PDF</span>
         </button>
       </div>
+
+    </div>
+
+    <!-- Mobile Sub-Navigation Strip -->
+    <div class="lg:hidden flex items-center justify-around py-2 border-t border-white/[0.06] text-[11px] bg-black/40 overflow-x-auto px-2">
+      <button onclick="switchPage('flowchart')" class="px-2 py-1 text-apple-secondary hover:text-white whitespace-nowrap">Flowchart</button>
+      <button onclick="switchPage('standard')" class="px-2 py-1 text-apple-secondary hover:text-white whitespace-nowrap">About Advisory</button>
+      <button onclick="switchPage('onboarding')" class="px-2 py-1 text-apple-secondary hover:text-white whitespace-nowrap">Account Opening</button>
+      <button onclick="switchPage('portfolios')" class="px-2 py-1 text-apple-secondary hover:text-white whitespace-nowrap">Allocations (INR)</button>
+      <button onclick="switchPage('compliance')" class="px-2 py-1 text-apple-secondary hover:text-white whitespace-nowrap">Compliance</button>
     </div>
   </header>
 
-  <div class="relative hero-glow pt-20 pb-16 sm:pt-24 sm:pb-20 border-b border-white/[0.06]">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-      
-      <!-- Eyebrow Badge -->
-      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-medium text-apple-secondary">
-        <span class="w-1.5 h-1.5 rounded-full bg-apple-emerald animate-pulse"></span>
-        Fiduciary Wealth Architecture • SEBI / SEC RIA Standard
-      </div>
-
-      <!-- Hero Heading -->
-      <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white max-w-4xl mx-auto leading-[1.08]">
-        Equity Advisory. <br>
-        <span class="bg-gradient-to-r from-apple-blue via-indigo-300 to-apple-purple bg-clip-text text-transparent">
-          Precision strategy for generational wealth.
-        </span>
-      </h1>
-
-      <!-- Description -->
-      <p class="text-base sm:text-lg text-apple-muted max-w-2xl mx-auto font-normal leading-relaxed tracking-tight">
-        A completely transparent, non-discretionary investment framework. Institutional equity research delivered straight to your demat account with zero custody risk and zero hidden commissions.
-      </p>
-
-      <!-- Action Buttons -->
-      <div class="flex flex-wrap items-center justify-center gap-3.5 pt-4">
-        <a href="#flowchart" class="px-6 py-2.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition shadow-[0_0_25px_rgba(255,255,255,0.2)] flex items-center gap-2">
-          <span>Explore Interactive Flowchart</span>
-          <i class="fa-solid fa-arrow-down text-xs"></i>
-        </a>
-        <a href="#account-roadmap" class="px-6 py-2.5 rounded-full glass-pill text-white text-sm font-medium hover:bg-white/[0.08] transition flex items-center gap-2">
-          <span>Account Setup Checklist</span>
-          <i class="fa-solid fa-chevron-right text-xs text-apple-muted"></i>
-        </a>
-      </div>
-
-      <!-- 3 Key Metric Badges -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-12 max-w-3xl mx-auto text-left">
-        <div class="p-4 rounded-2xl glass-card">
-          <div class="text-apple-blue text-xs font-semibold uppercase tracking-wider mb-1 flex items-center gap-1.5">
-            <i class="fa-solid fa-shield-halved"></i> 100% Custody Safe
-          </div>
-          <div class="text-white text-base font-bold">Client Retains Assets</div>
-          <p class="text-apple-muted text-xs mt-1">Securities reside solely in your personal Demat/Brokerage account. Advisory holds zero custody.</p>
+  <!-- PAGE 1: ARCHITECTURE FLOWCHART -->
+  <main id="page-flowchart" class="page-view flex-grow">
+    
+    <!-- Hero Banner -->
+    <div class="relative hero-glow pt-14 pb-12 sm:pt-20 sm:pb-16 border-b border-white/[0.06]">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
+        
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-medium text-apple-secondary">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+          PhillipCapital (India) Pvt. Ltd. • SEBI Regd. Investment Adviser (INA000004518)
         </div>
 
-        <div class="p-4 rounded-2xl glass-card">
-          <div class="text-apple-emerald text-xs font-semibold uppercase tracking-wider mb-1 flex items-center gap-1.5">
-            <i class="fa-solid fa-stamp"></i> Fiduciary First
-          </div>
-          <div class="text-white text-base font-bold">Unbiased Recommendations</div>
-          <p class="text-apple-muted text-xs mt-1">Fee-only RIA model. Zero commissions or kickbacks from stock exchanges or brokerages.</p>
+        <h1 class="text-4xl sm:text-6xl font-bold tracking-tighter text-white max-w-4xl mx-auto leading-[1.08]">
+          Precision Equity Advisory. <br>
+          <span class="bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300 bg-clip-text text-transparent">
+            Institutional research direct to your Demat.
+          </span>
+        </h1>
+
+        <p class="text-sm sm:text-base text-apple-muted max-w-2xl mx-auto font-normal leading-relaxed">
+          An institutional, non-discretionary equity framework designed for High Net Worth Individuals, Family Offices, and discerning retail investors. Zero custody risk; complete transparency.
+        </p>
+
+        <!-- Quick Switch Bar -->
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-3">
+          <button onclick="switchPage('onboarding')" class="px-5 py-2.5 rounded-full bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center gap-2">
+            <span>Start Account Setup (INR)</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+          <button onclick="switchPage('standard')" class="px-5 py-2.5 rounded-full glass-pill text-white text-xs font-medium hover:bg-white/[0.08] transition flex items-center gap-2">
+            <span>Advisory vs PMS vs Broker</span>
+            <i class="fa-solid fa-chevron-right text-xs text-apple-muted"></i>
+          </button>
         </div>
 
-        <div class="p-4 rounded-2xl glass-card">
-          <div class="text-apple-purple text-xs font-semibold uppercase tracking-wider mb-1 flex items-center gap-1.5">
-            <i class="fa-solid fa-bolt"></i> 1-Click Execution
-          </div>
-          <div class="text-white text-base font-bold">API Broker Integration</div>
-          <p class="text-apple-muted text-xs mt-1">Review recommendation memos and approve orders with 1-click execution through your broker.</p>
-        </div>
       </div>
-
     </div>
-  </div>
 
-  <section id="flowchart" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-2 border-b border-white/[0.06]">
-      <div>
-        <div class="text-xs font-bold text-apple-blue tracking-wider uppercase mb-1 flex items-center gap-2">
-          <i class="fa-solid fa-diagram-project"></i> Complete Operational Architecture
+    <!-- Interactive Visual Flow Section -->
+    <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-2 border-b border-white/[0.06]">
+        <div>
+          <div class="text-xs font-bold text-apple-blue tracking-wider uppercase mb-1 flex items-center gap-2">
+            <i class="fa-solid fa-network-wired"></i> End-to-End Operational Lifecycle
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">PhillipCapital Advisory Execution Blueprint</h2>
+          <p class="text-apple-muted text-xs sm:text-sm mt-1 max-w-xl">
+            Click on any operational node to inspect SEBI IA regulatory mandates, research committee mechanics, and Demat trade settlement workflows.
+          </p>
         </div>
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">The Equity Advisory Lifecycle</h2>
-        <p class="text-apple-muted text-xs sm:text-sm mt-1 max-w-xl">
-          Click any step in the process below to inspect full operational details, regulatory compliance protocols, and trade execution mechanics.
+
+        <!-- Export Toolbar -->
+        <div class="flex flex-wrap items-center gap-2.5">
+          <span class="text-xs text-apple-secondary mr-1">Export Diagram:</span>
+          <button onclick="exportFlowchartSVG()" class="px-3 py-1.5 rounded-lg text-xs font-medium glass-pill text-apple-text hover:bg-white/10 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-file-code text-apple-blue"></i> SVG Vector
+          </button>
+          <button onclick="exportFlowchartPNG()" class="px-3 py-1.5 rounded-lg text-xs font-medium glass-pill text-apple-text hover:bg-white/10 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-file-image text-apple-purple"></i> High-Res PNG (2x)
+          </button>
+          <button onclick="window.print()" class="px-3 py-1.5 rounded-lg text-xs font-medium glass-pill text-apple-text hover:bg-white/10 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-print text-apple-emerald"></i> Print Sheet
+          </button>
+        </div>
+      </div>
+
+      <!-- Flowchart SVG Canvas Container -->
+      <div class="p-3 sm:p-5 rounded-3xl glass-card overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.85)] border border-white/[0.08]">
+        
+        <!-- Stage Headers -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4 text-xs font-semibold text-center">
+          <div class="py-2 px-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span> 1. ONBOARDING & SUITABILITY
+          </div>
+          <div class="py-2 px-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span> 2. PHILLIP RESEARCH & MODELS
+          </div>
+          <div class="py-2 px-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 3. CLIENT CONSENT & ROUTING
+          </div>
+          <div class="py-2 px-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-purple-500"></span> 4. SURVEILLANCE & REBALANCE
+          </div>
+        </div>
+
+        <!-- SVG Visual Diagram -->
+        <div class="overflow-x-auto pb-4 pt-1">
+          <svg id="equity-flow-svg" viewBox="0 0 1120 700" class="w-full min-w-[980px] h-auto select-none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="#2997ff"/>
+              </marker>
+              <marker id="arr-amber" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="#ff9f0a"/>
+              </marker>
+              <marker id="arr-emerald" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="#30d158"/>
+              </marker>
+              <marker id="arr-purple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 9 5 L 0 9 z" fill="#bf5af2"/>
+              </marker>
+              <radialGradient id="card-grad" cx="50%" cy="30%" r="80%">
+                <stop offset="0%" stop-color="#141724"/>
+                <stop offset="100%" stop-color="#0a0c14"/>
+              </radialGradient>
+            </defs>
+
+            <!-- Column Frames -->
+            <rect x="20" y="20" width="250" height="660" rx="16" fill="#060810" stroke="rgba(41, 151, 255, 0.2)" stroke-width="1.2"/>
+            <text x="145" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#2997ff" letter-spacing="1">1. REGULATORY SUITABILITY</text>
+
+            <rect x="295" y="20" width="250" height="660" rx="16" fill="#060810" stroke="rgba(255, 159, 10, 0.2)" stroke-width="1.2"/>
+            <text x="420" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#ff9f0a" letter-spacing="1">2. INSTITUTIONAL RESEARCH</text>
+
+            <rect x="570" y="20" width="250" height="660" rx="16" fill="#060810" stroke="rgba(48, 209, 88, 0.2)" stroke-width="1.2"/>
+            <text x="695" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#30d158" letter-spacing="1">3. GATED DEMAT EXECUTION</text>
+
+            <rect x="845" y="20" width="255" height="660" rx="16" fill="#060810" stroke="rgba(191, 90, 242, 0.2)" stroke-width="1.2"/>
+            <text x="972" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#bf5af2" letter-spacing="1">4. CONTINUOUS SURVEILLANCE</text>
+
+            <!-- Connector Beziers -->
+            <!-- 1.1 -> 1.2 -->
+            <path d="M 145 165 L 145 210" stroke="#2997ff" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-blue)"/>
+            <!-- 1.2 -> 1.3 -->
+            <path d="M 145 305 L 145 350" stroke="#2997ff" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-blue)"/>
+            <!-- Stage 1 -> Stage 2 -->
+            <path d="M 245 395 C 275 395, 270 120, 315 120" stroke="#4b5563" stroke-width="1.8" fill="none" marker-end="url(#arr-amber)"/>
+
+            <!-- 2.1 -> 2.2 -->
+            <path d="M 420 165 L 420 210" stroke="#ff9f0a" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-amber)"/>
+            <!-- 2.2 -> 2.3 -->
+            <path d="M 420 305 L 420 350" stroke="#ff9f0a" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-amber)"/>
+            <!-- Stage 2 -> Stage 3 -->
+            <path d="M 520 395 C 550 395, 545 120, 590 120" stroke="#4b5563" stroke-width="1.8" fill="none" marker-end="url(#arr-emerald)"/>
+
+            <!-- 3.1 -> 3.2 -->
+            <path d="M 695 165 L 695 210" stroke="#30d158" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-emerald)"/>
+            <!-- 3.2 -> 3.3 -->
+            <path d="M 695 305 L 695 350" stroke="#30d158" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-emerald)"/>
+            <!-- Stage 3 -> Stage 4 -->
+            <path d="M 795 395 C 825 395, 820 120, 865 120" stroke="#4b5563" stroke-width="1.8" fill="none" marker-end="url(#arr-purple)"/>
+
+            <!-- 4.1 -> 4.2 -->
+            <path d="M 972 165 L 972 210" stroke="#bf5af2" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-purple)"/>
+            <!-- 4.2 -> 4.3 -->
+            <path d="M 972 305 L 972 350" stroke="#bf5af2" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arr-purple)"/>
+
+            <!-- Rebalance Feedback Loop -->
+            <path d="M 972 445 C 972 580, 590 580, 695 455" stroke="#bf5af2" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-emerald)"/>
+
+            <!-- Node 1.1: CKYC & PAN Ingestion -->
+            <g class="flow-node" onclick="openInspectorModal('node-1')" transform="translate(38, 80)">
+              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
+              <circle cx="24" cy="28" r="10" fill="#2997ff" fill-opacity="0.15"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#2997ff">01</text>
+              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">PAN & CKYC Onboarding</text>
+              <text x="24" y="55" font-size="10.5" fill="#86868b">KRA Registration & KYC</text>
+              <text x="24" y="70" font-size="9.5" fill="#52525b">SEBI AML & FATCA Check</text>
+              <circle cx="195" cy="28" r="4" fill="#2997ff"/>
+            </g>
+
+            <!-- Node 1.2: SEBI Psychometric Profiler -->
+            <g class="flow-node" onclick="openInspectorModal('node-2')" transform="translate(38, 220)">
+              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
+              <circle cx="24" cy="28" r="10" fill="#2997ff" fill-opacity="0.15"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#2997ff">02</text>
+              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">SEBI Risk Suitability</text>
+              <text x="24" y="55" font-size="10.5" fill="#86868b">Drawdown tolerance audit</text>
+              <text x="24" y="70" font-size="9.5" fill="#52525b">Conservative / Growth / Alpha</text>
+              <circle cx="195" cy="28" r="4" fill="#2997ff"/>
+            </g>
+
+            <!-- Node 1.3: Digital Fiduciary Mandate -->
+            <g class="flow-node" onclick="openInspectorModal('node-3')" transform="translate(38, 360)">
+              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
+              <circle cx="24" cy="28" r="10" fill="#2997ff" fill-opacity="0.15"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#2997ff">03</text>
+              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Advisory Agreement</text>
+              <text x="24" y="55" font-size="10.5" fill="#86868b">SEBI IA fee cap disclosures</text>
+              <text x="24" y="70" font-size="9.5" fill="#52525b">Aadhaar e-Sign execution</text>
+              <circle cx="195" cy="28" r="4" fill="#2997ff"/>
+            </g>
+
+            <!-- Node 2.1: Phillip Research Universe -->
+            <g class="flow-node" onclick="openInspectorModal('node-4')" transform="translate(313, 80)">
+              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
+              <circle cx="24" cy="28" r="10" fill="#ff9f0a" fill-opacity="0.15"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#ff9f0a">04</text>
+              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Phillip Quant Screener</text>
+              <text x="24" y="55" font-size="10.5" fill="#86868b">ROCE > 20%, FCF conversion</text>
+              <text x="24" y="70" font-size="9.5" fill="#52525b">Corporate governance filter</text>
+              <circle cx="195" cy="28" r="4" fill="#ff9f0a"/>
+            </g>
+
+            <!-- Node 2.2: Model Basket Construction -->
+            <g class="flow-node" onclick="openInspectorModal('node-5')" transform="translate(313, 220)">
+              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
+              <circle cx="24" cy="28" r="10" fill="#ff9f0a" fill-opacity="0.15"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#ff9f0a">05</text>
+              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Model Basket Design</text>
+              <text x="24" y="55" font-size="10.5" fill="#86868b">Sector limits (max 25%)</text>
+              <text x="24" y="70" font-size="9.5" fill="#52525b">Single equity cap (max 10%)</text>
+              <circle cx="195" cy="28" r="4" fill="#ff9f0a"/>
+            </g>
+
+            <!-- Node 2.3: Research Thesis Memos -->
+            <g class="flow-node" onclick="openInspectorModal('node-6')" transform="translate(313, 360)">
+              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
+              <circle cx="24" cy="28" r="10" fill="#ff9f0a" fill-opacity="0.15"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#ff9f0a">06</text>
+              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Advisory Note & Rationale</text>
+              <text x="24" y="55" font-size="10.5" fill="#86868b">Target price, stop & horizon</text>
+              <text x="24" y="70" font-size="9.5" fill="#52525b">SEBI RA disclosure attached</text>
+              <circle cx="195" cy="28" r="4" fill="#ff9f0a"/>
+            </g>
+
+            <!-- Node 3.1: Recommendation Signal Dispatch -->
+            <g class="flow-node" onclick="openInspectorModal('node-7')" transform="translate(588, 80)">
+              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
+              <circle cx="24" cy="28" r="10" fill="#30d158" fill-opacity="0.15"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#30d158">07</text>
+              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Client Signal Dispatch</text>
+              <text x="24" y="55" font-size="10.5" fill="#86868b">Encrypted portal & app alert</text>
+              <text x="24" y="70" font-size="9.5" fill="#52525b">Non-discretionary trigger</text>
+              <circle cx="195" cy="28" r="4" fill="#30d158"/>
+            </g>
+
+            <!-- Node 3.2: 1-Click Consent / Broker API -->
+            <g class="flow-node" onclick="openInspectorModal('node-8')" transform="translate(588, 220)">
+              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
+              <circle cx="24" cy="28" r="10" fill="#30d158" fill-opacity="0.15"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#30d158">08</text>
+              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Client 1-Click Consent</text>
+              <text x="24" y="55" font-size="10.5" fill="#86868b">PhillipCapital / Broker API</text>
+              <text x="24" y="70" font-size="9.5" fill="#52525b">Zero POA requirement</text>
+              <circle cx="195" cy="28" r="4" fill="#30d158"/>
+            </g>
+
+            <!-- Node 3.3: T+1 Direct Demat Custody -->
+            <g class="flow-node" onclick="openInspectorModal('node-9')" transform="translate(588, 360)">
+              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
+              <circle cx="24" cy="28" r="10" fill="#30d158" fill-opacity="0.15"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#30d158">09</text>
+              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">T+1 Demat Clearing</text>
+              <text x="24" y="55" font-size="10.5" fill="#86868b">NSE / BSE exchange routing</text>
+              <text x="24" y="70" font-size="9.5" fill="#52525b">Direct NSDL / CDSL holding</text>
+              <circle cx="195" cy="28" r="4" fill="#30d158"/>
+            </g>
+
+            <!-- Node 4.1: Quarterly Earnings Surveillance -->
+            <g class="flow-node" onclick="openInspectorModal('node-10')" transform="translate(865, 80)">
+              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
+              <circle cx="24" cy="28" r="10" fill="#bf5af2" fill-opacity="0.15"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#bf5af2">10</text>
+              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Earnings Surveillance</text>
+              <text x="24" y="55" font-size="10.5" fill="#86868b">QoQ / YoY forensic reviews</text>
+              <text x="24" y="70" font-size="9.5" fill="#52525b">Management con-call audits</text>
+              <circle cx="195" cy="28" r="4" fill="#bf5af2"/>
+            </g>
+
+            <!-- Node 4.2: Drift & Thesis Rebalance -->
+            <g class="flow-node" onclick="openInspectorModal('node-11')" transform="translate(865, 220)">
+              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
+              <circle cx="24" cy="28" r="10" fill="#bf5af2" fill-opacity="0.15"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#bf5af2">11</text>
+              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Dynamic Rebalance</text>
+              <text x="24" y="55" font-size="10.5" fill="#86868b">Weight drift > 5% trigger</text>
+              <text x="24" y="70" font-size="9.5" fill="#52525b">Profit-booking / Stop reallocation</text>
+              <circle cx="195" cy="28" r="4" fill="#bf5af2"/>
+            </g>
+
+            <!-- Node 4.3: Tax-Loss Harvesting & XIRR -->
+            <g class="flow-node" onclick="openInspectorModal('node-12')" transform="translate(865, 360)">
+              <rect width="214" height="85" rx="12" fill="url(#card-grad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
+              <circle cx="24" cy="28" r="10" fill="#bf5af2" fill-opacity="0.15"/>
+              <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#bf5af2">12</text>
+              <text x="44" y="32" class="title-text" font-size="12.5" font-weight="700" fill="#f5f5f7">Tax-Loss Harvesting</text>
+              <text x="24" y="55" font-size="10.5" fill="#86868b">LTCG / STCG fiscal offset</text>
+              <text x="24" y="70" font-size="9.5" fill="#52525b">XIRR vs Nifty 50 alpha audit</text>
+              <circle cx="195" cy="28" r="4" fill="#bf5af2"/>
+            </g>
+
+            <!-- Closed Loop Badge -->
+            <rect x="710" y="555" width="240" height="34" rx="17" fill="#151025" stroke="#bf5af2" stroke-width="1.2"/>
+            <text x="830" y="576" text-anchor="middle" font-size="11" font-weight="600" fill="#d8b4fe">↺ Dynamic Rebalance Feedback Loop</text>
+          </svg>
+        </div>
+
+        <div class="pt-3 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between text-xs text-apple-muted gap-2">
+          <span class="flex items-center gap-2">
+            <i class="fa-regular fa-hand-pointer text-apple-blue"></i>
+            <span>Click any node to view SEBI IA compliance & research committee execution rules.</span>
+          </span>
+          <span class="text-[11px] text-apple-secondary">PhillipCapital IA Architecture Standard v2.4</span>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PAGE 2: WHAT IS EQUITY ADVISORY -->
+  <main id="page-standard" class="page-view flex-grow hidden">
+    
+    <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="text-xs font-bold text-apple-blue tracking-wider uppercase">Fiduciary Standard</div>
+        <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white">What is an Equity Advisory?</h2>
+        <p class="text-apple-muted text-sm sm:text-base leading-relaxed">
+          An independent, SEBI-registered advisory service that equips you with institutional research and tailored portfolio strategies without taking custody of your funds or executing trades without your explicit approval.
         </p>
       </div>
 
-      <!-- Flow Controls & Export Panel -->
-      <div class="flex flex-wrap items-center gap-2.5">
-        <span class="text-xs text-apple-secondary mr-1">Export Diagram:</span>
-        <button onclick="exportFlowchartSVG()" class="px-3 py-1.5 rounded-lg text-xs font-medium glass-pill text-apple-text hover:bg-white/10 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-file-code text-apple-blue"></i> SVG Vector
-        </button>
-        <button onclick="exportFlowchartPNG()" class="px-3 py-1.5 rounded-lg text-xs font-medium glass-pill text-apple-text hover:bg-white/10 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-file-image text-apple-purple"></i> High-Res PNG
-        </button>
-        <button onclick="window.print()" class="px-3 py-1.5 rounded-lg text-xs font-medium glass-pill text-apple-text hover:bg-white/10 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-print text-apple-emerald"></i> Print Sheet
-        </button>
-      </div>
-    </div>
-
-    <!-- Flowchart Canvas Frame -->
-    <div class="p-3 sm:p-5 rounded-3xl glass-card overflow-hidden relative shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-white/[0.09]">
-      
-      <!-- Stage Indicator Bar -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4 text-xs font-medium text-center">
-        <div class="py-2 px-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-blue-500"></span> STAGE 1: INGESTION & KYC
-        </div>
-        <div class="py-2 px-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-amber-500"></span> STAGE 2: RESEARCH & MODEL
-        </div>
-        <div class="py-2 px-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-emerald-500"></span> STAGE 3: GATED EXECUTION
-        </div>
-        <div class="py-2 px-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-purple-500"></span> STAGE 4: SURVEILLANCE & HARVEST
-        </div>
-      </div>
-
-      <!-- Responsive SVG Container -->
-      <div class="overflow-x-auto pb-4 pt-1">
-        <svg id="equity-flow-svg" viewBox="0 0 1120 700" class="w-full min-w-[980px] h-auto select-none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <!-- Marker Arrows -->
-            <marker id="arrow-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 1 L 9 5 L 0 9 z" fill="#2997ff"/>
-            </marker>
-            <marker id="arrow-amber" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 1 L 9 5 L 0 9 z" fill="#ff9f0a"/>
-            </marker>
-            <marker id="arrow-emerald" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 1 L 9 5 L 0 9 z" fill="#30d158"/>
-            </marker>
-            <marker id="arrow-purple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 1 L 9 5 L 0 9 z" fill="#bf5af2"/>
-            </marker>
-            <marker id="arrow-gray" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 1 L 9 5 L 0 9 z" fill="#4b5563"/>
-            </marker>
-
-            <!-- Radial Node Fills -->
-            <radialGradient id="node-bg" cx="50%" cy="30%" r="80%">
-              <stop offset="0%" stop-color="#181822"/>
-              <stop offset="100%" stop-color="#0d0d12"/>
-            </radialGradient>
-          </defs>
-
-          <!-- STAGE COLUMNS BACKGROUNDS -->
-          <!-- Col 1 -->
-          <rect x="20" y="20" width="250" height="660" rx="16" fill="#08080c" stroke="rgba(41, 151, 255, 0.2)" stroke-width="1.2"/>
-          <text x="145" y="55" text-anchor="middle" font-size="12" font-weight="700" fill="#2997ff" letter-spacing="1">1. INGESTION & SUITABILITY</text>
-
-          <!-- Col 2 -->
-          <rect x="295" y="20" width="250" height="660" rx="16" fill="#08080c" stroke="rgba(255, 159, 10, 0.2)" stroke-width="1.2"/>
-          <text x="420" y="55" text-anchor="middle" font-size="12" font-weight="700" fill="#ff9f0a" letter-spacing="1">2. QUANT RESEARCH & MODEL</text>
-
-          <!-- Col 3 -->
-          <rect x="570" y="20" width="250" height="660" rx="16" fill="#08080c" stroke="rgba(48, 209, 88, 0.2)" stroke-width="1.2"/>
-          <text x="695" y="55" text-anchor="middle" font-size="12" font-weight="700" fill="#30d158" letter-spacing="1">3. GATED ORDER EXECUTION</text>
-
-          <!-- Col 4 -->
-          <rect x="845" y="20" width="255" height="660" rx="16" fill="#08080c" stroke="rgba(191, 90, 242, 0.2)" stroke-width="1.2"/>
-          <text x="972" y="55" text-anchor="middle" font-size="12" font-weight="700" fill="#bf5af2" letter-spacing="1">4. SURVEILLANCE & REBALANCE</text>
-
-          <!-- CONNECTIONS (BEZIER PATHS) -->
-          <!-- 1.1 -> 1.2 -->
-          <path d="M 145 165 L 145 210" stroke="#2997ff" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arrow-blue)"/>
-          <!-- 1.2 -> 1.3 -->
-          <path d="M 145 305 L 145 350" stroke="#2997ff" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arrow-blue)"/>
-          
-          <!-- Cross Stage 1 to 2: 1.3 -> 2.1 -->
-          <path d="M 245 395 C 275 395, 270 120, 315 120" stroke="#4b5563" stroke-width="1.8" fill="none" marker-end="url(#arrow-amber)"/>
-
-          <!-- 2.1 -> 2.2 -->
-          <path d="M 420 165 L 420 210" stroke="#ff9f0a" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arrow-amber)"/>
-          <!-- 2.2 -> 2.3 -->
-          <path d="M 420 305 L 420 350" stroke="#ff9f0a" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arrow-amber)"/>
-
-          <!-- Cross Stage 2 to 3: 2.3 -> 3.1 -->
-          <path d="M 520 395 C 550 395, 545 120, 590 120" stroke="#4b5563" stroke-width="1.8" fill="none" marker-end="url(#arrow-emerald)"/>
-
-          <!-- 3.1 -> 3.2 -->
-          <path d="M 695 165 L 695 210" stroke="#30d158" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arrow-emerald)"/>
-          <!-- 3.2 -> 3.3 -->
-          <path d="M 695 305 L 695 350" stroke="#30d158" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arrow-emerald)"/>
-
-          <!-- Cross Stage 3 to 4: 3.3 -> 4.1 -->
-          <path d="M 795 395 C 825 395, 820 120, 865 120" stroke="#4b5563" stroke-width="1.8" fill="none" marker-end="url(#arrow-purple)"/>
-
-          <!-- 4.1 -> 4.2 -->
-          <path d="M 972 165 L 972 210" stroke="#bf5af2" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arrow-purple)"/>
-          <!-- 4.2 -> 4.3 -->
-          <path d="M 972 305 L 972 350" stroke="#bf5af2" stroke-width="1.8" stroke-dasharray="3,3" marker-end="url(#arrow-purple)"/>
-
-          <!-- Dynamic Rebalancing Feedback Loop: 4.3 back to 2.2 / 3.1 -->
-          <path d="M 972 445 C 972 580, 590 580, 695 455" stroke="#bf5af2" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arrow-emerald)"/>
-
-          <!-- Node 1.1 -->
-          <g class="flow-node" onclick="openInspectorModal('node-1')" transform="translate(38, 80)">
-            <rect width="214" height="85" rx="12" fill="url(#node-bg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-            <circle cx="24" cy="28" r="10" fill="#2997ff" fill-opacity="0.15"/>
-            <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#2997ff">01</text>
-            <text x="44" y="32" class="title-text" font-size="13" font-weight="700" fill="#f5f5f7">KYC & Identity Ingestion</text>
-            <text x="24" y="55" font-size="11" fill="#86868b">PAN, Aadhaar, Bank Details</text>
-            <text x="24" y="70" font-size="10" fill="#52525b">Anti-Money Laundering & CKYC</text>
-            <circle cx="195" cy="28" r="4" fill="#2997ff"/>
-          </g>
-
-          <!-- Node 1.2 -->
-          <g class="flow-node" onclick="openInspectorModal('node-2')" transform="translate(38, 220)">
-            <rect width="214" height="85" rx="12" fill="url(#node-bg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-            <circle cx="24" cy="28" r="10" fill="#2997ff" fill-opacity="0.15"/>
-            <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#2997ff">02</text>
-            <text x="44" y="32" class="title-text" font-size="13" font-weight="700" fill="#f5f5f7">Suitability & Profiler</text>
-            <text x="24" y="55" font-size="11" fill="#86868b">Psychometric draw-down test</text>
-            <text x="24" y="70" font-size="10" fill="#52525b">Horizon: Growth vs Defensive</text>
-            <circle cx="195" cy="28" r="4" fill="#2997ff"/>
-          </g>
-
-          <!-- Node 1.3 -->
-          <g class="flow-node" onclick="openInspectorModal('node-3')" transform="translate(38, 360)">
-            <rect width="214" height="85" rx="12" fill="url(#node-bg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-            <circle cx="24" cy="28" r="10" fill="#2997ff" fill-opacity="0.15"/>
-            <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#2997ff">03</text>
-            <text x="44" y="32" class="title-text" font-size="13" font-weight="700" fill="#f5f5f7">Advisory Agreement</text>
-            <text x="24" y="55" font-size="11" fill="#86868b">Fee Disclosure Document</text>
-            <text x="24" y="70" font-size="10" fill="#52525b">Digital e-Sign & Legal Mandate</text>
-            <circle cx="195" cy="28" r="4" fill="#2997ff"/>
-          </g>
-
-          <!-- Node 2.1 -->
-          <g class="flow-node" onclick="openInspectorModal('node-4')" transform="translate(313, 80)">
-            <rect width="214" height="85" rx="12" fill="url(#node-bg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-            <circle cx="24" cy="28" r="10" fill="#ff9f0a" fill-opacity="0.15"/>
-            <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#ff9f0a">04</text>
-            <text x="44" y="32" class="title-text" font-size="13" font-weight="700" fill="#f5f5f7">Universe Screening</text>
-            <text x="24" y="55" font-size="11" fill="#86868b">ROIC > 18%, Low Debt/EBITDA</text>
-            <text x="24" y="70" font-size="10" fill="#52525b">DCF valuation & Moat scoring</text>
-            <circle cx="195" cy="28" r="4" fill="#ff9f0a"/>
-          </g>
-
-          <!-- Node 2.2 -->
-          <g class="flow-node" onclick="openInspectorModal('node-5')" transform="translate(313, 220)">
-            <rect width="214" height="85" rx="12" fill="url(#node-bg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-            <circle cx="24" cy="28" r="10" fill="#ff9f0a" fill-opacity="0.15"/>
-            <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#ff9f0a">05</text>
-            <text x="44" y="32" class="title-text" font-size="13" font-weight="700" fill="#f5f5f7">Model Basket Mapping</text>
-            <text x="24" y="55" font-size="11" fill="#86868b">Weight allocations & Sector cap</text>
-            <text x="24" y="70" font-size="10" fill="#52525b">Large / Mid / Small Cap balance</text>
-            <circle cx="195" cy="28" r="4" fill="#ff9f0a"/>
-          </g>
-
-          <!-- Node 2.3 -->
-          <g class="flow-node" onclick="openInspectorModal('node-6')" transform="translate(313, 360)">
-            <rect width="214" height="85" rx="12" fill="url(#node-bg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-            <circle cx="24" cy="28" r="10" fill="#ff9f0a" fill-opacity="0.15"/>
-            <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#ff9f0a">06</text>
-            <text x="44" y="32" class="title-text" font-size="13" font-weight="700" fill="#f5f5f7">Research Thesis Memo</text>
-            <text x="24" y="55" font-size="11" fill="#86868b">Target price, Entry band, Stop</text>
-            <text x="24" y="70" font-size="10" fill="#52525b">Fiduciary rationale published</text>
-            <circle cx="195" cy="28" r="4" fill="#ff9f0a"/>
-          </g>
-
-          <!-- Node 3.1 -->
-          <g class="flow-node" onclick="openInspectorModal('node-7')" transform="translate(588, 80)">
-            <rect width="214" height="85" rx="12" fill="url(#node-bg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-            <circle cx="24" cy="28" r="10" fill="#30d158" fill-opacity="0.15"/>
-            <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#30d158">07</text>
-            <text x="44" y="32" class="title-text" font-size="13" font-weight="700" fill="#f5f5f7">Client Signal Delivery</text>
-            <text x="24" y="55" font-size="11" fill="#86868b">Push alert, Email & App note</text>
-            <text x="24" y="70" font-size="10" fill="#52525b">Non-discretionary review</text>
-            <circle cx="195" cy="28" r="4" fill="#30d158"/>
-          </g>
-
-          <!-- Node 3.2 -->
-          <g class="flow-node" onclick="openInspectorModal('node-8')" transform="translate(588, 220)">
-            <rect width="214" height="85" rx="12" fill="url(#node-bg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-            <circle cx="24" cy="28" r="10" fill="#30d158" fill-opacity="0.15"/>
-            <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#30d158">08</text>
-            <text x="44" y="32" class="title-text" font-size="13" font-weight="700" fill="#f5f5f7">1-Click Consent / API</text>
-            <text x="24" y="55" font-size="11" fill="#86868b">Secure broker API session</text>
-            <text x="24" y="70" font-size="10" fill="#52525b">Explicit client authorization</text>
-            <circle cx="195" cy="28" r="4" fill="#30d158"/>
-          </g>
-
-          <!-- Node 3.3 -->
-          <g class="flow-node" onclick="openInspectorModal('node-9')" transform="translate(588, 360)">
-            <rect width="214" height="85" rx="12" fill="url(#node-bg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-            <circle cx="24" cy="28" r="10" fill="#30d158" fill-opacity="0.15"/>
-            <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#30d158">09</text>
-            <text x="44" y="32" class="title-text" font-size="13" font-weight="700" fill="#f5f5f7">T+1 Demat Custody</text>
-            <text x="24" y="55" font-size="11" fill="#86868b">Direct exchange routing</text>
-            <text x="24" y="70" font-size="10" fill="#52525b">Securities stay in user account</text>
-            <circle cx="195" cy="28" r="4" fill="#30d158"/>
-          </g>
-
-          <!-- Node 4.1 -->
-          <g class="flow-node" onclick="openInspectorModal('node-10')" transform="translate(865, 80)">
-            <rect width="214" height="85" rx="12" fill="url(#node-bg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-            <circle cx="24" cy="28" r="10" fill="#bf5af2" fill-opacity="0.15"/>
-            <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#bf5af2">10</text>
-            <text x="44" y="32" class="title-text" font-size="13" font-weight="700" fill="#f5f5f7">Live Surveillance</text>
-            <text x="24" y="55" font-size="11" fill="#86868b">Quarterly earnings call audit</text>
-            <text x="24" y="70" font-size="10" fill="#52525b">Macro regime & debt checks</text>
-            <circle cx="195" cy="28" r="4" fill="#bf5af2"/>
-          </g>
-
-          <!-- Node 4.2 -->
-          <g class="flow-node" onclick="openInspectorModal('node-11')" transform="translate(865, 220)">
-            <rect width="214" height="85" rx="12" fill="url(#node-bg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-            <circle cx="24" cy="28" r="10" fill="#bf5af2" fill-opacity="0.15"/>
-            <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#bf5af2">11</text>
-            <text x="44" y="32" class="title-text" font-size="13" font-weight="700" fill="#f5f5f7">Dynamic Rebalance</text>
-            <text x="24" y="55" font-size="11" fill="#86868b">Weight drift > 5% trigger</text>
-            <text x="24" y="70" font-size="10" fill="#52525b">Profit-booking or stop loss</text>
-            <circle cx="195" cy="28" r="4" fill="#bf5af2"/>
-          </g>
-
-          <!-- Node 4.3 -->
-          <g class="flow-node" onclick="openInspectorModal('node-12')" transform="translate(865, 360)">
-            <rect width="214" height="85" rx="12" fill="url(#node-bg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.2"/>
-            <circle cx="24" cy="28" r="10" fill="#bf5af2" fill-opacity="0.15"/>
-            <text x="24" y="32" text-anchor="middle" font-size="11" font-weight="700" fill="#bf5af2">12</text>
-            <text x="44" y="32" class="title-text" font-size="13" font-weight="700" fill="#f5f5f7">Tax-Loss Harvesting</text>
-            <text x="24" y="55" font-size="11" fill="#86868b">Fiscal year capital gain offset</text>
-            <text x="24" y="70" font-size="10" fill="#52525b">Benchmark alpha reporting</text>
-            <circle cx="195" cy="28" r="4" fill="#bf5af2"/>
-          </g>
-
-          <!-- Cyclic Rebalance Badge -->
-          <rect x="710" y="555" width="230" height="34" rx="17" fill="#1b122c" stroke="#bf5af2" stroke-width="1.2"/>
-          <text x="825" y="576" text-anchor="middle" font-size="11" font-weight="600" fill="#e9d5ff">↺ Closed-Loop Rebalancing Feedback</text>
-        </svg>
-      </div>
-
-      <div class="pt-3 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between text-xs text-apple-muted gap-2">
-        <span class="flex items-center gap-2">
-          <i class="fa-regular fa-hand-pointer text-apple-blue"></i>
-          <span>Click any block to inspect full protocols and regulatory specifications.</span>
-        </span>
-        <span class="text-[11px] text-apple-secondary">Vector SVG Engine 2.0 • Ultra-sharp retina export ready</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="what-is-advisory" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-    <div class="text-center max-w-3xl mx-auto space-y-3">
-      <div class="text-xs font-bold text-apple-emerald tracking-wider uppercase">Fiduciary Intelligence</div>
-      <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white">What is an Equity Advisory?</h2>
-      <p class="text-apple-muted text-sm sm:text-base leading-relaxed">
-        An Equity Advisory is a specialized financial practice providing registered, independent research and customized portfolio strategy directly to individual and institutional investors.
-      </p>
-    </div>
-
-    <!-- 3 Core Pillars (Apple Pro Cards) -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      
-      <!-- Card 1 -->
-      <div class="glass-card rounded-3xl p-7 space-y-4">
-        <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-apple-blue text-xl">
-          <i class="fa-solid fa-key"></i>
-        </div>
-        <h3 class="text-xl font-bold text-white tracking-tight">100% Non-Discretionary</h3>
-        <p class="text-apple-muted text-xs leading-relaxed">
-          Unlike asset managers or mutual funds, you maintain total ownership of your assets. The advisory publishes institutional-grade model baskets, rebalance alerts, and entry bands—but <strong class="text-white">you execute the trades yourself</strong>. Your money never leaves your licensed brokerage account.
-        </p>
-        <div class="pt-2 text-xs font-semibold text-apple-blue flex items-center gap-1">
-          Zero Custody Exposure <i class="fa-solid fa-arrow-right text-[10px]"></i>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="glass-card rounded-3xl p-7 space-y-4">
-        <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-apple-purple text-xl">
-          <i class="fa-solid fa-scale-balanced"></i>
-        </div>
-        <h3 class="text-xl font-bold text-white tracking-tight">Fiduciary Standard</h3>
-        <p class="text-apple-muted text-xs leading-relaxed">
-          Traditional stockbrokers operate under a "suitability" standard and generate revenue through transaction churn. Registered Investment Advisers (RIAs) are bound by the <strong class="text-white">legal fiduciary standard</strong>, obligated to place client capital preservation and growth above all else.
-        </p>
-        <div class="pt-2 text-xs font-semibold text-apple-purple flex items-center gap-1">
-          SEBI / SEC Compliant <i class="fa-solid fa-arrow-right text-[10px]"></i>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="glass-card rounded-3xl p-7 space-y-4">
-        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-apple-emerald text-xl">
-          <i class="fa-solid fa-ban"></i>
-        </div>
-        <h3 class="text-xl font-bold text-white tracking-tight">Zero Commissions</h3>
-        <p class="text-apple-muted text-xs leading-relaxed">
-          Fee-only architecture eliminates conflicts of interest. The advisory charges either a predictable flat subscription or an explicit % of Assets Under Advice (AUA). No broker rebates, no distributor cuts, and zero incentive to over-trade your account.
-        </p>
-        <div class="pt-2 text-xs font-semibold text-apple-emerald flex items-center gap-1">
-          Transparent Retainers <i class="fa-solid fa-arrow-right text-[10px]"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- Detailed Comparison Matrix Table -->
-    <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/[0.06] pb-4">
-        <div>
-          <h3 class="text-lg font-bold text-white">How Equity Advisory Compares Across the Industry</h3>
-          <p class="text-xs text-apple-muted">A direct operational comparison across key investor protection pillars.</p>
-        </div>
-        <span class="text-xs px-3 py-1 rounded-full bg-apple-blue/10 text-apple-blue border border-apple-blue/20 self-start">
-          Investor Rights Benchmark
-        </span>
-      </div>
-
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs border-collapse">
-          <thead>
-            <tr class="text-apple-secondary border-b border-white/[0.08]">
-              <th class="py-3 px-4 font-semibold">Dimension</th>
-              <th class="py-3 px-4 font-semibold text-apple-blue bg-blue-500/[0.04] rounded-t-xl">Equity Advisory (RIA)</th>
-              <th class="py-3 px-4 font-semibold">Portfolio Mgmt (PMS)</th>
-              <th class="py-3 px-4 font-semibold">Traditional Broker</th>
-              <th class="py-3 px-4 font-semibold">Mutual Fund</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-white/[0.04] text-apple-muted">
-            <tr class="hover:bg-white/[0.02]">
-              <td class="py-3.5 px-4 font-medium text-white">Custody of Assets</td>
-              <td class="py-3.5 px-4 text-emerald-400 font-semibold bg-blue-500/[0.04]">
-                <i class="fa-solid fa-check mr-1.5"></i> 100% in your Demat
-              </td>
-              <td class="py-3.5 px-4">Managed via Power of Atty (POA)</td>
-              <td class="py-3.5 px-4">In your Demat / Broker pool</td>
-              <td class="py-3.5 px-4">Pooled with AMC Custodian</td>
-            </tr>
-            <tr class="hover:bg-white/[0.02]">
-              <td class="py-3.5 px-4 font-medium text-white">Trade Discretion</td>
-              <td class="py-3.5 px-4 text-apple-blue font-semibold bg-blue-500/[0.04]">
-                Non-discretionary (You approve)
-              </td>
-              <td class="py-3.5 px-4">Discretionary (Manager trades)</td>
-              <td class="py-3.5 px-4">Self-directed or call-to-trade</td>
-              <td class="py-3.5 px-4">Full fund manager discretion</td>
-            </tr>
-            <tr class="hover:bg-white/[0.02]">
-              <td class="py-3.5 px-4 font-medium text-white">Regulatory Standard</td>
-              <td class="py-3.5 px-4 text-white font-medium bg-blue-500/[0.04]">
-                Fiduciary standard (Lawful)
-              </td>
-              <td class="py-3.5 px-4">Fiduciary / Portfolio contract</td>
-              <td class="py-3.5 px-4">Suitability standard only</td>
-              <td class="py-3.5 px-4">Scheme Objective Mandate</td>
-            </tr>
-            <tr class="hover:bg-white/[0.02]">
-              <td class="py-3.5 px-4 font-medium text-white">Typical Fee Model</td>
-              <td class="py-3.5 px-4 text-apple-text font-semibold bg-blue-500/[0.04]">
-                Flat Retainer or 1-1.5% AUA
-              </td>
-              <td class="py-3.5 px-4">1.5 - 2.5% + 15-20% profit share</td>
-              <td class="py-3.5 px-4">Turnover brokerage per trade</td>
-              <td class="py-3.5 px-4">0.8 - 2.2% Total Expense Ratio</td>
-            </tr>
-            <tr class="hover:bg-white/[0.02]">
-              <td class="py-3.5 px-4 font-medium text-white">Minimum Capital</td>
-              <td class="py-3.5 px-4 text-emerald-400 font-semibold bg-blue-500/[0.04]">
-                Accessible (e.g. $1k / ₹50k+)
-              </td>
-              <td class="py-3.5 px-4">High (₹50 Lakhs / $100k+)</td>
-              <td class="py-3.5 px-4">None ($0 / ₹0)</td>
-              <td class="py-3.5 px-4">Ultra low ($10 / ₹500)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <section id="account-roadmap" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-    <div class="text-center max-w-3xl mx-auto space-y-3">
-      <div class="text-xs font-bold text-apple-blue tracking-wider uppercase">Onboarding Roadmap</div>
-      <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white">How to Open an Advisory Account</h2>
-      <p class="text-apple-muted text-sm sm:text-base leading-relaxed">
-        A seamless 4-step onboarding protocol compliant with SEBI (RIA) / SEC fiduciary standards. Complete within 15 minutes digitally.
-      </p>
-    </div>
-
-    <!-- 4-Step Interactive Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      
-      <!-- Step 1 -->
-      <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-6 relative overflow-hidden group">
-        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition"></div>
-        <div>
-          <div class="w-9 h-9 rounded-xl bg-apple-blue/10 border border-apple-blue/30 text-apple-blue font-bold flex items-center justify-center text-sm mb-4">
-            01
+      <!-- 3 Core Pillars -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="glass-card rounded-3xl p-7 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-apple-blue text-xl">
+            <i class="fa-solid fa-vault"></i>
           </div>
-          <h4 class="text-lg font-bold text-white tracking-tight">Identity & CKYC</h4>
-          <p class="text-apple-muted text-xs leading-relaxed mt-2">
-            Submit regulatory identification to prevent financial fraud and establish accredited investor suitability.
+          <h3 class="text-xl font-bold text-white tracking-tight">100% Client Demat Custody</h3>
+          <p class="text-apple-muted text-xs leading-relaxed">
+            Your securities are held directly in your personal Demat account with NSDL or CDSL. PhillipCapital Advisory never pools client funds, eliminating counterparty custody risk.
           </p>
-          <ul class="mt-4 space-y-2 text-xs text-apple-secondary">
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-blue text-[10px]"></i> Tax ID / PAN / SSN</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-blue text-[10px]"></i> Proof of Address (Passport / UID)</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-blue text-[10px]"></i> Bank Proof / Cancelled Cheque</li>
-          </ul>
-        </div>
-        <div class="pt-4 border-t border-white/[0.06] text-[11px] text-apple-muted flex justify-between">
-          <span>Digital Verification</span>
-          <span class="text-apple-emerald font-medium">Instant OTP</span>
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-6 relative overflow-hidden group">
-        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition"></div>
-        <div>
-          <div class="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 text-apple-amber font-bold flex items-center justify-center text-sm mb-4">
-            02
+          <div class="pt-2 text-xs font-semibold text-apple-blue flex items-center gap-1">
+            Zero Custody Exposure <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </div>
-          <h4 class="text-lg font-bold text-white tracking-tight">Risk Suitability Matrix</h4>
-          <p class="text-apple-muted text-xs leading-relaxed mt-2">
-            Evaluate psychometric drawdown tolerance, liquidity requirements, and investment horizon.
+        </div>
+
+        <div class="glass-card rounded-3xl p-7 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-apple-amber text-xl">
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white tracking-tight">Fee-Only Fiduciary Model</h3>
+          <p class="text-apple-muted text-xs leading-relaxed">
+            Regulated under SEBI (Investment Advisers) Regulations, 2013. We do not accept commissions, kickbacks, or distribution incentives from listed entities or exchanges.
           </p>
-          <ul class="mt-4 space-y-2 text-xs text-apple-secondary">
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-amber text-[10px]"></i> Horizon (1 yr to 10+ yrs)</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-amber text-[10px]"></i> Loss capacity assessment (-20%)</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-amber text-[10px]"></i> Model scoring: Def/Mod/Agg</li>
-          </ul>
-        </div>
-        <div class="pt-4 border-t border-white/[0.06] text-[11px] text-apple-muted flex justify-between">
-          <span>Regulatory Step</span>
-          <span class="text-apple-amber font-medium">Mandatory</span>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-6 relative overflow-hidden group">
-        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition"></div>
-        <div>
-          <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-apple-emerald font-bold flex items-center justify-center text-sm mb-4">
-            03
+          <div class="pt-2 text-xs font-semibold text-apple-amber flex items-center gap-1">
+            Zero Trade Churn Conflict <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </div>
-          <h4 class="text-lg font-bold text-white tracking-tight">Broker API Connectivity</h4>
-          <p class="text-apple-muted text-xs leading-relaxed mt-2">
-            Link your existing preferred brokerage or Demat custody account via secure, tokenized OAuth.
+        </div>
+
+        <div class="glass-card rounded-3xl p-7 space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-apple-emerald text-xl">
+            <i class="fa-solid fa-building-columns"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white tracking-tight">Phillip Institutional Pedigree</h3>
+          <p class="text-apple-muted text-xs leading-relaxed">
+            Founded in Singapore in 1975, PhillipCapital operates across 15 countries with over USD 35 Billion in assets under custody and management, bringing global research rigor to Indian equities.
           </p>
-          <ul class="mt-4 space-y-2 text-xs text-apple-secondary">
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-emerald text-[10px]"></i> Zerodha, Groww, AngelOne</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-emerald text-[10px]"></i> Interactive Brokers / ICICI Direct</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-emerald text-[10px]"></i> Zero POA / No Withdrawal API</li>
-          </ul>
-        </div>
-        <div class="pt-4 border-t border-white/[0.06] text-[11px] text-apple-muted flex justify-between">
-          <span>Security Protocol</span>
-          <span class="text-apple-emerald font-medium">Read & Exec Only</span>
-        </div>
-      </div>
-
-      <!-- Step 4 -->
-      <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-6 relative overflow-hidden group">
-        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition"></div>
-        <div>
-          <div class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/30 text-apple-purple font-bold flex items-center justify-center text-sm mb-4">
-            04
-          </div>
-          <h4 class="text-lg font-bold text-white tracking-tight">Sign Mandate & Fund</h4>
-          <p class="text-apple-muted text-xs leading-relaxed mt-2">
-            Execute the digital fiduciary agreement, select your subscription tier, and trigger your first model basket.
-          </p>
-          <ul class="mt-4 space-y-2 text-xs text-apple-secondary">
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-purple text-[10px]"></i> Digital Aadhaar / DocuSign</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-purple text-[10px]"></i> Flat fee or % AUA selection</li>
-            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-purple text-[10px]"></i> Review initial capital allocation</li>
-          </ul>
-        </div>
-        <div class="pt-4 border-t border-white/[0.06] text-[11px] text-apple-muted flex justify-between">
-          <span>Activation</span>
-          <span class="text-apple-purple font-medium">Same-Day Go Live</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Interactive Readiness Checklist -->
-    <div class="glass-card rounded-3xl p-6 sm:p-8 max-w-4xl mx-auto space-y-6 border border-white/[0.1]">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h3 class="text-lg font-bold text-white flex items-center gap-2">
-            <i class="fa-solid fa-list-check text-apple-blue"></i> Investor Onboarding Readiness Checklist
-          </h3>
-          <p class="text-xs text-apple-muted mt-0.5">Toggle documents you currently have prepared to compute readiness.</p>
-        </div>
-        <div class="flex items-center gap-3">
-          <div class="text-right">
-            <div id="checklist-percent" class="text-sm font-bold text-white">0% Complete</div>
-            <div class="text-[10px] text-apple-muted">Readiness Score</div>
-          </div>
-          <div class="w-12 h-12 rounded-full bg-apple-subtle border border-white/10 flex items-center justify-center">
-            <div id="readiness-ring" class="w-8 h-8 rounded-full bg-blue-500/20 border-2 border-apple-blue flex items-center justify-center text-[10px] font-bold text-apple-blue">
-              0/5
-            </div>
+          <div class="pt-2 text-xs font-semibold text-apple-emerald flex items-center gap-1">
+            49+ Years of Institutional Trust <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </div>
         </div>
+
       </div>
 
-      <!-- Checklist Items -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-        <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none">
-          <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
+      <!-- Regulatory Comparison Matrix -->
+      <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/[0.06] pb-4">
           <div>
-            <span class="text-white font-medium block">Permanent Account Number (PAN) / Tax ID</span>
-            <span class="text-apple-muted text-[11px]">Required for central depository and tax reconciliation.</span>
+            <h3 class="text-lg font-bold text-white">Institutional Comparison: Advisory vs PMS vs Stock Broker</h3>
+            <p class="text-xs text-apple-muted">A direct legal and operational comparison under Indian regulatory frameworks.</p>
           </div>
-        </label>
-
-        <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none">
-          <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
-          <div>
-            <span class="text-white font-medium block">Active Broker Demat Account</span>
-            <span class="text-apple-muted text-[11px]">With Zerodha, Groww, Interactive Brokers, Upstox, etc.</span>
-          </div>
-        </label>
-
-        <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none">
-          <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
-          <div>
-            <span class="text-white font-medium block">Verified Bank Account Proof</span>
-            <span class="text-apple-muted text-[11px]">Cancelled cheque or official 3-month account statement.</span>
-          </div>
-        </label>
-
-        <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none">
-          <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
-          <div>
-            <span class="text-white font-medium block">Aadhaar / Passport with Mobile Linked</span>
-            <span class="text-apple-muted text-[11px]">Required for instantaneous digital OTP e-signing.</span>
-          </div>
-        </label>
-
-        <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none sm:col-span-2">
-          <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
-          <div>
-            <span class="text-white font-medium block">Risk Tolerance Self-Assessment Awareness</span>
-            <span class="text-apple-muted text-[11px]">Clarity on liquidity timeline (min. recommended 36 months for public equities).</span>
-          </div>
-        </label>
-      </div>
-
-      <!-- Live Dynamic Progress Bar -->
-      <div class="space-y-1">
-        <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
-          <div id="readiness-bar" class="h-full bg-gradient-to-r from-apple-blue to-apple-emerald transition-all duration-300 w-0"></div>
-        </div>
-        <p id="readiness-msg" class="text-[11px] text-apple-secondary text-right">Select the documents you have ready.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="simulator" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-    <div class="text-center max-w-3xl mx-auto space-y-3">
-      <div class="text-xs font-bold text-apple-purple tracking-wider uppercase">Adaptive Allocation</div>
-      <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white">Interactive Advisory Simulator</h2>
-      <p class="text-apple-muted text-sm sm:text-base leading-relaxed">
-        Test how your investment horizon and drawdown preference alter the advisory's model basket allocation across large cap, high-growth mid-cap, and tactical hedges.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-      
-      <!-- Left Controls Panel (5 cols) -->
-      <div class="lg:col-span-5 glass-card rounded-3xl p-6 sm:p-8 space-y-6">
-        <h3 class="text-lg font-bold text-white flex items-center gap-2">
-          <i class="fa-solid fa-sliders text-apple-purple"></i> Investor Profile Controls
-        </h3>
-
-        <!-- Horizon Slider -->
-        <div class="space-y-2">
-          <div class="flex justify-between items-center text-xs">
-            <span class="text-apple-secondary font-medium">Investment Horizon:</span>
-            <span id="slider-horizon-val" class="text-apple-blue font-bold text-sm">5 Years</span>
-          </div>
-          <input type="range" id="slider-horizon" min="1" max="15" value="5" step="1" oninput="runAllocationSimulator()" class="w-full accent-apple-blue bg-white/10 h-1.5 rounded-lg cursor-pointer">
-          <div class="flex justify-between text-[10px] text-apple-muted">
-            <span>1 Year (Tactical)</span>
-            <span>7 Years (Compound)</span>
-            <span>15+ Years (Legacy)</span>
-          </div>
-        </div>
-
-        <!-- Risk Tolerance Slider -->
-        <div class="space-y-2">
-          <div class="flex justify-between items-center text-xs">
-            <span class="text-apple-secondary font-medium">Drawdown Appetite:</span>
-            <span id="slider-risk-val" class="text-apple-purple font-bold text-sm">Moderate Growth</span>
-          </div>
-          <input type="range" id="slider-risk" min="1" max="5" value="3" step="1" oninput="runAllocationSimulator()" class="w-full accent-apple-purple bg-white/10 h-1.5 rounded-lg cursor-pointer">
-          <div class="flex justify-between text-[10px] text-apple-muted">
-            <span>Conservative</span>
-            <span>Balanced</span>
-            <span>Aggressive Alpha</span>
-          </div>
-        </div>
-
-        <!-- Initial Capital Input -->
-        <div class="space-y-2">
-          <div class="flex justify-between items-center text-xs">
-            <span class="text-apple-secondary font-medium">Planned Deployment:</span>
-            <span id="capital-display" class="text-white font-bold">$100,000</span>
-          </div>
-          <div class="relative">
-            <span class="absolute left-3.5 top-2.5 text-apple-muted text-xs">$</span>
-            <input type="number" id="capital-input" value="100000" min="5000" step="5000" oninput="runAllocationSimulator()" class="w-full bg-white/[0.04] border border-white/10 rounded-xl py-2 pl-7 pr-3 text-sm text-white focus:outline-none focus:border-apple-blue transition">
-          </div>
-        </div>
-
-        <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-[11px] text-apple-muted flex items-start gap-2">
-          <i class="fa-solid fa-circle-info text-apple-blue mt-0.5"></i>
-          <span>Rebalancing triggers automatically when any asset sleeve deviates by > 5% from target weight.</span>
-        </div>
-      </div>
-
-      <!-- Right Visualizer Panel (7 cols) -->
-      <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 space-y-6">
-        <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
-          <h4 class="text-base font-bold text-white">Target Recommended Model Basket</h4>
-          <span id="risk-category-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">
-            Moderate Growth Strategy
+          <span class="text-xs px-3 py-1 rounded-full bg-apple-blue/10 text-apple-blue border border-apple-blue/20 self-start">
+            SEBI Regulatory Matrix
           </span>
         </div>
 
-        <!-- Allocation Breakdown Bars -->
-        <div class="space-y-4">
-          <!-- Large Cap Sleeve -->
-          <div class="space-y-1.5">
-            <div class="flex justify-between text-xs">
-              <span class="text-white font-medium flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Large-Cap Bluechips & Monopolies
-              </span>
-              <span id="alloc-large-pct" class="font-bold text-apple-blue">50% ($50,000)</span>
-            </div>
-            <div class="w-full h-3 rounded-full bg-white/5 overflow-hidden">
-              <div id="bar-large" class="h-full bg-apple-blue transition-all duration-300 w-1/2"></div>
-            </div>
-            <span class="text-[10px] text-apple-muted">Cash cows, dividend aristocrats, institutional defense.</span>
-          </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="text-apple-secondary border-b border-white/[0.08]">
+                <th class="py-3 px-4 font-semibold">Parameter</th>
+                <th class="py-3 px-4 font-semibold text-apple-blue bg-blue-500/[0.05] rounded-t-xl">Phillip Equity Advisory (RIA)</th>
+                <th class="py-3 px-4 font-semibold">Portfolio Management (PMS)</th>
+                <th class="py-3 px-4 font-semibold">Discount / Traditional Broker</th>
+                <th class="py-3 px-4 font-semibold">Direct Mutual Fund</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/[0.04] text-apple-muted">
+              <tr class="hover:bg-white/[0.02]">
+                <td class="py-3.5 px-4 font-medium text-white">Asset Custody</td>
+                <td class="py-3.5 px-4 text-emerald-400 font-semibold bg-blue-500/[0.05]">
+                  <i class="fa-solid fa-check mr-1.5"></i> Client's Personal Demat
+                </td>
+                <td class="py-3.5 px-4">Managed via Power of Attorney (POA)</td>
+                <td class="py-3.5 px-4">Client Demat / Broker Pool Account</td>
+                <td class="py-3.5 px-4">AMC Custodian Pooled Units</td>
+              </tr>
+              <tr class="hover:bg-white/[0.02]">
+                <td class="py-3.5 px-4 font-medium text-white">Trade Discretion</td>
+                <td class="py-3.5 px-4 text-apple-blue font-semibold bg-blue-500/[0.05]">
+                  Non-Discretionary (Client Consent Required)
+                </td>
+                <td class="py-3.5 px-4">Full Discretion with Fund Manager</td>
+                <td class="py-3.5 px-4">Client Self-Directed Only</td>
+                <td class="py-3.5 px-4">Full AMC Discretion</td>
+              </tr>
+              <tr class="hover:bg-white/[0.02]">
+                <td class="py-3.5 px-4 font-medium text-white">Legal Standard</td>
+                <td class="py-3.5 px-4 text-white font-medium bg-blue-500/[0.05]">
+                  Fiduciary Standard (SEBI IA Regs 2013)
+                </td>
+                <td class="py-3.5 px-4">Contractual PMS Mandate</td>
+                <td class="py-3.5 px-4">Suitability / Execution Only</td>
+                <td class="py-3.5 px-4">Scheme SID / KIM Mandate</td>
+              </tr>
+              <tr class="hover:bg-white/[0.02]">
+                <td class="py-3.5 px-4 font-medium text-white">Fee Architecture</td>
+                <td class="py-3.5 px-4 text-apple-text font-semibold bg-blue-500/[0.05]">
+                  Flat Fee or Max 2.5% AUA (SEBI Cap)
+                </td>
+                <td class="py-3.5 px-4">1.5 - 2.5% Fixed + 15-20% Profit Share</td>
+                <td class="py-3.5 px-4">₹20/order or % Brokerage Churn</td>
+                <td class="py-3.5 px-4">0.8 - 2.0% TER (Deducted daily from NAV)</td>
+              </tr>
+              <tr class="hover:bg-white/[0.02]">
+                <td class="py-3.5 px-4 font-medium text-white">Minimum Capital</td>
+                <td class="py-3.5 px-4 text-emerald-400 font-semibold bg-blue-500/[0.05]">
+                  Accessible (₹10 Lakhs recommended)
+                </td>
+                <td class="py-3.5 px-4">₹50 Lakhs (SEBI Mandatory Floor)</td>
+                <td class="py-3.5 px-4">₹0 Minimum</td>
+                <td class="py-3.5 px-4">₹500 (SIP)</td>
+              </tr>
+              <tr class="hover:bg-white/[0.02]">
+                <td class="py-3.5 px-4 font-medium text-white">Tax Transparency</td>
+                <td class="py-3.5 px-4 text-white bg-blue-500/[0.05]">
+                  Direct Capital Gain Statements (T+1)
+                </td>
+                <td class="py-3.5 px-4">Annual Audited Statement</td>
+                <td class="py-3.5 px-4">Contract Notes</td>
+                <td class="py-3.5 px-4">Taxable only on Unit Redemption</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-          <!-- Mid / Small Cap Sleeve -->
-          <div class="space-y-1.5">
-            <div class="flex justify-between text-xs">
-              <span class="text-white font-medium flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span> Mid & Small-Cap Alpha Compounders
-              </span>
-              <span id="alloc-mid-pct" class="font-bold text-apple-purple">35% ($35,000)</span>
-            </div>
-            <div class="w-full h-3 rounded-full bg-white/5 overflow-hidden">
-              <div id="bar-mid" class="h-full bg-apple-purple transition-all duration-300 w-[35%]"></div>
-            </div>
-            <span class="text-[10px] text-apple-muted">High ROCE, market share gainers, exponential revenue runway.</span>
-          </div>
+    </div>
 
-          <!-- Tactical Cash / Gold / Hedges -->
-          <div class="space-y-1.5">
-            <div class="flex justify-between text-xs">
-              <span class="text-white font-medium flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Tactical Cash / Gold / Short Debt
-              </span>
-              <span id="alloc-cash-pct" class="font-bold text-apple-emerald">15% ($15,000)</span>
+  </main>
+
+  <!-- PAGE 3: ONBOARDING & ACCOUNT SETUP -->
+  <main id="page-onboarding" class="page-view flex-grow hidden">
+    
+    <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="text-xs font-bold text-apple-emerald tracking-wider uppercase">Digital Setup</div>
+        <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white">How to Open an Advisory Account</h2>
+        <p class="text-apple-muted text-sm sm:text-base leading-relaxed">
+          Open your account digitally in less than 15 minutes. Connect your existing Demat account or set up a new one with PhillipCapital India.
+        </p>
+      </div>
+
+      <!-- 4 Step Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5">
+          <div>
+            <div class="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/30 text-apple-blue font-bold flex items-center justify-center text-sm mb-4">
+              01
             </div>
-            <div class="w-full h-3 rounded-full bg-white/5 overflow-hidden">
-              <div id="bar-cash" class="h-full bg-apple-emerald transition-all duration-300 w-[15%]"></div>
-            </div>
-            <span class="text-[10px] text-apple-muted">Dry powder for opportunistic market panics and hedge liquidity.</span>
+            <h4 class="text-base font-bold text-white tracking-tight">KYC & Identity Ingestion</h4>
+            <p class="text-apple-muted text-xs leading-relaxed mt-1">
+              Verify your Permanent Account Number (PAN) and retrieve your registered CKYC records via KRA.
+            </p>
+            <ul class="mt-3 space-y-1.5 text-xs text-apple-secondary">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-blue text-[10px]"></i> PAN Card Verification</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-blue text-[10px]"></i> CKYC Status Retrieval</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-blue text-[10px]"></i> Bank Proof / Cancelled Cheque</li>
+            </ul>
+          </div>
+          <div class="pt-3 border-t border-white/[0.06] text-[11px] text-apple-muted flex justify-between">
+            <span>Validation</span>
+            <span class="text-apple-emerald font-semibold">Instant API Check</span>
           </div>
         </div>
 
-        <!-- Metric Stat Tiles -->
-        <div class="grid grid-cols-3 gap-3 pt-2 text-center">
-          <div class="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-            <div class="text-[10px] text-apple-muted uppercase font-semibold">Expected Volatility</div>
-            <div id="stat-volatility" class="text-sm font-bold text-white mt-0.5">Moderate (13%)</div>
+        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5">
+          <div>
+            <div class="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/30 text-apple-amber font-bold flex items-center justify-center text-sm mb-4">
+              02
+            </div>
+            <h4 class="text-base font-bold text-white tracking-tight">SEBI Risk Suitability</h4>
+            <p class="text-apple-muted text-xs leading-relaxed mt-1">
+              Complete a psychometric assessment covering investment horizon, draw-down resilience, and income objectives.
+            </p>
+            <ul class="mt-3 space-y-1.5 text-xs text-apple-secondary">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-amber text-[10px]"></i> Liquidity Timeline (3-5+ Yrs)</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-amber text-[10px]"></i> Volatility Appetite Audit</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-amber text-[10px]"></i> Model Profile Classification</li>
+            </ul>
           </div>
-          <div class="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-            <div class="text-[10px] text-apple-muted uppercase font-semibold">Review Cadence</div>
-            <div id="stat-cadence" class="text-sm font-bold text-apple-blue mt-0.5">Quarterly</div>
+          <div class="pt-3 border-t border-white/[0.06] text-[11px] text-apple-muted flex justify-between">
+            <span>SEBI IA Mandate</span>
+            <span class="text-apple-amber font-semibold">Required by Law</span>
           </div>
-          <div class="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-            <div class="text-[10px] text-apple-muted uppercase font-semibold">Alpha Benchmark</div>
-            <div id="stat-benchmark" class="text-sm font-bold text-apple-emerald mt-0.5">S&P 500 / Nifty 50</div>
+        </div>
+
+        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5">
+          <div>
+            <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-apple-emerald font-bold flex items-center justify-center text-sm mb-4">
+              03
+            </div>
+            <h4 class="text-base font-bold text-white tracking-tight">Demat Connection</h4>
+            <p class="text-apple-muted text-xs leading-relaxed mt-1">
+              Link your existing broker Demat account (Zerodha, Groww, AngelOne, ICICI Direct) or open a direct PhillipCapital Demat.
+            </p>
+            <ul class="mt-3 space-y-1.5 text-xs text-apple-secondary">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-emerald text-[10px]"></i> Client Master List (CML)</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-emerald text-[10px]"></i> Tokenized Broker OAuth2 API</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-emerald text-[10px]"></i> Zero POA or Withdrawal access</li>
+            </ul>
+          </div>
+          <div class="pt-3 border-t border-white/[0.06] text-[11px] text-apple-muted flex justify-between">
+            <span>Custody Safety</span>
+            <span class="text-apple-emerald font-semibold">100% In Your Demat</span>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-5">
+          <div>
+            <div class="w-9 h-9 rounded-xl bg-purple-500/10 border border-purple-500/30 text-apple-purple font-bold flex items-center justify-center text-sm mb-4">
+              04
+            </div>
+            <h4 class="text-base font-bold text-white tracking-tight">Sign Mandate & Go-Live</h4>
+            <p class="text-apple-muted text-xs leading-relaxed mt-1">
+              Execute the digital SEBI-compliant Advisory Agreement via Aadhaar OTP e-Sign and initiate your model portfolio.
+            </p>
+            <ul class="mt-3 space-y-1.5 text-xs text-apple-secondary">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-purple text-[10px]"></i> Aadhaar OTP Digital e-Sign</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-purple text-[10px]"></i> Transparent Fee Structure</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-apple-purple text-[10px]"></i> Initial Portfolio Deployment</li>
+            </ul>
+          </div>
+          <div class="pt-3 border-t border-white/[0.06] text-[11px] text-apple-muted flex justify-between">
+            <span>Activation</span>
+            <span class="text-apple-purple font-semibold">Same-Day Active</span>
           </div>
         </div>
 
       </div>
 
-    </div>
-  </section>
+      <!-- Interactive Readiness Checklist -->
+      <div class="glass-card rounded-3xl p-6 sm:p-8 max-w-4xl mx-auto space-y-6 border border-white/[0.1]">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+              <i class="fa-solid fa-list-check text-apple-blue"></i> Onboarding Document Checklist
+            </h3>
+            <p class="text-xs text-apple-muted mt-0.5">Toggle the documents you have prepared to check your onboarding readiness.</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <div id="checklist-percent" class="text-sm font-bold text-white">0% Complete</div>
+              <div class="text-[10px] text-apple-muted">Readiness Score</div>
+            </div>
+            <div class="w-12 h-12 rounded-full bg-apple-subtle border border-white/10 flex items-center justify-center">
+              <div id="readiness-ring" class="w-8 h-8 rounded-full bg-blue-500/20 border-2 border-apple-blue flex items-center justify-center text-[10px] font-bold text-apple-blue">
+                0/5
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <!-- Inspector Modal (Sliding Glass Sheet) -->
-  <div id="inspector-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl hidden transition-all duration-300 opacity-0 pointer-events-none">
-    <div class="relative w-full max-w-2xl glass-card bg-[#0e0e13]/95 border border-white/20 rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.9)] max-h-[90vh] overflow-y-auto transform scale-95 transition-all duration-300" id="modal-card">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
+            <div>
+              <span class="text-white font-medium block">Permanent Account Number (PAN Card)</span>
+              <span class="text-apple-muted text-[11px]">Required for KRA identification and SEBI compliance.</span>
+            </div>
+          </label>
+
+          <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
+            <div>
+              <span class="text-white font-medium block">Active Demat Account (CDSL / NSDL)</span>
+              <span class="text-apple-muted text-[11px]">With PhillipCapital, Zerodha, Groww, AngelOne, or Bank DP.</span>
+            </div>
+          </label>
+
+          <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
+            <div>
+              <span class="text-white font-medium block">Verified Bank Account Proof</span>
+              <span class="text-apple-muted text-[11px]">Cancelled cheque with printed name or latest bank statement.</span>
+            </div>
+          </label>
+
+          <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
+            <div>
+              <span class="text-white font-medium block">Aadhaar Linked with Active Mobile</span>
+              <span class="text-apple-muted text-[11px]">Required for instantaneous digital OTP e-Sign of the IA Agreement.</span>
+            </div>
+          </label>
+
+          <label class="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/15 cursor-pointer transition select-none sm:col-span-2">
+            <input type="checkbox" onchange="updateReadinessChecklist()" class="mt-0.5 rounded border-white/20 bg-white/5 text-apple-blue focus:ring-0">
+            <div>
+              <span class="text-white font-medium block">Client Master List (CML) Copy</span>
+              <span class="text-apple-muted text-[11px]">Digitally stamped PDF from your DP confirming 16-digit Demat BOID.</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="space-y-1">
+          <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
+            <div id="readiness-bar" class="h-full bg-gradient-to-r from-apple-blue to-apple-emerald transition-all duration-300 w-0"></div>
+          </div>
+          <p id="readiness-msg" class="text-[11px] text-apple-secondary text-right">Select the documents you have ready.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- PAGE 4: ALLOCATION ENGINE (INR) -->
+  <main id="page-portfolios" class="page-view flex-grow hidden">
+    
+    <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
       
-      <!-- Close Button -->
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="text-xs font-bold text-apple-purple tracking-wider uppercase">Phillip Capital Advisory Engine</div>
+        <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white">Dynamic Asset Allocation (INR)</h2>
+        <p class="text-apple-muted text-sm sm:text-base leading-relaxed">
+          Simulate how your investment horizon and volatility tolerance calibrate model equity allocations across large-cap monopolies, mid-cap compounders, and tactical hedges.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Controls (5 cols) -->
+        <div class="lg:col-span-5 glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-apple-blue"></i> Investor Profile Parameters
+          </h3>
+
+          <!-- Capital Input in INR -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-apple-secondary font-medium">Deployment Capital:</span>
+              <span id="capital-display" class="text-white font-bold">₹25,00,000 (25 Lakhs)</span>
+            </div>
+            <div class="relative">
+              <span class="absolute left-3.5 top-2.5 text-apple-muted text-xs font-semibold">₹</span>
+              <input type="number" id="capital-input" value="2500000" min="500000" step="500000" oninput="runAllocationSimulator()" class="w-full bg-white/[0.04] border border-white/10 rounded-xl py-2 pl-8 pr-3 text-sm text-white focus:outline-none focus:border-apple-blue transition">
+            </div>
+            <div class="flex justify-between text-[10px] text-apple-muted">
+              <span>₹10 Lakhs (Min)</span>
+              <span>₹1 Crore</span>
+              <span>₹10 Crores+</span>
+            </div>
+          </div>
+
+          <!-- Horizon Slider -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-apple-secondary font-medium">Investment Horizon:</span>
+              <span id="slider-horizon-val" class="text-apple-blue font-bold text-sm">5 Years</span>
+            </div>
+            <input type="range" id="slider-horizon" min="1" max="15" value="5" step="1" oninput="runAllocationSimulator()" class="w-full accent-apple-blue bg-white/10 h-1.5 rounded-lg cursor-pointer">
+            <div class="flex justify-between text-[10px] text-apple-muted">
+              <span>1 Year (Tactical)</span>
+              <span>5 Years (Growth)</span>
+              <span>15+ Years (Generational)</span>
+            </div>
+          </div>
+
+          <!-- Risk Profile Slider -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-apple-secondary font-medium">Drawdown Appetite:</span>
+              <span id="slider-risk-val" class="text-apple-purple font-bold text-sm">Moderate Growth</span>
+            </div>
+            <input type="range" id="slider-risk" min="1" max="5" value="3" step="1" oninput="runAllocationSimulator()" class="w-full accent-apple-purple bg-white/10 h-1.5 rounded-lg cursor-pointer">
+            <div class="flex justify-between text-[10px] text-apple-muted">
+              <span>Conservative</span>
+              <span>Balanced Growth</span>
+              <span>Aggressive Alpha</span>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-[11px] text-apple-muted flex items-start gap-2">
+            <i class="fa-solid fa-circle-info text-apple-blue mt-0.5"></i>
+            <span>Complies with SEBI Investment Adviser Fee Ceiling (Maximum 2.5% p.a. of AUA or ₹1,25,000 flat fee per annum per family).</span>
+          </div>
+        </div>
+
+        <!-- Output Visualizer (7 cols) -->
+        <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+          <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
+            <h4 class="text-base font-bold text-white">Recommended Model Basket</h4>
+            <span id="risk-category-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              Moderate Growth Strategy
+            </span>
+          </div>
+
+          <!-- Progress Allocations -->
+          <div class="space-y-4">
+            
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs">
+                <span class="text-white font-medium flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Phillip Large-Cap Moats (Nifty 50)
+                </span>
+                <span id="alloc-large-pct" class="font-bold text-apple-blue">50% (₹12,50,000)</span>
+              </div>
+              <div class="w-full h-3 rounded-full bg-white/5 overflow-hidden">
+                <div id="bar-large" class="h-full bg-apple-blue transition-all duration-300 w-1/2"></div>
+              </div>
+              <span class="text-[10px] text-apple-muted">Bluechip leaders with high ROCE, debt-free balance sheets, and institutional stability.</span>
+            </div>
+
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs">
+                <span class="text-white font-medium flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span> Phillip Mid & Small-Cap Compounders
+                </span>
+                <span id="alloc-mid-pct" class="font-bold text-apple-purple">35% (₹8,75,000)</span>
+              </div>
+              <div class="w-full h-3 rounded-full bg-white/5 overflow-hidden">
+                <div id="bar-mid" class="h-full bg-apple-purple transition-all duration-300 w-[35%]"></div>
+              </div>
+              <span class="text-[10px] text-apple-muted">High-growth market share gainers across manufacturing, defense, and specialty chemicals.</span>
+            </div>
+
+            <div class="space-y-1.5">
+              <div class="flex justify-between text-xs">
+                <span class="text-white font-medium flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Tactical Arbitrage / Cash / Sovereign Gold
+                </span>
+                <span id="alloc-cash-pct" class="font-bold text-apple-emerald">15% (₹3,75,000)</span>
+              </div>
+              <div class="w-full h-3 rounded-full bg-white/5 overflow-hidden">
+                <div id="bar-cash" class="h-full bg-apple-emerald transition-all duration-300 w-[15%]"></div>
+              </div>
+              <span class="text-[10px] text-apple-muted">Liquid dry powder reserved for market corrections and tactical margin opportunities.</span>
+            </div>
+
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="grid grid-cols-3 gap-3 pt-2 text-center">
+            <div class="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+              <div class="text-[10px] text-apple-muted uppercase font-semibold">Expected Volatility</div>
+              <div id="stat-volatility" class="text-sm font-bold text-white mt-0.5">Moderate (13%)</div>
+            </div>
+            <div class="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+              <div class="text-[10px] text-apple-muted uppercase font-semibold">Rebalance Cycle</div>
+              <div id="stat-cadence" class="text-sm font-bold text-apple-blue mt-0.5">Quarterly</div>
+            </div>
+            <div class="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+              <div class="text-[10px] text-apple-muted uppercase font-semibold">Benchmark Target</div>
+              <div id="stat-benchmark" class="text-sm font-bold text-apple-emerald mt-0.5">Nifty 500 TRI</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- PAGE 5: SEBI REGULATORY COMPLIANCE & INVESTOR CHARTER -->
+  <main id="page-compliance" class="page-view flex-grow hidden">
+    
+    <div class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="text-xs font-bold text-apple-blue tracking-wider uppercase">Statutory Disclosures</div>
+        <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white">SEBI Compliance & Investor Charter</h2>
+        <p class="text-apple-muted text-sm sm:text-base leading-relaxed">
+          Transparent, audited, and strictly compliant with Securities and Exchange Board of India (SEBI) standards.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Registration Cards -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-certificate text-apple-blue"></i> Entity & SEBI Registrations
+          </h3>
+          <div class="space-y-3 text-xs text-apple-secondary">
+            <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+              <span class="text-apple-muted">Legal Entity Name:</span>
+              <span class="text-white font-medium">PhillipCapital (India) Private Limited</span>
+            </div>
+            <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+              <span class="text-apple-muted">Corporate Identity No. (CIN):</span>
+              <span class="text-white font-mono">U92403MH1999PTC123359</span>
+            </div>
+            <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+              <span class="text-apple-muted">SEBI Investment Adviser (IA):</span>
+              <span class="text-apple-blue font-mono font-bold">INA000004518</span>
+            </div>
+            <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+              <span class="text-apple-muted">SEBI Research Analyst (RA):</span>
+              <span class="text-apple-blue font-mono font-bold">INH000001345</span>
+            </div>
+            <div class="flex justify-between py-1.5 border-b border-white/[0.04]">
+              <span class="text-apple-muted">SEBI Stock Broker Regn:</span>
+              <span class="text-white font-mono">INZ000169632 (NSE / BSE / MCX)</span>
+            </div>
+            <div class="flex justify-between py-1.5">
+              <span class="text-apple-muted">Depository Participant (DP):</span>
+              <span class="text-white font-mono">CDSL / NSDL (IN-DP-516-2020)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Office & Grievance -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-map-location-dot text-apple-emerald"></i> Registered Office & Grievance Redressal
+          </h3>
+          <div class="space-y-3 text-xs text-apple-secondary">
+            <div>
+              <span class="text-apple-muted block mb-1">Corporate & Registered Headquarters:</span>
+              <p class="text-white leading-relaxed">
+                PhillipCapital (India) Pvt. Ltd., No. 1, 18th Floor, Urmi Estate, 95, Ganpatrao Kadam Marg, Lower Parel (West), Mumbai – 400013, Maharashtra, India.
+              </p>
+            </div>
+            <div class="pt-2 border-t border-white/[0.04] space-y-1.5">
+              <div class="flex justify-between">
+                <span class="text-apple-muted">Compliance Officer:</span>
+                <span class="text-white">Head of Regulatory Compliance</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-apple-muted">Direct Email:</span>
+                <span class="text-apple-blue font-mono">compliance@phillipcapital.in</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-apple-muted">Investor Grievance:</span>
+                <span class="text-apple-blue font-mono">customercare@phillipcapital.in</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SEBI Investor Charter Highlights -->
+      <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+        <h3 class="text-lg font-bold text-white">Investor Charter in Respect of Investment Advisers (SEBI IA Circular)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-apple-muted">
+          <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04] space-y-2">
+            <h4 class="text-white font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-check text-apple-emerald text-[11px]"></i> Right to Fair Advice
+            </h4>
+            <p>Every investor has the statutory right to receive investment advice consistent with their documented risk profile and suitability score.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04] space-y-2">
+            <h4 class="text-white font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-check text-apple-emerald text-[11px]"></i> Complete Transparency
+            </h4>
+            <p>Advisers must disclose all potential conflicts of interest, holding details, and all fee charges before the signing of the agreement.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04] space-y-2">
+            <h4 class="text-white font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-check text-apple-emerald text-[11px]"></i> SEBI SCORES / SMART ODR
+            </h4>
+            <p>Unresolved grievances can be escalated directly to SEBI via the centralized SCORES portal (scores.gov.in) or SMART ODR dispute resolution.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Floating Inspector Modal Sheet -->
+  <div id="inspector-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl hidden transition-all duration-300 opacity-0 pointer-events-none">
+    <div class="relative w-full max-w-2xl glass-card bg-[#0a0d17]/95 border border-white/20 rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.95)] max-h-[90vh] overflow-y-auto transform scale-95 transition-all duration-300" id="modal-card">
+      
       <button onclick="closeInspectorModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-apple-text flex items-center justify-center transition">
         <i class="fa-solid fa-xmark text-sm"></i>
       </button>
 
-      <!-- Modal Content Wrapper -->
       <div class="space-y-6">
         <div class="flex items-center gap-3">
           <div id="modal-step-badge" class="w-10 h-10 rounded-xl bg-blue-500/20 text-apple-blue font-bold flex items-center justify-center text-sm border border-blue-500/30">
@@ -981,44 +1105,34 @@
         </div>
 
         <p id="modal-desc" class="text-sm text-apple-secondary leading-relaxed">
-          Detailed breakdown description of the selected operational step.
+          Description
         </p>
 
-        <!-- 3 Tabular Technical Deep Dive Sections -->
         <div class="space-y-4">
-          
-          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-2">
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1.5">
             <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <i class="fa-solid fa-gears text-apple-blue"></i> Operational Protocols
+              <i class="fa-solid fa-gears text-apple-blue"></i> PhillipCapital Operational Protocol
             </h4>
-            <p id="modal-ops" class="text-xs text-apple-muted leading-relaxed">
-              Step protocols will appear here.
-            </p>
+            <p id="modal-ops" class="text-xs text-apple-muted leading-relaxed">Protocols</p>
           </div>
 
-          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-2">
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1.5">
             <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <i class="fa-solid fa-gavel text-apple-emerald"></i> Regulatory & Fiduciary Mandate
+              <i class="fa-solid fa-gavel text-apple-emerald"></i> SEBI IA Statutory Mandate
             </h4>
-            <p id="modal-reg" class="text-xs text-apple-muted leading-relaxed">
-              Compliance details will appear here.
-            </p>
+            <p id="modal-reg" class="text-xs text-apple-muted leading-relaxed">Compliance</p>
           </div>
 
-          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-2">
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1.5">
             <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <i class="fa-solid fa-lock text-apple-purple"></i> Security & Custody Architecture
+              <i class="fa-solid fa-vault text-apple-purple"></i> Demat Custody & Security
             </h4>
-            <p id="modal-sec" class="text-xs text-apple-muted leading-relaxed">
-              Custody details will appear here.
-            </p>
+            <p id="modal-sec" class="text-xs text-apple-muted leading-relaxed">Custody</p>
           </div>
-
         </div>
 
-        <!-- Footer Action -->
         <div class="pt-4 border-t border-white/[0.08] flex justify-between items-center text-xs">
-          <span class="text-apple-muted">Apex Equity Operating Standard v4.2</span>
+          <span class="text-apple-muted">PhillipCapital (India) Pvt. Ltd. • SEBI IA Protocol</span>
           <button onclick="closeInspectorModal()" class="px-5 py-2 rounded-full bg-white text-black font-semibold hover:bg-neutral-200 transition">
             Close Inspector
           </button>
@@ -1027,162 +1141,221 @@
     </div>
   </div>
 
-  <!-- Toast Notification Container -->
+  <!-- Toast Notification -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 rounded-2xl glass-card border border-white/20 text-xs text-white shadow-2xl transition-all duration-300 translate-y-16 opacity-0 pointer-events-none">
     <i id="toast-icon" class="fa-solid fa-circle-check text-apple-emerald text-sm"></i>
     <span id="toast-msg">Operation completed successfully</span>
   </div>
 
-  <footer class="border-t border-white/[0.08] py-12 text-apple-muted text-xs">
+  <!-- Footer -->
+  <footer class="border-t border-white/[0.08] py-10 text-apple-muted text-xs bg-black/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      
       <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-2.5">
-          <div class="w-6 h-6 rounded-md bg-white/10 flex items-center justify-center text-white text-xs">
-            <i class="fa-solid fa-compass"></i>
+        <div class="flex items-center gap-3">
+          <div class="w-6 h-6 rounded-md bg-gradient-to-br from-blue-700 to-cyan-500 flex items-center justify-center text-white text-xs font-bold">
+            P
           </div>
-          <span class="font-semibold text-white/90">Apex Equity Advisory Lifecycle Specification</span>
+          <span class="font-bold text-white/90">PhillipCapital (India) Private Limited</span>
+          <span class="text-apple-muted">• Corporate Member of NSE, BSE, MCX | Depository Participant: CDSL / NSDL</span>
         </div>
-        <div class="flex flex-wrap gap-6 text-[11px] text-apple-secondary">
-          <a href="#flowchart" class="hover:text-white transition">Lifecycle Architecture</a>
-          <a href="#what-is-advisory" class="hover:text-white transition">Fiduciary Comparison</a>
-          <a href="#account-roadmap" class="hover:text-white transition">Account Checklist</a>
-          <a href="#simulator" class="hover:text-white transition">Model Simulator</a>
+
+        <div class="flex flex-wrap gap-4 text-[11px] text-apple-secondary">
+          <button onclick="switchPage('flowchart')" class="hover:text-white transition">Flowchart</button>
+          <button onclick="switchPage('standard')" class="hover:text-white transition">Advisory Standard</button>
+          <button onclick="switchPage('onboarding')" class="hover:text-white transition">Account Setup</button>
+          <button onclick="switchPage('portfolios')" class="hover:text-white transition">Allocation Engine</button>
+          <button onclick="switchPage('compliance')" class="hover:text-white transition">SEBI Disclosures</button>
         </div>
       </div>
 
-      <div class="pt-6 border-t border-white/[0.05] text-[11px] leading-relaxed text-apple-muted flex flex-col md:flex-row justify-between gap-4">
-        <p class="max-w-3xl">
-          <strong>Regulatory Disclaimer:</strong> Investment in equity markets involves risk of principal loss. Equity advisory services provide non-discretionary recommendations; final execution remains solely at client discretion. Past performance is no guarantee of future returns. Ensure your Demat linkage complies with local securities regulations (SEBI in India, SEC/FINRA in the US).
+      <div class="pt-4 border-t border-white/[0.05] text-[11px] leading-relaxed text-apple-muted flex flex-col md:flex-row justify-between gap-4">
+        <p class="max-w-4xl">
+          <strong>Regulatory Risk Disclosure:</strong> Investments in securities are subject to market risks. Read all scheme and offer documents carefully before investing. Registration granted by SEBI, membership of BASL, and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors. Securities quoted are for illustration purposes only.
         </p>
         <p class="whitespace-nowrap text-right">
-          Design Language © Apple Pro Dark Reference.
+          Urmi Estate, Lower Parel (W), Mumbai.
         </p>
       </div>
+
     </div>
   </footer>
 
   <script>
-    // Detailed Node Data Dictionary for the 12 Interactive Flow Nodes
+    // Multi-Page SPA Controller
+    function switchPage(pageId) {
+      const pages = ['flowchart', 'standard', 'onboarding', 'portfolios', 'compliance'];
+      
+      pages.forEach(p => {
+        const el = document.getElementById(`page-${p}`);
+        const navBtn = document.getElementById(`nav-btn-${p}`);
+        
+        if (p === pageId) {
+          if (el) el.classList.remove('hidden');
+          if (navBtn) navBtn.classList.add('nav-tab-active');
+        } else {
+          if (el) el.classList.add('hidden');
+          if (navBtn) navBtn.classList.remove('nav-tab-active');
+        }
+      });
+
+      // Update URL hash without jitter
+      history.replaceState(null, null, `#${pageId}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize from URL Hash on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const initialHash = window.location.hash.replace('#', '') || 'flowchart';
+      const validPages = ['flowchart', 'standard', 'onboarding', 'portfolios', 'compliance'];
+      
+      if (validPages.includes(initialHash)) {
+        switchPage(initialHash);
+      } else {
+        switchPage('flowchart');
+      }
+
+      runAllocationSimulator();
+    });
+
+    // Toast Utility
+    function showToast(message, isSuccess = true) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      const toastIcon = document.getElementById('toast-icon');
+
+      toastMsg.textContent = message;
+      toastIcon.className = isSuccess 
+        ? "fa-solid fa-circle-check text-apple-emerald text-sm" 
+        : "fa-solid fa-circle-info text-apple-blue text-sm";
+
+      toast.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    // PhillipCapital Operational Node Data Dictionary
     const nodeDetails = {
       'node-1': {
-        stage: 'STAGE 1: INGESTION & SUITABILITY',
+        stage: 'STAGE 1: SUITABILITY & ONBOARDING',
         step: '01',
         color: '#2997ff',
-        title: 'KYC & Identity Ingestion',
-        desc: 'The regulatory gateway onboarding clients into the advisory framework while establishing compliance with Central KYC (CKYC), Anti-Money Laundering (AML), and FATCA provisions.',
-        ops: 'Automated retrieval of existing CKYC records via Tax ID/PAN. Face-match liveliness verification and digital address extraction from National ID databases.',
-        reg: 'Mandated under SEBI (Investment Advisers) Regulations, 2013 and SEC Rule 204-3. All client identification must be re-verified every 24 months.',
-        sec: '256-bit AES encrypted transmission of PII data. Identity documents are stored in zero-knowledge hardware security modules (HSMs).'
+        title: 'PAN & CKYC Digital Onboarding',
+        desc: 'Central KYC (CKYC) registry verification and PAN authentication required under SEBI (Investment Advisers) Regulations, 2013.',
+        ops: 'Real-time API lookup through CVL KRA, NDML, or CAMS KRA to extract verified demat details, address, and live bank records.',
+        reg: 'Strict compliance with SEBI Circular on Central KYC Registry and Prevention of Money Laundering Act (PMLA), 2002.',
+        sec: 'Direct institutional gateway verification. Zero local storage of raw biometric credentials.'
       },
       'node-2': {
-        stage: 'STAGE 1: INGESTION & SUITABILITY',
+        stage: 'STAGE 1: SUITABILITY & ONBOARDING',
         step: '02',
         color: '#2997ff',
-        title: 'Psychometric Suitability & Profiler',
-        desc: 'A scientific questionnaire evaluating the client’s risk tolerance, psychological drawdown thresholds, financial obligations, and investment horizon.',
-        ops: 'Multi-variable scoring model that classifies clients into Conservative, Moderate, or Aggressive Alpha sleeves. Includes mandatory stress testing scenarios (e.g. 2008 crash or 2020 drop).',
-        reg: 'Regulators legally forbid recommending high-beta equities or micro-caps to conservative or retirement-aged investors without documented justification.',
-        sec: 'Audit-ready timestamped logs preserved for 5 years as evidence of non-predatory investment advisory practice.'
+        title: 'SEBI Psychometric Suitability Matrix',
+        desc: 'Comprehensive risk profiling required to calibrate advice to the client\'s financial capacity and drawdown resilience.',
+        ops: 'Multi-factor algorithm assessing investor age, current liability obligations, income streams, and maximum bear-market drop tolerance (-15% to -35%).',
+        reg: 'SEBI IA Regulation 17: Advisers are legally prohibited from recommending high-beta mid/small caps to conservative investors.',
+        sec: 'Timestamped risk audit certificates stored for 5 years for SEBI regulatory inspections.'
       },
       'node-3': {
-        stage: 'STAGE 1: INGESTION & SUITABILITY',
+        stage: 'STAGE 1: SUITABILITY & ONBOARDING',
         step: '03',
         color: '#2997ff',
-        title: 'Fiduciary Advisory Mandate',
-        desc: 'The legal charter binding the advisor and client, clearly establishing the fee structure, non-discretionary nature, and strict fiduciary duty.',
-        ops: 'Digital execution via Aadhaar OTP or DocuSign. Explicit itemization of fixed retainer or % Assets Under Advice (AUA) terms.',
-        reg: 'Prohibits any hidden distribution kickbacks, trailer fees, or secret brokerage revenue shares. Total alignment of client interest.',
-        sec: 'Cryptographically signed PDF certificates backed by national digital signature authorities.'
+        title: 'Advisory Agreement & Fee Schedule',
+        desc: 'The binding legal mandate governing the fiduciary engagement between PhillipCapital India and the investor.',
+        ops: 'Executed via Aadhaar OTP e-Sign. Explicit disclosure of fee caps: Flat retainer or % of AUA (capped at SEBI IA statutory limits).',
+        reg: 'Strict adherence to SEBI IA (Amendment) Regulations 2020: Absolute segregation of advisory activities from broking/distribution.',
+        sec: 'Cryptographically signed audit trail with NSDL / CDSL e-Sign validation.'
       },
       'node-4': {
-        stage: 'STAGE 2: QUANT RESEARCH & MODEL',
+        stage: 'STAGE 2: PHILLIP RESEARCH & MODELS',
         step: '04',
         color: '#ff9f0a',
-        title: 'Fundamental Universe Screening',
-        desc: 'Algorithmic screening of listed public equities across top indices to filter out balance sheet leverage and governance concerns.',
-        ops: 'Screens 5,000+ equities using strict hurdle filters: Return on Invested Capital (ROIC) > 18%, Debt/EBITDA < 2.0x, free cash flow conversion > 80%, and transparent promoter integrity.',
-        reg: 'Advisory research reports must preserve complete analyst notes, source financial statements, and valuation models on record.',
-        sec: 'Data feeds ingested via institutional Bloomberg & Refinitiv APIs with multi-source consensus cross-checks.'
+        title: 'Phillip Quant Screener & Universe Filter',
+        desc: 'Quantitative and qualitative fundamental research screening over 1,500 listed NSE and BSE equities.',
+        ops: 'Filters for Return on Capital Employed (ROCE) > 20%, low Debt-to-Equity (< 0.5x), consistent 5-year Free Cash Flow conversion, and high promoter integrity.',
+        reg: 'SEBI Research Analyst (RA) Regulations, 2014 compliant. Documented analyst rationale behind every screened equity.',
+        sec: 'Ingestion of audited corporate filings directly via exchange feeds and Bloomberg terminal interfaces.'
       },
       'node-5': {
-        stage: 'STAGE 2: QUANT RESEARCH & MODEL',
+        stage: 'STAGE 2: PHILLIP RESEARCH & MODELS',
         step: '05',
         color: '#ff9f0a',
-        title: 'Model Basket Mapping',
-        desc: 'Constructing balanced model portfolios tailored to each investor tier, establishing strict individual stock and sector concentration limits.',
-        ops: 'Defines target weights: Max 10% in any single equity; Max 25% in any single industry sector. Blends large-cap market leaders with high-growth mid-caps.',
-        reg: 'Model portfolio rebalances must be documented with systematic rationale before dissemination to clients.',
-        sec: 'Automated drift monitoring systems calculate tracking error relative to benchmark indices.'
+        title: 'Model Basket Construction',
+        desc: 'Assembling balanced portfolios with strict single-stock limits (max 10%) and sector concentration barriers (max 25%).',
+        ops: 'Blend of core large-cap compounding champions and high-conviction mid-cap sector leaders designed to generate sustainable alpha over Nifty 500 TRI.',
+        reg: 'Investment Committee (IC) approvals recorded for all model rebalances prior to client dissemination.',
+        sec: 'Portfolio tracking error simulated against benchmark indices.'
       },
       'node-6': {
-        stage: 'STAGE 2: QUANT RESEARCH & MODEL',
+        stage: 'STAGE 2: PHILLIP RESEARCH & MODELS',
         step: '06',
         color: '#ff9f0a',
-        title: 'Research Thesis & Recommendation Note',
-        desc: 'Comprehensive actionable notes published for every recommendation, providing explicit entry price bands, fair value targets, and stop-loss criteria.',
-        ops: 'Notes include earnings preview summaries, competitive moat analysis, macro catalysts, and clear upside/downside valuation ratios.',
-        reg: 'Mandatory conflict-of-interest disclosure: Analysts must state if they or immediate family hold positions in recommended equities.',
-        sec: 'Published instantaneously across dedicated client web portals, encrypted mobile applications, and registered SMS/Email alerts.'
+        title: 'Advisory Note & Thesis Publication',
+        desc: 'Detailed research memos published for each recommendation, specifying entry bands, target valuation, and stop-loss criteria.',
+        ops: 'Comprehensive reports outlining industry catalysts, quarterly earnings previews, competitive moats, and risk metrics.',
+        reg: 'Mandatory conflict-of-interest disclosure: Advisers and analysts disclose personal and institutional holdings in recommended scrips.',
+        sec: 'Delivered through encrypted client web dashboards and SMS alerts.'
       },
       'node-7': {
-        stage: 'STAGE 3: GATED ORDER EXECUTION',
+        stage: 'STAGE 3: GATED DEMAT EXECUTION',
         step: '07',
         color: '#30d158',
-        title: 'Non-Discretionary Signal Delivery',
-        desc: 'The advisory transmits trade recommendations directly to the investor with full transparent rationale. The client retains 100% discretion.',
-        ops: 'Delivered via multi-channel notification engine (Push notification, Telegram bot, and email alert) with direct deeplinks to review.',
-        reg: 'The advisor CANNOT execute orders on the client’s behalf without explicit per-trade consent in a non-discretionary license.',
-        sec: 'End-to-end tokenized push channels prevent spoofing of advisory signals.'
+        title: 'Client Recommendation Signal Dispatch',
+        desc: 'Instant transmission of trade recommendations to the investor. The client maintains complete non-discretionary authority.',
+        ops: 'Automated notification dispatch across client portal, mobile app notifications, and registered WhatsApp/SMS channels.',
+        reg: 'Under non-discretionary advisory, no trades can be routed without explicit, recorded client approval.',
+        sec: 'Secure HMAC token authentication verifying authenticity of advisory signals.'
       },
       'node-8': {
-        stage: 'STAGE 3: GATED ORDER EXECUTION',
+        stage: 'STAGE 3: GATED DEMAT EXECUTION',
         step: '08',
         color: '#30d158',
-        title: '1-Click Consent / Broker API',
-        desc: 'Clients review the basket with 1-click execution through integrated broker APIs (Zerodha, Groww, AngelOne, Interactive Brokers).',
-        ops: 'Client logs into their own brokerage session via OAuth2. A single approval executes the calculated quantity of shares to match target weightings.',
-        reg: 'Broker API permissions are restricted to "Order Placement" only. "Funds Withdrawal" API endpoints are strictly blocked and disabled.',
-        sec: 'OAuth 2.0 with short-lived session tokens. User credentials never touch advisory servers.'
+        title: '1-Click Client Consent & Broker Routing',
+        desc: 'Clients review the rationale and execute orders with a single tap through PhillipCapital or third-party broker APIs.',
+        ops: 'Integration with major Indian brokers (PhillipCapital, Zerodha, Groww, AngelOne, ICICI Direct) via tokenized OAuth2.',
+        reg: 'Restricted execution-only API scopes. Advisors have zero permission to withdraw funds or alter bank linkages.',
+        sec: 'End-to-end tokenized trading credentials; passwords and MPINs are never stored.'
       },
       'node-9': {
-        stage: 'STAGE 3: GATED ORDER EXECUTION',
+        stage: 'STAGE 3: GATED DEMAT EXECUTION',
         step: '09',
         color: '#30d158',
-        title: 'T+1 Settlement into Personal Demat',
-        desc: 'Trades clear through central clearing corporations directly into the client’s designated personal Demat custody account.',
-        ops: 'Clearing corporations settle funds and shares on a rolling T+1 cycle. Securities are credited directly to client account with depository (CDSL/NSDL/DTC).',
-        reg: 'Adviser holds zero custody. If the advisory firm ever shuts down, 100% of your shares remain secure in your Demat account.',
-        sec: 'Depository-level dual-factor authentication and SMS transaction notifications from the exchange.'
+        title: 'T+1 Direct Demat Custody Clearing',
+        desc: 'Equities clear through NSCCL / ICCL directly into the investor\'s personal Demat account with NSDL or CDSL.',
+        ops: 'Trade settlement executes on a rolling T+1 schedule. Purchased shares are deposited directly into the investor\'s 16-digit Demat BOID.',
+        reg: 'Zero custody risk: Even in extreme scenarios, 100% of securities remain safely registered under the client\'s name in the depository.',
+        sec: 'Direct SMS trade confirmation from National Stock Exchange (NSE) and Bombay Stock Exchange (BSE).'
       },
       'node-10': {
-        stage: 'STAGE 4: SURVEILLANCE & REBALANCE',
+        stage: 'STAGE 4: CONTINUOUS SURVEILLANCE',
         step: '10',
         color: '#bf5af2',
-        title: 'Continuous Portfolio Surveillance',
-        desc: 'Constant institutional surveillance of held equities, quarterly corporate earnings calls, management transitions, and macro interest rate regimes.',
-        ops: 'Algorithmic earnings teardowns compare reported numbers against consensus forecasts. Flagging sudden leverage growth or promoter stake pledges.',
-        reg: 'Advisers must alert clients within 24 hours of material events impacting thesis integrity (e.g. auditor resignations or regulatory penalties).',
-        sec: 'Automated continuous news sentiment and exchange corporate disclosure parsers.'
+        title: 'Quarterly Earnings & Management Audits',
+        desc: 'Continuous surveillance of held equities, earnings concalls, corporate governance developments, and macro policy changes.',
+        ops: 'Analysts review quarterly earnings releases and management guidance against initial investment theses.',
+        reg: 'Advisers must alert clients within 24 hours of material governance issues or auditor resignations.',
+        sec: 'Automated forensic monitoring of promoter pledge changes and exchange filings.'
       },
       'node-11': {
-        stage: 'STAGE 4: SURVEILLANCE & REBALANCE',
+        stage: 'STAGE 4: CONTINUOUS SURVEILLANCE',
         step: '11',
         color: '#bf5af2',
-        title: 'Trigger-Based Dynamic Rebalancing',
-        desc: 'Rebalancing is initiated whenever market movement causes any stock to drift > 5% past target weight, or when target fair value is attained.',
-        ops: 'Generates proportional Buy/Sell orders to bring the portfolio back into strategic alignment. Trims winners at peak valuation and adds to undervalued leaders.',
-        reg: 'Avoids excessive churn. Rebalancing is strictly triggered by mathematical drift thresholds or broken fundamental theses.',
-        sec: 'Full ledger calculation verifies optimal execution size to minimize bid-ask spread impact.'
+        title: 'Dynamic Trigger-Based Rebalancing',
+        desc: 'Proactive portfolio adjustment when individual position weights deviate by > 5% due to price movements, or when target fair value is met.',
+        ops: 'Generates rebalance signals to lock in profits from outperforming winners and reallocate into high-margin undervalued leaders.',
+        reg: 'Churn minimization: Rebalancing occurs exclusively on fundamental thesis breaches or mathematical drift parameters.',
+        sec: 'Automated lot calculation prevents odd-lot liquidity slippage.'
       },
       'node-12': {
-        stage: 'STAGE 4: SURVEILLANCE & REBALANCE',
+        stage: 'STAGE 4: CONTINUOUS SURVEILLANCE',
         step: '12',
         color: '#bf5af2',
-        title: 'Tax-Loss Harvesting & Alpha Reports',
-        desc: 'End-of-year capital gains optimization strategy combined with institutional benchmark alpha performance reporting.',
-        ops: 'Identifies opportunities to offset realized capital gains against temporary unrealized losses before fiscal year-end, reinvesting into comparable equities.',
-        reg: 'Complies with Wash Sale rules and local tax authority provisions. Provides downloadable Schedule CG / 1099-B tax packages.',
-        sec: 'Detailed XIRR & Time-Weighted Return (TWR) audited against standard benchmarks (S&P 500, Nifty 50).'
+        title: 'Tax-Loss Harvesting & XIRR Benchmarking',
+        desc: 'Strategic year-end capital gains optimization combined with rigorous XIRR alpha tracking against Nifty indices.',
+        ops: 'Identifies opportunities to offset short-term/long-term capital gains (STCG/LTCG) against unrealized losses before March 31.',
+        reg: 'Complies with Indian Income Tax Act regulations. Generates Schedule CG capital gains statements.',
+        sec: 'Direct export to Excel/PDF for audited tax reconciliation.'
       }
     };
 
@@ -1228,43 +1401,16 @@
       }, 300);
     }
 
-    // Close on outside click
-    window.addEventListener('click', function(e) {
+    window.addEventListener('click', (e) => {
       const modal = document.getElementById('inspector-modal');
-      if (e.target === modal) {
-        closeInspectorModal();
-      }
+      if (e.target === modal) closeInspectorModal();
     });
 
-    // Escape key closes modal
-    window.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeInspectorModal();
-      }
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeInspectorModal();
     });
-  </script>
 
-  <script>
-    // Toast Notification Utility (Never uses alert)
-    function showToast(message, isSuccess = true) {
-      const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toast-msg');
-      const toastIcon = document.getElementById('toast-icon');
-
-      toastMsg.textContent = message;
-      if (isSuccess) {
-        toastIcon.className = "fa-solid fa-circle-check text-apple-emerald text-sm";
-      } else {
-        toastIcon.className = "fa-solid fa-circle-info text-apple-blue text-sm";
-      }
-
-      toast.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
-      setTimeout(() => {
-        toast.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
-      }, 3500);
-    }
-
-    // Export Flowchart as SVG File
+    // Flowchart SVG Export
     function exportFlowchartSVG() {
       try {
         const svgElement = document.getElementById('equity-flow-svg');
@@ -1281,25 +1427,25 @@
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = "Equity_Advisory_Architecture_Flowchart.svg";
+        link.download = "PhillipCapital_Equity_Advisory_Architecture.svg";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
 
-        showToast("SVG flowchart exported successfully.");
+        showToast("PhillipCapital Vector SVG exported successfully.");
       } catch (err) {
-        showToast("Could not export SVG: " + err.message, false);
+        showToast("Export error: " + err.message, false);
       }
     }
 
-    // Export Flowchart as High-Res PNG (Retina 2x)
+    // High-Res Retina PNG Export (2x scale)
     function exportFlowchartPNG() {
       try {
         const svg = document.getElementById('equity-flow-svg');
         if (!svg) return;
 
-        showToast("Generating high-resolution PNG rendering...");
+        showToast("Generating Retina 2x PNG rendering...");
 
         const serializer = new XMLSerializer();
         let source = serializer.serializeToString(svg);
@@ -1315,42 +1461,36 @@
         const image = new Image();
         image.onload = function () {
           const canvas = document.createElement('canvas');
-          const scale = 2; // High DPI Retina scale
+          const scale = 2;
           canvas.width = 1120 * scale;
           canvas.height = 700 * scale;
 
           const context = canvas.getContext('2d');
-          context.fillStyle = "#000000";
+          context.fillStyle = "#05070d";
           context.fillRect(0, 0, canvas.width, canvas.height);
           context.drawImage(image, 0, 0, canvas.width, canvas.height);
 
           const pngUrl = canvas.toDataURL("image/png");
           const downloadLink = document.createElement("a");
           downloadLink.href = pngUrl;
-          downloadLink.download = "Equity_Advisory_Flowchart_HighRes.png";
+          downloadLink.download = "PhillipCapital_Advisory_Blueprint_Retina.png";
           document.body.appendChild(downloadLink);
           downloadLink.click();
           document.body.removeChild(downloadLink);
           URLObj.revokeObjectURL(blobURL);
 
-          showToast("High-resolution PNG downloaded.");
-        };
-
-        image.onerror = function() {
-          showToast("PNG canvas conversion failed. Try SVG export.", false);
+          showToast("High-resolution PNG downloaded successfully.");
         };
 
         image.src = blobURL;
       } catch (err) {
-        showToast("Export error: " + err.message, false);
+        showToast("PNG generation failed: " + err.message, false);
       }
     }
-  </script>
 
-  <script>
-    // Interactive Readiness Checklist Calculation
+    // Checklist Scoring
     function updateReadinessChecklist() {
-      const checkboxes = document.querySelectorAll('#account-roadmap input[type="checkbox"]');
+      const checkboxes = document.querySelectorAll('#page-onboarding input[type="checkbox"]');
       const total = checkboxes.length;
       let checkedCount = 0;
 
@@ -1365,111 +1505,92 @@
 
       const msg = document.getElementById('readiness-msg');
       if (percentage === 100) {
-        msg.textContent = '🎉 All documents ready. You can complete digital onboarding in 10 minutes!';
+        msg.textContent = '🎉 All documents verified. You are ready for immediate digital onboarding!';
         msg.className = 'text-[11px] text-apple-emerald font-semibold text-right';
       } else if (percentage >= 60) {
-        msg.textContent = 'Great progress. Just ' + (total - checkedCount) + ' items remaining.';
+        msg.textContent = 'Well prepared. Only ' + (total - checkedCount) + ' items remaining.';
         msg.className = 'text-[11px] text-apple-blue text-right';
       } else {
-        msg.textContent = 'Check items to calculate verification readiness.';
+        msg.textContent = 'Toggle your documents to calculate readiness.';
         msg.className = 'text-[11px] text-apple-secondary text-right';
       }
     }
 
-    // Dynamic Portfolio Allocation Engine
+    // Allocation Simulator in INR
     function runAllocationSimulator() {
       const horizon = parseInt(document.getElementById('slider-horizon').value);
       const risk = parseInt(document.getElementById('slider-risk').value);
       const capitalInput = document.getElementById('capital-input');
-      let capital = parseFloat(capitalInput.value) || 50000;
+      let capital = parseFloat(capitalInput.value) || 2500000;
 
-      if (capital < 1000) capital = 1000;
+      if (capital < 500000) capital = 500000;
 
-      // Update Horizon Label
       document.getElementById('slider-horizon-val').textContent = horizon + (horizon === 1 ? ' Year' : ' Years');
 
-      // Update Risk Label & Strategy Classification
       const riskNames = [
         'Capital Preservation (Ultra-Defensive)',
-        'Conservative Growth',
-        'Moderate Growth',
-        'Aggressive Alpha',
-        'Maximum Growth (High Beta)'
+        'Conservative Hybrid Growth',
+        'Moderate Growth Strategy',
+        'Aggressive Alpha Strategy',
+        'High Beta Growth Compounder'
       ];
       document.getElementById('slider-risk-val').textContent = riskNames[risk - 1];
 
-      // Update Capital Display
-      document.getElementById('capital-display').textContent = '$' + capital.toLocaleString();
+      // Format Indian Rupee Label
+      const formattedINR = formatINR(capital);
+      document.getElementById('capital-display').textContent = formattedINR;
 
-      // Calculation of Allocation Weights
       let largeCapPct, midCapPct, cashPct;
 
       if (risk === 1) {
-        // Ultra-Defensive
-        largeCapPct = 70;
-        midCapPct = 10;
-        cashPct = 20;
+        largeCapPct = 70; midCapPct = 10; cashPct = 20;
       } else if (risk === 2) {
-        // Conservative
-        largeCapPct = 60;
-        midCapPct = 25;
-        cashPct = 15;
+        largeCapPct = 60; midCapPct = 25; cashPct = 15;
       } else if (risk === 3) {
-        // Moderate Growth
-        largeCapPct = 50;
-        midCapPct = 35;
-        cashPct = 15;
+        largeCapPct = 50; midCapPct = 35; cashPct = 15;
       } else if (risk === 4) {
-        // Aggressive Alpha
-        largeCapPct = 40;
-        midCapPct = 50;
-        cashPct = 10;
+        largeCapPct = 40; midCapPct = 50; cashPct = 10;
       } else {
-        // Maximum Growth
-        largeCapPct = 30;
-        midCapPct = 65;
-        cashPct = 5;
+        largeCapPct = 30; midCapPct = 65; cashPct = 5;
       }
 
-      // Horizon adjustments: longer horizons unlock slightly more mid-cap compounding
       if (horizon >= 7 && cashPct > 5) {
-        cashPct -= 5;
-        midCapPct += 5;
+        cashPct -= 5; midCapPct += 5;
       } else if (horizon <= 2 && cashPct < 25) {
-        cashPct += 10;
-        midCapPct = Math.max(5, midCapPct - 10);
+        cashPct += 10; midCapPct = Math.max(5, midCapPct - 10);
       }
 
-      // Values in Dollars
       const largeVal = Math.round(capital * (largeCapPct / 100));
       const midVal = Math.round(capital * (midCapPct / 100));
       const cashVal = Math.round(capital * (cashPct / 100));
 
-      // Update UI Percentages & Dollar Labels
-      document.getElementById('alloc-large-pct').textContent = `${largeCapPct}% ($${largeVal.toLocaleString()})`;
-      document.getElementById('alloc-mid-pct').textContent = `${midCapPct}% ($${midVal.toLocaleString()})`;
-      document.getElementById('alloc-cash-pct').textContent = `${cashPct}% ($${cashVal.toLocaleString()})`;
+      document.getElementById('alloc-large-pct').textContent = `${largeCapPct}% (${formatINR(largeVal)})`;
+      document.getElementById('alloc-mid-pct').textContent = `${midCapPct}% (${formatINR(midVal)})`;
+      document.getElementById('alloc-cash-pct').textContent = `${cashPct}% (${formatINR(cashVal)})`;
 
-      // Update Progress Bar Widths
       document.getElementById('bar-large').style.width = largeCapPct + '%';
       document.getElementById('bar-mid').style.width = midCapPct + '%';
       document.getElementById('bar-cash').style.width = cashPct + '%';
 
-      // Update Strategy Badge
-      document.getElementById('risk-category-badge').textContent = riskNames[risk - 1] + ' Strategy';
+      document.getElementById('risk-category-badge').textContent = riskNames[risk - 1];
 
-      // Update Tiles
-      const volMap = ['Low (7%)', 'Controlled (10%)', 'Moderate (13%)', 'Elevated (18%)', 'High Beta (24%)'];
+      const volMap = ['Low (~8%)', 'Controlled (~10%)', 'Moderate (~13%)', 'Elevated (~17%)', 'High Beta (~23%)'];
       document.getElementById('stat-volatility').textContent = volMap[risk - 1];
 
-      const cadenceMap = ['Monthly Audit', 'Bi-Monthly', 'Quarterly Review', 'Monthly Momentum', 'Dynamic Weekly'];
+      const cadenceMap = ['Monthly Review', 'Bi-Monthly', 'Quarterly Review', 'Monthly Momentum', 'Dynamic Weekly'];
       document.getElementById('stat-cadence').textContent = cadenceMap[risk - 1];
     }
 
-    // Initialize Simulator on Load
-    window.addEventListener('DOMContentLoaded', () => {
-      runAllocationSimulator();
-    });
+    // Indian Number Formatter Helper (Lakhs & Crores)
+    function formatINR(number) {
+      if (number >= 10000000) {
+        return '₹' + (number / 10000000).toFixed(2) + ' Cr';
+      } else if (number >= 100000) {
+        return '₹' + (number / 100000).toFixed(2) + ' Lakhs';
+      } else {
+        return '₹' + number.toLocaleString('en-IN');
+      }
+    }
   </script>
 </body>
 </html>
